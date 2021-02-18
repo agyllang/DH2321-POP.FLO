@@ -17,20 +17,28 @@ function App() {
 
     
 
-    //drawing the x-axis
+    //_____Drawing the x-axis____
     const xScale = scaleLinear().domain([0,data.length-1]).range([0,300]);
-  
+    //.domain([min,max]) displaying the range of the x-axis (the actual data)
+    //.range([ .., ..]) is the coordinates on the "svg-parent" it populates.
+
+    
     const xAxis = axisBottom(xScale).ticks(data.length).tickFormat(index => index + 1);
 
     svg.select(".x-axis").style("transform","translateY(150px)").call(xAxis);
+    //populates the <g className="x-axis"/> with the xAxis, set to y-coordinate 150px
 
 
-    //drawing the y-axis
+    //_____Drawing the y-axis____
     const yScale = scaleLinear().domain([0, 20 + Math.max(...data)]).range([150,0]);
+    //.domain([min,max]) displaying the range of the y-axis
+    //.range([..,..]) is the coordinates on the "svg-parent" it populates.
 
     const yAxis= axisRight(yScale);
 
     svg.select(".y-axis").style("transform","translateX(300px)").call(yAxis);
+
+
 
     
     const myLine = line()
