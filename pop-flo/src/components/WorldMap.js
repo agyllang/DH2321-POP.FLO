@@ -87,15 +87,15 @@ const WorldMap = () => {
                 response.json().then(swedenData => {
                     setGeographies(feature(swedenData, swedenData.objects.SWE_adm1).features);
                     console.log("swedenData1", swedenData);
-                      projection.fitExtent(
-                            [
-                                [0, 0],
-                                [width/2, height/2],
-                            ], geographies
+                    projection.fitExtent(
+                        [
+                            [0, 0],
+                            [width / 2, height / 2],
+                        ], geographies
 
 
 
-                        )
+                    )
                 })
             })
 
@@ -113,74 +113,126 @@ const WorldMap = () => {
 
     //     )
     //   },[geographies])
+    // useEffect(() => {
+    //     const requestOptions = {
+    //         method: 'POST',
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({
+    //             "query": [
+    //               {
+    //                 "code": "InflyttningsL",
+    //                 "selection": {
+    //                   "filter": "item",
+    //                   "values": [
+    //                     "01"
+    //                   ]
+    //                 }
+    //               },
+    //               {
+    //                 "code": "UtflyttningsL",
+    //                 "selection": {
+    //                   "filter": "item",
+    //                   "values": [
+    //                     "01",
+    //                     "03"
+    //                   ]
+    //                 }
+    //               },
+    //               {
+    //                 "code": "Kon",
+    //                 "selection": {
+    //                   "filter": "item",
+    //                   "values": [
+    //                     "1",
+    //                     "2"
+    //                   ]
+    //                 }
+    //               },
+    //               {
+    //                 "code": "Tid",
+    //                 "selection": {
+    //                   "filter": "item",
+    //                   "values": [
+    //                     "2018",
+    //                     "2019"
+    //                   ]
+    //                 }
+    //               }
+    //             ],
+    //             "response": {
+    //               "format": "px"
+    //             }
+    //           })
+    //     };
+    //     fetch('https://cors-anywhere.herokuapp.com/https://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101J/InOmflytt', requestOptions)
+    //         .then(async response => {
+    //             const data = await response.json();
 
-   
+    //             // check for error response
+    //             if (!response.ok) {
+    //                 // get error message from body or default to response status
+    //                 const error = (data && data.message) || response.status;
+    //                 return Promise.reject(error);
+    //             }
+
+    //             console.log("data", data)
+    //         })
+    //         .catch(error => {
+    //             //this.setState({ errorMessage: error.toString() });
+    //             console.error('There was an error!', error);
+    //         });
+    // }, [])
+
+
     useEffect(()=>{
         (async () => {
-            const rawResponse = await fetch('https://cors-anywhere.herokuapp.com/http://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101J/InOmflytt', {
+            console.log("async started")
+            const rawResponse = await fetch('https://cors-anywhere.herokuapp.com/http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
+                body: JSON.stringify(
+                    {
                     "query": [
-                        {
-                            "code": "InflyttningsL",
-                            "selection": {
-                                "filter": "item",
-                                "values": [
-                                    "01",
-                                    "03",
-                                    "04"
-                                ]
-                            }
-                        },
-                        {
-                            "code": "UtflyttningsL",
-                            "selection": {
-                                "filter": "item",
-                                "values": [
-                                    "03",
-                                    "04"
-                                ]
-                            }
-                        },
-                        {
-                            "code": "Kon",
-                            "selection": {
-                                "filter": "item",
-                                "values": [
-                                    "1",
-                                    "2"
-                                ]
-                            }
-                        },
-                        {
-                            "code": "Tid",
-                            "selection": {
-                                "filter": "item",
-                                "values": [
-                                    "2016",
-                                    "2017",
-                                    "2018",
-                                    "2019"
-                                ]
-                            }
-                        }
+                     {
+                     "code": "ContentsCode",
+                      "selection": {
+                        "filter": "item",
+                        "values": [
+                          "BE0101N1"
+                        ]
+                       }
+                    },
+                    {
+                      "code": "Tid",
+                       "selection": {
+                       "filter": "item",
+                       "values": [
+                       "2010",
+                       "2011"
+                       ]
+                      }
+                     }
                     ],
                     "response": {
-                        "format": "json"
-                    }
-                })
+                      "format": "json"
+                     }
+                    })
             });
              await rawResponse.json().then(res => {console.log("result from rawResponse", res)});
             // var content = await rawResponse.then(res => { console.log("res",res)});
             // console.log("demoData",demoData)
             // console.log("content",content)
         })();
+        console.log("async stopped")
+
     },[])
-  
+
 
 
 
