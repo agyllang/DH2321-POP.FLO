@@ -4,6 +4,7 @@
 import React, { useState, useEffect } from "react";
 import { geoConicEquidistant, geoEqualEarth, geoPath } from "d3-geo";
 import { feature } from "topojson-client";
+import axios from 'axios';
 
 const cities = [
     { name: "Tokyo", coordinates: [139.6917, 35.6895], population: 37843000 },
@@ -86,7 +87,7 @@ const WorldMap = () => {
                 }
                 response.json().then(swedenData => {
                     setGeographies(feature(swedenData, swedenData.objects.SWE_adm1).features);
-                    console.log("swedenData1", swedenData);
+                    //console.log("swedenData1", swedenData);
                     projection.fitExtent(
                         [
                             [0, 0],
@@ -99,9 +100,83 @@ const WorldMap = () => {
                 })
             })
 
-        console.log("projection2", projection)
+        //console.log("projection2", projection)
 
     }, []);
+
+
+
+
+    useEffect(() => {
+        //'https://cors-anywhere.herokuapp.com/https://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101J/InOmflytt'
+        let postQuestion = {
+            "query": [
+                {
+                    "code": "InflyttningsL",
+                    "selection": {
+                        "filter": "item",
+                        "values": [
+                            "01"
+                        ]
+                    }
+                },
+                {
+                    "code": "UtflyttningsL",
+                    "selection": {
+                        "filter": "item",
+                        "values": [
+                            "01",
+                            "03"
+                        ]
+                    }
+                },
+                {
+                    "code": "Kon",
+                    "selection": {
+                        "filter": "item",
+                        "values": [
+                            "1",
+                            "2"
+                        ]
+                    }
+                },
+                {
+                    "code": "Tid",
+                    "selection": {
+                        "filter": "item",
+                        "values": [
+                            "2018",
+                            "2019"
+                        ]
+                    }
+                }
+            ],
+            "response": {
+                "format": "json"
+            }
+        }
+        const options = {
+            method: 'post',
+            url: 'https://cors-anywhere.herokuapp.com/https://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101J/InOmflytt',
+            data: postQuestion,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            // transformResponse: [(data) => {
+            //     // transform the response
+
+            //     return data;
+            // }]
+        };
+
+        // send the request
+        //axios(options).then(response => {console.log("response",response)});
+        axios(options).then(response => { console.log("response", response) }).catch(error => {console.log("error",error)});
+    }, [])
+
+
+
 
 
     //   useEffect(()=>{
@@ -167,7 +242,7 @@ const WorldMap = () => {
     //             }
     //           })
     //     };
-    //     fetch('https://cors-anywhere.herokuapp.com/https://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101J/InOmflytt', requestOptions)
+    //     fetch('https://cors-anywhere.herokuapp.com/http://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101J/InOmflytt', requestOptions)
     //         .then(async response => {
     //             const data = await response.json();
 
@@ -187,51 +262,7 @@ const WorldMap = () => {
     // }, [])
 
 
-    useEffect(()=>{
-        (async () => {
-            console.log("async started")
-            const rawResponse = await fetch('https://cors-anywhere.herokuapp.com/http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(
-                    {
-                    "query": [
-                     {
-                     "code": "ContentsCode",
-                      "selection": {
-                        "filter": "item",
-                        "values": [
-                          "BE0101N1"
-                        ]
-                       }
-                    },
-                    {
-                      "code": "Tid",
-                       "selection": {
-                       "filter": "item",
-                       "values": [
-                       "2010",
-                       "2011"
-                       ]
-                      }
-                     }
-                    ],
-                    "response": {
-                      "format": "json"
-                     }
-                    })
-            });
-             await rawResponse.json().then(res => {console.log("result from rawResponse", res)});
-            // var content = await rawResponse.then(res => { console.log("res",res)});
-            // console.log("demoData",demoData)
-            // console.log("content",content)
-        })();
-        console.log("async stopped")
 
-    },[])
 
 
 
