@@ -24,3 +24,10 @@ code {
   font-weight: bold;
   margin: 0px;
 }
+
+.about {
+  background-color: lightgray;
+  width: 500px;
+  padding: 10px;
+  border-radius: 10px;
+}
