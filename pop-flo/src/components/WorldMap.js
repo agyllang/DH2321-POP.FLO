@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from "react";
 import { geoConicEquidistant, geoEqualEarth, geoPath } from "d3-geo";
 import { feature } from "topojson-client";
-import axios from 'axios';
+//import axios from 'axios';
 
 const cities = [
     { name: "Tokyo", coordinates: [139.6917, 35.6895], population: 37843000 },
@@ -105,7 +105,7 @@ const WorldMap = () => {
     }, []);
 
 
-
+/*
 
     useEffect(() => {
         //'https://cors-anywhere.herokuapp.com/https://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101J/InOmflytt'
@@ -177,7 +177,7 @@ const WorldMap = () => {
 
 
 
-
+*/
 
     //   useEffect(()=>{
     //     projection.fitExtent(
