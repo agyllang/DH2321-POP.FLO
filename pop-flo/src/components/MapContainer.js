@@ -16,7 +16,7 @@ var height = 500;
 
 //const projection = geoConicEquidistant().scale(1200).center([45, 60]);
 
-const MapContainer = () => {
+const MapContainer = ({selected,selectCounty}) => {
     const [geographies, setGeographies] = useState([])
     const [demoData, setDemoData] = useState({});
     const svgRef = createRef();
@@ -122,7 +122,7 @@ const MapContainer = () => {
     return (
         <svg ref={svgRef} width={width} height={height} >
             {geographies  &&
-            <SwedenMap geographies={geographies}/> 
+            <SwedenMap geographies={geographies} selectCounty={selectCounty} selected={selected}/> 
             }
         </svg>
     )
