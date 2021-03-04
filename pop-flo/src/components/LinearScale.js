@@ -12,7 +12,8 @@ const LinearScale = () => {
         const svg = d3.select(svgRef.current)
         var linear = d3.scaleLinear()
         .domain([-5,0,5])
-        .range(["rgb(239, 71, 111)","rgb(125,125, 125)", "rgb(6, 214, 160)"]);
+        .range(["rgb(0,95,255)","rgb(255,255, 255)", "rgb(255,121,0)"]);
+
       
       
       svg.append("g")
