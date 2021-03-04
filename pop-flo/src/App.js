@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react"
-import WorldMap from "./components/WorldMap"
+import MapContainer from "./components/MapContainer";
+import LinearScale from "./components/LinearScale";
+import DropDown from "./components/DropDown"
 import "./App.css"
 
 function App() {
+  const [selectedCounty, setSelectedCounty] = useState(null);
 
   return (
     <div className="App">
-      <WorldMap />
+
+      <div>selected county:{selectedCounty}]</div>
+      <DropDown selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} />
+      <MapContainer/>
+      <LinearScale />
     </div>
   );
 }
