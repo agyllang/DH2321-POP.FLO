@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import * as d3 from "d3";
+import { csv } from 'd3-fetch';
+import url from './../01.csv';
 
 class Explanation extends React.Component {
     constructor(props) {
@@ -7,6 +10,14 @@ class Explanation extends React.Component {
             show: true,
         }
     }
+    
+    componentDidMount() {
+        csv(url, function(err, raw, content) {
+            for (var k in content) {
+                console.log(k[0])
+                }
+    })
+}
 
     render() {
         return(
