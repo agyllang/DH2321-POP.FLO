@@ -6,6 +6,7 @@ import Sankey from "./components/SankeyContainer"
 import "./App.css"
 import Explanation from "./components/explanation"
 import About from "./components/about";
+import GetData from "./components/GetData";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       <Explanation/>
       <About/>
       <Sankey/>
+      <GetData />
     </div>
     
     
