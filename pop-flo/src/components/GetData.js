@@ -10,76 +10,54 @@ import data from '../stockholm_data.csv';
 //const [dYear, setDYear] = ([2019]);
 const dYear = 2019;
 //const [dGender, setDGender] = ([]);
-//const [dNetto, setDNetto] = (0);
 //const inflytt = [];
 //const utflytt = []; 
 //const total_in = 0;
-//const Stocholm_in = 0;
-//const [netto, setNetto] = useState(0);
-var Stockhom_netto = [];
-
 // in, out, netto, för kvinnor, män, all
 
 const counties = [
-    { name: "Stockholm", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0 },
+    { name: "01  Stockholms län (Inflyttningslän)", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: [] },
+    {name: "03  Uppsala län (Inflyttningslän)", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: []},
 ]
 
-//counties[0].in = 5;
-
-//console.log("counties", counties[0].in);
 //const GetData = () => {
 function GetData() {
-    //const [netto, setNetto] = useState(0);
-    //const [dInflytt, setDInflytt] = useState(0);
-    //const [utflytt, setUtflytt] = useState([]);
-    //const [sthlm, setSthlm] = useState(0);
-    const inflytt = [];
-    const utflytt = [];
-    
-
    // d3.csv(data, function(data) { 
     d3.csv(data).then(function(data){
         data.forEach(d=> {
-        // vill köra forEach av varje län 
-            if (d.Inflyttningslän == "01  Stockholms län (Inflyttningslän)" && d.kön =="kvinnor") {
-                //console.log("d", d);
-                inflytt.push(Number(d[dYear]));
-                //return inflytt;
-                //setDInflytt(dInflytt + Number(data[dYear]));
-                //console.log("inflytt 1:", inflytt);
+            //if (d.Inflyttningslän == "01  Stockholms län (Inflyttningslän)" && d.kön =="kvinnor") {
+            for (var i in counties) {
+              if (d.Inflyttningslän == counties[i].name && d.kön =="kvinnor") {
+                //inflytt.push(Number(d[dYear])); // plus vilket län det kommer från 
+                counties[i].inflytt.push(Number(d[dYear])); // plus vilket län det kommer från 
             }
-            //console.log("d", d);
-
+            // se till så att inflytt och utflytt namn i csv filen är samma, så man kan köra detta för i
+            //                ... == counties[i].name , counties[i].utflytt....
             if (d.Utflyttningslän == " Stockholms län (Utflyttningslän)" && d.kön =="kvinnor") {
-                //console.log("d", d);
-                utflytt.push(Number(d[dYear]));
+               counties[0].utflytt.push(Number(d[dYear]));
             }
-
+        }
         });
-        //console.log("inflytt 2: ", inflytt);
-        const total_in = inflytt.reduce((partial_sum, a) => partial_sum + a,0); 
-        //console.log("total in: ", total_in);
-        const total_out = utflytt.reduce((partial_sum, a) => partial_sum + a,0);
-        //console.log("tot out: ", total_out);
-        const netto = total_in - total_out;
-        console.log("netto", netto);
-        //det körs på nått sätt dubblet??
+        //const total_in = inflytt.reduce((partial_sum, a) => partial_sum + a,0); 
+        for (var j in counties) {
+            counties[j].in = counties[j].inflytt.reduce((partial_sum, a) => partial_sum + a,0); 
+            counties[j].out = counties[j].utflytt.reduce((partial_sum, a) => partial_sum + a,0);
+            counties[j].netto = counties[j].in - counties[j].out;
+        }
+        //console.log("netto", counties[0].netto);
+        //det körs på nått sätt dubbelt
         //console.log("typ netto", typeof(netto));
-        Stockhom_netto = netto;
-        console.log("sthml netto", Stockhom_netto);
         //detta för varje län 
-        counties[0].in = total_in;
+/*      counties[0].in = total_in;
         counties[0].out = total_out;
-        counties[0].netto = netto;
+        counties[0].netto = netto; */
 
         console.log("counties", counties[0]);
+        console.log("counties 1", counties[1]);        
 
-
-        
-
-
-    })
-   //console.log("nettooooooooo", Stockhom_netto);
+    });
+   //se till så man kommer åt datan från counties utanför 
+   console.log("Counties 2:", counties[0]);
 
     return (
         <svg>
