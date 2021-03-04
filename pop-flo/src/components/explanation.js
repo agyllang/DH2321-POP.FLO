@@ -10,14 +10,6 @@ class Explanation extends React.Component {
             show: true,
         }
     }
-    
-    componentDidMount() {
-        csv(url, function(err, raw, content) {
-            for (var k in content) {
-                console.log(k[0])
-                }
-    })
-}
 
     render() {
         return(
