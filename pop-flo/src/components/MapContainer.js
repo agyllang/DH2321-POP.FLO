@@ -8,7 +8,7 @@ import SwedenMap from "./SwedenMap"
 
 
 import { feature } from "topojson-client";
-import axios from 'axios';
+//import axios from 'axios';
 
 
 var width = 1000;
