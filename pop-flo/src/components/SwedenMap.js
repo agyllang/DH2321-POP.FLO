@@ -4,7 +4,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { geoConicEquidistant, geoEqualEarth, geoPath } from "d3-geo";
 import * as d3 from 'd3';
-import { rgb } from "d3";
+
 
 const projection = geoConicEquidistant().scale(1600).center([35, 60]);
 
@@ -99,6 +99,7 @@ function SwedenMap({ geographies, selected, selectCounty, counties }) {
 
         }
     }
+
 
 
     return (
