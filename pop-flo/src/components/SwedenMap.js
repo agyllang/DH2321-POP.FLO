@@ -35,9 +35,14 @@ function SwedenMap({ geographies, selected, selectCounty, counties }) {
 
     const mouseEnter = (event, object) => {
         const text = d3.select('.tooltip-area__text');
-        text.text(object.VARNAME_1);
-        setHoverKey(object.ID_1)
-
+       for (var i in counties){
+           if (counties[i].id == object.ID_1) {
+         //   text.text(object.VARNAME_1,);
+             text.text(counties[i].name);
+             //text.text(counties[i].netto); 
+           }
+       }
+       setHoverKey(object.ID_1)
         if (object.ID_1 !== hoverKey) {
             // console.log("mouseEnter set new cordinates")
 
@@ -51,7 +56,8 @@ function SwedenMap({ geographies, selected, selectCounty, counties }) {
         }
     };
 
-
+// counties.id == ID_1
+// få med in, out, netto, namn
 
 
     return (
@@ -67,7 +73,7 @@ function SwedenMap({ geographies, selected, selectCounty, counties }) {
                             stroke="#FFFFFF"
                             strokeWidth={0.5}
                             // onClick={() => handleCountryClick(i)}
-                            onClick={() => selectCounty(geographies[i].properties.VARNAME_1)}
+                            onClick={() => selectCounty(geographies[i].properties.ID_1)}
                             onMouseOver={(event) => { mouseOver(event,geographies[i].properties) }}
                             onMouseEnter={event => { mouseEnter(event, geographies[i].properties) }}
                             onMouseLeave={() => mouseLeave()}
