@@ -22,7 +22,7 @@ function App() {
       <Explanation/>
       <About/>
       <Sankey/>
-      <GetData />
+    {/*   <GetData /> */}
     </div>
     
     

@@ -8,11 +8,13 @@ import * as d3 from 'd3';
 const projection = geoConicEquidistant().scale(1600).center([35, 60]);
 
 
-function SwedenMap({ geographies, selected, selectCounty }) {
+function SwedenMap({ geographies, selected, selectCounty, counties }) {
     const [hoverKey, setHoverKey] = useState(0)
     const [hoverInfo, setHoverInfo] = useState("")
     const [mouseX, setX] = useState();
     const [mouseY, setY] = useState();
+
+    console.log("counties in swedenmap:", counties);
 
     const handleCountryClick = countryIndex => {
         console.log("Clicked on country: ", geographies[countryIndex])

@@ -8,6 +8,7 @@ import data from '../scb_data.csv';
 
 const dYear = 2019;
 // in, out, netto, för kvinnor, män, all
+const dGender = "kvinnor";
 
 const counties = [
 //    { name: "01  Stockholms län (Inflyttningslän)", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: [] },
@@ -44,13 +45,15 @@ function GetData() {
                 d.Inflyttningslän = d.Inflyttningslän.replace(/[0-9]/g, '');
                 d.Inflyttningslän = d.Inflyttningslän.replace(' (Inflyttningslän)', '');
                 d.Inflyttningslän = d.Inflyttningslän.trim();
-                if (d.Inflyttningslän == counties[i].name && d.kön =="kvinnor") {
+                if (d.Inflyttningslän == counties[i].name && d.kön == dGender) {
                     //inflytt.push(Number(d[dYear])); // plus vilket län det kommer från 
                     counties[i].inflytt.push(Number(d[dYear])); // plus vilket län det kommer från 
+                   // counties[i].inflytt.push(d.Utflyttningslän);
+
                 }
                 d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
                 d.Utflyttningslän = d.Utflyttningslän.trim();
-                if (d.Utflyttningslän == counties[i].name && d.kön =="kvinnor") {
+                if (d.Utflyttningslän == counties[i].name && d.kön ==dGender) {
                     counties[i].utflytt.push(Number(d[dYear]));
                 }
             }
@@ -74,7 +77,7 @@ function GetData() {
     return (
         <svg>
             {console.log(counties[0].netto)}
-            <text x="20" y="35" class="small">Netto Sthlm: {counties[0].netto}</text>
+            <text x="20" y="35" className="small">Netto Sthlm: {counties[0].netto}</text>
         </svg>
     )
 }
