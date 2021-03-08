@@ -4,16 +4,37 @@
 import React, { useRef, useState, useEffect } from "react";
 import { geoConicEquidistant, geoEqualEarth, geoPath } from "d3-geo";
 import * as d3 from 'd3';
-import { svg } from "d3";
+
 
 const projection = geoConicEquidistant().scale(1600).center([35, 60]);
 
 
 function SwedenMap({ geographies, selected, selectCounty, counties }) {
+    console.log("geographies", geographies)
     const [hoverKey, setHoverKey] = useState(0)
     const [hoverInfo, setHoverInfo] = useState("")
     const [mouseX, setX] = useState();
     const [mouseY, setY] = useState();
+    const [colorArray, setColorArray] = useState();
+
+
+    const calculateMaxMin = () => {
+        var calcArr = [];
+        counties.forEach((c) => {
+            calcArr.push(c.netto)
+        })
+
+        return [Math.min.apply(null, calcArr), Math.max.apply(null, calcArr)];
+
+    }
+
+
+
+
+    console.log(calculateMaxMin());
+
+
+
 
     console.log("counties in swedenmap:", counties);
 
@@ -31,19 +52,19 @@ function SwedenMap({ geographies, selected, selectCounty, counties }) {
     const mouseLeave = (event, d) => {
         console.log("mouseLeave")
         tooltip.style('opacity', 0);
-      
+
     }
 
     const mouseEnter = (event, object) => {
         const text = d3.select('.tooltip-area__text');
-       for (var i in counties){
-           if (counties[i].id == object.ID_1) {
-         //   text.text(object.VARNAME_1,);
-             text.text(counties[i].name);
-             //text.text(counties[i].netto); 
-           }
-       }
-       setHoverKey(object.ID_1)
+        for (var i in counties) {
+            if (counties[i].id == object.ID_1) {
+                //   text.text(object.VARNAME_1,);
+                text.text(counties[i].name);
+                //text.text(counties[i].netto); 
+            }
+        }
+        setHoverKey(object.ID_1)
         if (object.ID_1 !== hoverKey) {
             // console.log("mouseEnter set new cordinates")
 
@@ -57,30 +78,27 @@ function SwedenMap({ geographies, selected, selectCounty, counties }) {
         }
     };
 
-    const fillCountie = (id) => {
-        for (var i in counties){
-            if(id == counties[i].id){
-                if ((counties[i].in/counties[i].out) > 1){
-                    //var svg = d3.select("body").append("svg")
-                    return "blue"
-                }
-                
-                else {
-                    //var svg = d3.select("body").append("svg")
-                    //.attr("width", width + margin.right + margin.left)
-                    //.attr("height", height + margin.top + margin.bottom);
+    // var myColor = d3.scaleSequential().domain(calculateMaxMin())
+    //     .range(["white","green"]);
+        
+    var myColor = d3.scaleSequential().domain(calculateMaxMin())
+        .interpolator(d3.interpolateViridis);
 
-                    //svg.append("rect")
-                    //.attr("fill", "pink");
-                    return "pink"
-                }
+    const mapIdToColor = (id1) => {
+        // console.log("mapIdToColor id1", id1)
+        for (var i in counties) {
 
+            // console.log("counties[i].id",counties[i].id)
+            if (counties[i].id == id1) {
+                console.log("myColor(counties[i].netto)", myColor(counties[i].netto));
+                return myColor(counties[i].netto)
             }
+
+
+
+
         }
     }
-
-// counties.id == ID_1
-// få med in, out, netto, namn
 
 
 
@@ -93,13 +111,14 @@ function SwedenMap({ geographies, selected, selectCounty, counties }) {
                             key={`path-${i}`}
                             d={geoPath().projection(projection)(d)}
                             className="county"
-                            //fill={`rgba(38,50,56,${1 / geographies.length * i})`}
-                            fill={fillCountie(d.properties.ID_1)}
+                            // fill={`rgba(38,50,56,${1 / geographies.length * i})`}
+                            // fill={myColor(i*100)}
+                            fill={mapIdToColor(geographies[i].properties.ID_1)}
                             stroke="#FFFFFF"
                             strokeWidth={0.5}
                             // onClick={() => handleCountryClick(i)}
                             onClick={() => selectCounty(geographies[i].properties.ID_1)}
-                            onMouseOver={(event) => { mouseOver(event,geographies[i].properties) }}
+                            onMouseOver={(event) => { mouseOver(event, geographies[i].properties) }}
                             onMouseEnter={event => { mouseEnter(event, geographies[i].properties) }}
                             onMouseLeave={() => mouseLeave()}
                         >
