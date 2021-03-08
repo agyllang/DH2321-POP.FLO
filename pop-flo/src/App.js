@@ -22,6 +22,7 @@ function App() {
       <Explanation/>
       <About/>
       <Sankey/>
+      <Sankey/>
       <GetData />
     </div>
     

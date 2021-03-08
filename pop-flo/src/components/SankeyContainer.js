@@ -2,7 +2,7 @@ import React from "react";
 import SankeyDiagram from "./Sankey";
 
 //this is testdata, sent to the Sankey class
-const data = {
+const test = {
     "nodes":[
         {"name": "Stockholm"},
         {"name": "Uppsala"},
@@ -28,7 +28,7 @@ const data = {
     ]
 };
 
-const data2 = {
+const data = {
     "nodes":[
         {"name": "Stockholm"},
         {"name": "Uppsala"},
@@ -57,6 +57,7 @@ const data2 = {
 class Sankey extends React.Component {
   state = { data: {data}, width: 0, height: 0 };
   svgRef = React.createRef();
+  svgRef2 = React.createRef();
 
   componentDidMount() {
     // d3.json("/ugr-sankey-openspending.json").then(data =>
@@ -72,6 +73,7 @@ class Sankey extends React.Component {
 
   measureSVG = () => {
     const { width, height } = this.svgRef.current.getBoundingClientRect();
+    //const { width, height } = this.svgRef2.current.getBoundingClientRect();
 
     this.setState({
       width,
