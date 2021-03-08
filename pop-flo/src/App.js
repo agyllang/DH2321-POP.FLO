@@ -10,6 +10,7 @@ import GetData from "./components/GetData";
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
 import data from './scb_data.csv';
 import * as d3 from 'd3';
+import logo from './components/logo3.png'
 
 
 function App() {
@@ -107,8 +108,8 @@ useEffect(() => {
     <div>
       <Router>
       <div className="navbar">
+      <Link to ="/"><img className="logo" src={logo}></img></Link>
         <div className="navbuttons">
-        <Link to ="/"><text className="title">POP.FLO</text></Link>
         <button className="navbutton" onClick={() => setShow(true)}>How to use</button>
         <Link to="/about"><button className="navbutton">About us & POP.FLO</button></Link>
         </div>
