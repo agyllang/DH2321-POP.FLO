@@ -51,3 +51,20 @@ svg {
   margin-top: 15px;
   color: white;
 }
+
+.content-container{
+  /* width:100vw; */
+  display:flex;
+  /* flex-direction: row; */
+}
+.map-container{
+  
+  flex:0.5;
+}
+.sankey-container{
+  flex:1;
+}
+
+.selection-container{
+  width:100%;
+}

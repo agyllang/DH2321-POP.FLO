@@ -105,7 +105,7 @@ class SankeyContainer extends React.Component {
 
   render() {
     const { data, width, height, } = this.state;
-    console.log("props in sankey", this.props.counties);
+    // console.log("props in sankey", this.props.counties);
    // console.log("counties in sankey", counties);
 
 
