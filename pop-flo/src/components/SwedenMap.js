@@ -10,6 +10,7 @@ const projection = geoConicEquidistant().scale(1600).center([35, 60]);
 
 
 function SwedenMap({ geographies, selected, selectCounty, counties }) {
+    console.log(" Swedenmap selected",selected)
     console.log("geographies", geographies)
     const [hoverKey, setHoverKey] = useState(0)
   
@@ -42,6 +43,9 @@ function SwedenMap({ geographies, selected, selectCounty, counties }) {
         tooltip.style('opacity', 0);
 
     }
+    const onMouseOver= (event) => event.currentTarget.firstElementChild.style.borderColor = "#1b1e23"
+    
+    const onMouseOut= (event) => event.currentTarget.firstElementChild.style.borderColor = "#e8e8e8"
 
     const mouseEnter = (event, object) => {
         const text = d3.select('.tooltip-area__text');
@@ -57,7 +61,7 @@ function SwedenMap({ geographies, selected, selectCounty, counties }) {
             // console.log("mouseEnter set new cordinates")
 
 
-            const [x, y] = d3.pointer(event);
+            // const [x, y] = d3.pointer(event);
 
             tooltip
                 .attr('transform', `translate(60, 60)`);
@@ -88,12 +92,7 @@ function SwedenMap({ geographies, selected, selectCounty, counties }) {
                 } else {
                     return colorScaleSmaller(counties[i].netto)
                 }
-
             }
-
-
-
-
         }
     }
 
@@ -111,8 +110,9 @@ function SwedenMap({ geographies, selected, selectCounty, counties }) {
                             // fill={`rgba(38,50,56,${1 / geographies.length * i})`}
                             // fill={myColor(i*100)}
                             fill={mapIdToColor(geographies[i].properties.ID_1)}
-                            stroke="#FFFFFF"
-                            strokeWidth={0.5}
+                            stroke={ selected==geographies[i].properties.ID_1 ? "#212021" : "rgba(24, 14, 12, 0.2)"}
+                            strokeWidth={ selected==geographies[i].properties.ID_1 ? 1 : 0.5}
+                            // strokeWidth={ 3}
                             // onClick={() => handleCountryClick(i)}
                             onClick={() => selectCounty(geographies[i].properties.ID_1)}
                             onMouseOver={(event) => { mouseOver(event, geographies[i].properties) }}

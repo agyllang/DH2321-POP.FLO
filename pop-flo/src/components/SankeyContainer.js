@@ -105,7 +105,7 @@ class SankeyContainer extends React.Component {
 
   render() {
     const { data, width, height } = this.state;
-    console.log(this.props);
+    // console.log(this.props);
 
 
     return (

@@ -5,8 +5,8 @@ import React, { createRef, useRef, useState, useEffect } from "react";
 import { geoConicEquidistant, geoEqualEarth, geoPath } from "d3-geo";
 import { select,  } from "d3";
 import SwedenMap from "./SwedenMap"
-import * as d3 from 'd3';
-import data from '../scb_data.csv';
+// import * as d3 from 'd3';
+// import data from '../scb_data.csv';
 //import Sankey from "./SankeyContainer"
 
 
@@ -22,7 +22,6 @@ var height = 500;
 
 const MapContainer = ({selected,selectCounty, counties}) => {
     const [geographies, setGeographies] = useState([])
-    const [demoData, setDemoData] = useState({});
     const svgRef = createRef();
 
 
@@ -140,9 +139,7 @@ useEffect(() => {
             }
            
         </svg>
-/*         <div>
-             <Sankey counties={counties}/>
-        </div> */
+
     
     )
 }
