@@ -19,27 +19,27 @@ function App() {
   
   const EmptyCounties = [
   //    { name: "01  Stockholms län (Inflyttningslän)", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: [] },
-  {id: "01", name: "Stockholms län", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: [] }, 
-  {id: "03", name: "Uppsala län", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: []},
-  {id: "04", name: "Södermanlands län", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: []},
-  {id: "05", name: "Östergötlands län", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: []},
-  {id: "06", name: "Jönköpings län", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: [] }, 
-  {id: "07", name: "Kronobergs län", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: []},
-  {id: "08", name: "Kalmar län", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: []},
-  {id: "09", name: "Gotlands län", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: []},
-  {id: "10", name: "Blekinge län", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: [] }, 
-  {id: "12", name: "Skåne län", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: []},
-  {id: "13", name: "Hallands län", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: []},
-  {id: "14", name: "Västra Götalands län", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: []},
-  {id: "17", name: "Värmlands län", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: [] }, 
-  {id: "18", name: "Örebro län", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: []},
-  {id: "19", name: "Västmanlands län", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: []},
-  {id: "20", name: "Dalarnas län", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: []},
-  {id: "21", name: "Gävleborgs län", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: [] }, 
-  {id: "22", name: "Västernorrlands län", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: []},
-  {id: "23", name: "Jämtlands län", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: []},
-  {id: "24", name: "Västerbottens län", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: []},
-  {id: "25", name: "Norrbottens län", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: []},
+  {id: "01", name: "Stockholms län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []}, 
+  {id: "03", name: "Uppsala län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
+  {id: "04", name: "Södermanlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
+  {id: "05", name: "Östergötlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
+  {id: "06", name: "Jönköpings län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []}, 
+  {id: "07", name: "Kronobergs län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
+  {id: "08", name: "Kalmar län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
+  {id: "09", name: "Gotlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
+  {id: "10", name: "Blekinge län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []}, 
+  {id: "12", name: "Skåne län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
+  {id: "13", name: "Hallands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
+  {id: "14", name: "Västra Götalands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
+  {id: "17", name: "Värmlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []}, 
+  {id: "18", name: "Örebro län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
+  {id: "19", name: "Västmanlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
+  {id: "20", name: "Dalarnas län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
+  {id: "21", name: "Gävleborgs län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []}, 
+  {id: "22", name: "Västernorrlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
+  {id: "23", name: "Jämtlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
+  {id: "24", name: "Västerbottens län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
+  {id: "25", name: "Norrbottens län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
   ]
 
 const [counties, setCounties] = useState([]);
@@ -56,16 +56,20 @@ const [counties, setCounties] = useState([]);
                    d.Inflyttningslän = d.Inflyttningslän.replace(/[0-9]/g, '');
                    d.Inflyttningslän = d.Inflyttningslän.replace(' (Inflyttningslän)', '');
                    d.Inflyttningslän = d.Inflyttningslän.trim();
+                   d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
+                   d.Utflyttningslän = d.Utflyttningslän.trim();
                    if (d.Inflyttningslän == updatedCounties[i].name && d.kön == dGender) {
                        //inflytt.push(Number(d[dYear])); // plus vilket län det kommer från 
                        updatedCounties[i].inflytt.push(Number(d[dYear])); // plus vilket län det kommer från 
                       // counties[i].inflytt.push(d.Utflyttningslän);
+                      updatedCounties[i].inflyttLän.push(d.Utflyttningslän);
    
                    }
-                   d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
-                   d.Utflyttningslän = d.Utflyttningslän.trim();
+                   /* d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
+                   d.Utflyttningslän = d.Utflyttningslän.trim(); */
                    if (d.Utflyttningslän == updatedCounties[i].name && d.kön ==dGender) {
                       updatedCounties[i].utflytt.push(Number(d[dYear]));
+                      updatedCounties[i].utflyttLän.push(d.Inflyttningslän);
                    }
                }
            });
@@ -106,7 +110,7 @@ useEffect(() => {
       <LinearScale />
       <Explanation/>
       <About/>
-      {counties.length>0 && <SankeyContainer/>}
+      <SankeyContainer counties={counties} hej={"albinssträng"}/>
     {/*   <GetData /> */}
     </div>
     
