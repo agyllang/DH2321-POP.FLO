@@ -10,13 +10,9 @@ const projection = geoConicEquidistant().scale(1600).center([35, 60]);
 
 
 function SwedenMap({ geographies, selected, selectCounty, counties }) {
-    console.log("geographies", geographies)
+    //console.log("geographies", geographies)
     const [hoverKey, setHoverKey] = useState(0)
-    const [hoverInfo, setHoverInfo] = useState("")
-    const [mouseX, setX] = useState();
-    const [mouseY, setY] = useState();
-    const [colorArray, setColorArray] = useState();
-
+  
 
     const calculateMaxMin = () => {
         var calcArr = [];
@@ -28,18 +24,10 @@ function SwedenMap({ geographies, selected, selectCounty, counties }) {
 
     }
 
-
-
-
-    console.log(calculateMaxMin());
-
-
-
-
-    console.log("counties in swedenmap:", counties);
+    //console.log("counties in swedenmap:", counties);
 
     const handleCountryClick = countryIndex => {
-        console.log("Clicked on country: ", geographies[countryIndex])
+        //console.log("Clicked on country: ", geographies[countryIndex])
     }
 
     var tooltip = d3.select('.tooltip-area')
@@ -50,7 +38,7 @@ function SwedenMap({ geographies, selected, selectCounty, counties }) {
     };
 
     const mouseLeave = (event, d) => {
-        console.log("mouseLeave")
+        // console.log("mouseLeave")
         tooltip.style('opacity', 0);
 
     }
@@ -80,9 +68,12 @@ function SwedenMap({ geographies, selected, selectCounty, counties }) {
 
     // var myColor = d3.scaleSequential().domain(calculateMaxMin())
     //     .range(["white","green"]);
-        
-    var myColor = d3.scaleSequential().domain(calculateMaxMin())
-        .interpolator(d3.interpolateViridis);
+
+    var colorScaleSmaller = d3.scaleSequential().domain(calculateMaxMin())
+        .range(["rgb(0,95,255)","rgb(255,255, 255)"]);
+
+    var colorScaleBigger = d3.scaleSequential().domain(calculateMaxMin())
+        .range(["rgb(255,255, 255)", "rgb(255,121,0)"]);
 
     const mapIdToColor = (id1) => {
         // console.log("mapIdToColor id1", id1)
@@ -90,8 +81,14 @@ function SwedenMap({ geographies, selected, selectCounty, counties }) {
 
             // console.log("counties[i].id",counties[i].id)
             if (counties[i].id == id1) {
-                console.log("myColor(counties[i].netto)", myColor(counties[i].netto));
-                return myColor(counties[i].netto)
+                var pivotPoint = (calculateMaxMin()[0] + calculateMaxMin()[1] / 2)
+                //console.log("pivotPoint", pivotPoint)
+                if (counties[i].netto > pivotPoint) {
+                    return colorScaleBigger(counties[i].netto)
+                } else {
+                    return colorScaleSmaller(counties[i].netto)
+                }
+
             }
 
 
