@@ -6,7 +6,6 @@ import SankeyContainer from "./components/SankeyContainer"
 import "./App.css"
 import Explanation from "./components/explanation"
 import About from "./components/about";
-import GetData from "./components/GetData";
 import data from './scb_data.csv';
 import * as d3 from 'd3';
 
@@ -43,7 +42,7 @@ function App() {
   {id: "25", name: "Norrbottens län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
   ]
 
-const [counties, setCounties] = useState(EmptyCounties);
+const [counties, setCounties] = useState([]);
 
   function GetData() {
       // d3.csv(data, function(data) { 
@@ -106,7 +105,8 @@ useEffect(() => {
 
       <div>selected county:{selectedCounty}]</div>
       <DropDown selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} />
-      <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties}/>
+      {counties.length>0 && <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties}/>}
+       {/* <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties}/> */}
       <LinearScale />
       <Explanation/>
       <About/>
