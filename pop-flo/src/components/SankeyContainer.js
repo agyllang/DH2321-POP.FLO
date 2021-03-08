@@ -1,8 +1,19 @@
 import React from "react";
 import SankeyDiagram from "./Sankey";
+const scb = 
+{name: "Stockholms län", in: 0, out: 0, netto: 0, inflytt: [300,400], utflytt: ["Jönköping"] }; 
+
+
+/*
+for (var i in scb.utflytt){
+    if (scb.utflytt[i] == data.nodes){
+        data.links[0].source = i;
+    }
+}*/
 
 //this is testdata, sent to the Sankey class
-const test = {
+const data = {
+    
     "nodes":[
         {"name": "Stockholm"},
         {"name": "Uppsala"},
@@ -13,7 +24,7 @@ const test = {
         {
             "source": 1,
             "target": 0,
-            "value": 120
+            "value": scb.inflytt[0]
         },
         {
             "source": 2,
@@ -28,7 +39,10 @@ const test = {
     ]
 };
 
-const data = {
+
+console.log("sankey:", data.links[0]);
+
+const data2 = {
     "nodes":[
         {"name": "Stockholm"},
         {"name": "Uppsala"},

@@ -17,7 +17,7 @@ function App() {
 
       <div>selected county:{selectedCounty}]</div>
       <DropDown selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} />
-      <MapContainer/>
+      <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)}/>
       <LinearScale />
       <Explanation/>
       <About/>
