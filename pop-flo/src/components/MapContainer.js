@@ -119,8 +119,8 @@ const [counties, setCounties] = useState(EmptyCounties);
          setCounties(updatedCounties);
      
      }
-     console.log("Alla counties :" , counties);
-     console.log("Inflytt av ett countie: ", counties[1].in);
+    //  console.log("Alla counties :" , counties);
+    //  console.log("Inflytt av ett countie: ", counties[1].in);
      
 useEffect(() => {
     GetData()
@@ -133,7 +133,7 @@ useEffect(() => {
 
     return (
         <svg ref={svgRef} width={width} height={height} >
-            {geographies  &&
+            {geographies  &&  
             <SwedenMap geographies={geographies} selectCounty={selectCounty} selected={selected} counties={counties}/> 
             }
         </svg>
