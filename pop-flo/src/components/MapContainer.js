@@ -135,7 +135,7 @@ useEffect(() => {
 
     return (
         <svg ref={svgRef} width={width} height={height} >
-            {geographies  &&
+            {geographies  &&  
             <SwedenMap geographies={geographies} selectCounty={selectCounty} selected={selected} counties={counties}/> 
             }
            

@@ -75,10 +75,11 @@ const data2 = {
     ]
 };
 
-class Sankey extends React.Component {
-  state = { data: {data}, width: 0, height: 0, };
-  svgRef = React.createRef();
+class SankeyContainer extends React.Component {
 
+  state = { data: {data}, width: 0, height: 0 };
+  svgRef = React.createRef();
+  
   componentDidMount() {
     // d3.json("/ugr-sankey-openspending.json").then(data =>
     //   this.setState({ data })
@@ -104,7 +105,8 @@ class Sankey extends React.Component {
 
   render() {
     const { data, width, height } = this.state;
-    //console.log("counties from sankey ", counties);
+    console.log(this.props);
+
 
     return (
         <svg width="50%" height="300" ref={this.svgRef}>
@@ -116,4 +118,4 @@ class Sankey extends React.Component {
   }
 }
 
-export default Sankey;
+export default SankeyContainer;
