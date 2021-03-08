@@ -1,7 +1,14 @@
 import React from "react";
 import SankeyDiagram from "./Sankey";
-const scb = 
-{name: "Stockholms län", in: 0, out: 0, netto: 0, inflytt: [300,400], utflytt: ["Jönköping"] }; 
+//import React, { useRef, useState, useEffect } from "react";
+//import { geoConicEquidistant, geoEqualEarth, geoPath } from "d3-geo";
+//import * as d3 from 'd3';
+const scb = [
+{id: "01", name: "Stockholms län", in: 0, out: 0, netto: 0, inflytt: [300,400], utflytt: ["Jönköping"] },
+{id: "06", name: "Jönköping län", in: 0, out: 0, netto: 0, inflytt: [300,400], utflytt: ["Jönköping"] },]
+; 
+
+//console.log("counties from Sankey", counties);
 
 
 /*
@@ -15,7 +22,7 @@ for (var i in scb.utflytt){
 const data = {
     
     "nodes":[
-        {"name": "Stockholm"},
+        {"name": scb[0].name},
         {"name": "Uppsala"},
         {"name": "Gotland"},
         {"name": "Jönköping"}
@@ -24,7 +31,7 @@ const data = {
         {
             "source": 1,
             "target": 0,
-            "value": scb.inflytt[0]
+            "value": scb[0].inflytt[0]
         },
         {
             "source": 2,
@@ -68,10 +75,11 @@ const data2 = {
     ]
 };
 
-class Sankey extends React.Component {
+class SankeyContainer extends React.Component {
+
   state = { data: {data}, width: 0, height: 0 };
   svgRef = React.createRef();
-
+  
   componentDidMount() {
     // d3.json("/ugr-sankey-openspending.json").then(data =>
     //   this.setState({ data })
@@ -93,8 +101,12 @@ class Sankey extends React.Component {
     });
   };
 
+  
+
   render() {
     const { data, width, height } = this.state;
+    console.log(this.props);
+
 
     return (
         <svg width="50%" height="300" ref={this.svgRef}>
@@ -106,4 +118,4 @@ class Sankey extends React.Component {
   }
 }
 
-export default Sankey;
+export default SankeyContainer;

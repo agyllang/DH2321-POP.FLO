@@ -7,6 +7,8 @@ import { select,  } from "d3";
 import SwedenMap from "./SwedenMap"
 import * as d3 from 'd3';
 import data from '../scb_data.csv';
+//import Sankey from "./SankeyContainer"
+
 
 
 import { feature } from "topojson-client";
@@ -18,7 +20,7 @@ var height = 500;
 
 //const projection = geoConicEquidistant().scale(1200).center([45, 60]);
 
-const MapContainer = ({selected,selectCounty}) => {
+const MapContainer = ({selected,selectCounty, counties}) => {
     const [geographies, setGeographies] = useState([])
     const [demoData, setDemoData] = useState({});
     const svgRef = createRef();
@@ -46,7 +48,7 @@ const MapContainer = ({selected,selectCounty}) => {
     
     }, []);
 
-    const dYear = 2019;
+/*     const dYear = 2019;
     // in, out, netto, för kvinnor, män, all
     const dGender = "kvinnor";
     
@@ -119,24 +121,29 @@ const [counties, setCounties] = useState(EmptyCounties);
          setCounties(updatedCounties);
      
      }
-     console.log("Alla counties :" , counties);
-     console.log("Inflytt av ett countie: ", counties[1].in);
+     //console.log("Alla counties :" , counties);
+     //console.log("Inflytt av ett countie: ", counties[1].in);
      
 useEffect(() => {
     GetData()
     return () => {
 
     }
-}, [])
+}, []) */
 
 
 
     return (
         <svg ref={svgRef} width={width} height={height} >
-            {geographies  &&
+            {geographies  &&  
             <SwedenMap geographies={geographies} selectCounty={selectCounty} selected={selected} counties={counties}/> 
             }
+           
         </svg>
+/*         <div>
+             <Sankey counties={counties}/>
+        </div> */
+    
     )
 }
 
