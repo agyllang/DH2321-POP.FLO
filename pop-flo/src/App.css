@@ -104,3 +104,20 @@ svg {
   -webkit-transform: scale(1.5); /* Safari 3-8 */
   transform: scale(1.2); 
 }
+
+.content-container{
+  /* width:100vw; */
+  display:flex;
+  /* flex-direction: row; */
+}
+.map-container{
+  
+  flex:0.5;
+}
+.sankey-container{
+  flex:1;
+}
+
+.selection-container{
+  width:100%;
+}

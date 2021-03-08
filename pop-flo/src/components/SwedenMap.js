@@ -6,14 +6,27 @@ import { geoConicEquidistant, geoEqualEarth, geoPath } from "d3-geo";
 import * as d3 from 'd3';
 
 
-const projection = geoConicEquidistant().scale(1600).center([35, 60]);
 
+function SwedenMap({ geographies, selected, selectCounty, counties, height, width }) {
+    console.log("height",height)
+    console.log("width",width)
 
-function SwedenMap({ geographies, selected, selectCounty, counties }) {
-    console.log(" Swedenmap selected",selected)
-    console.log("geographies", geographies)
+    console.log(" Swedenmap selected", selected)
+    console.log("GEOGRAPHIES SWEDN MAP: ", geographies)
     const [hoverKey, setHoverKey] = useState(0)
-  
+
+    // var width = 800;
+    // var height = 1000;
+
+    var geojson = {
+        "type": "FeatureCollection", "features": geographies
+    };
+    console.log("geojson",geojson)
+    const projection = geoConicEquidistant().fitSize([width/2, height/2], geojson);
+
+    // const projection = geoConicEquidistant().fitSize([width, height], geographies);
+
+
 
     const calculateMaxMin = () => {
         var calcArr = [];
@@ -43,9 +56,7 @@ function SwedenMap({ geographies, selected, selectCounty, counties }) {
         tooltip.style('opacity', 0);
 
     }
-    const onMouseOver= (event) => event.currentTarget.firstElementChild.style.borderColor = "#1b1e23"
-    
-    const onMouseOut= (event) => event.currentTarget.firstElementChild.style.borderColor = "#e8e8e8"
+
 
     const mouseEnter = (event, object) => {
         const text = d3.select('.tooltip-area__text');
@@ -64,7 +75,7 @@ function SwedenMap({ geographies, selected, selectCounty, counties }) {
             // const [x, y] = d3.pointer(event);
 
             tooltip
-                .attr('transform', `translate(60, 60)`);
+                .attr('transform', `translate(10, 60)`);
             // tooltip
             //     .attr('transform', `translate(${x}, ${y})`);
         }
@@ -74,7 +85,7 @@ function SwedenMap({ geographies, selected, selectCounty, counties }) {
     //     .range(["white","green"]);
 
     var colorScaleSmaller = d3.scaleSequential().domain(calculateMaxMin())
-        .range(["rgb(0,95,255)","rgb(255,255, 255)"]);
+        .range(["rgb(0,95,255)", "rgb(255,255, 255)"]);
 
     var colorScaleBigger = d3.scaleSequential().domain(calculateMaxMin())
         .range(["rgb(255,255, 255)", "rgb(255,121,0)"]);
@@ -98,11 +109,20 @@ function SwedenMap({ geographies, selected, selectCounty, counties }) {
 
 
 
+
     return (
         <>
+            {/* { geographies.length > 0 && projection.fitExtent(
+                        [
+                            [0, 0],
+                            [width , height ],
+                        ], geographies
+                    )
+} */}
             <g className="counties">
                 {
-                    geographies.map((d, i) => (
+                    geojson.features.map((d, i) => (
+                    // geographies.map((d, i) => (
                         <path
                             key={`path-${i}`}
                             d={geoPath().projection(projection)(d)}
@@ -110,8 +130,8 @@ function SwedenMap({ geographies, selected, selectCounty, counties }) {
                             // fill={`rgba(38,50,56,${1 / geographies.length * i})`}
                             // fill={myColor(i*100)}
                             fill={mapIdToColor(geographies[i].properties.ID_1)}
-                            stroke={ selected==geographies[i].properties.ID_1 ? "#212021" : "rgba(24, 14, 12, 0.2)"}
-                            strokeWidth={ selected==geographies[i].properties.ID_1 ? 1 : 0.5}
+                            stroke={selected == geographies[i].properties.ID_1 ? "#212021" : "rgba(24, 14, 12, 0.2)"}
+                            strokeWidth={selected == geographies[i].properties.ID_1 ? 1 : 0.5}
                             // strokeWidth={ 3}
                             // onClick={() => handleCountryClick(i)}
                             onClick={() => selectCounty(geographies[i].properties.ID_1)}
