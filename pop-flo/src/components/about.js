@@ -1,44 +1,72 @@
 import React, { useState, useEffect } from "react";
+import logo from './logo3.png'
+import moa from './images/moa.png'
+import albin from './images/albin.png'
+import amalia from './images/amalia.png'
+import hilda from './images/hilda.png'
+import map from './images/map.png'
 
 class About extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: true,
+            selectedPerson: undefined,
+            detailsPerson: undefined,
         }
     }
 
     render() {
+        console.log(this.state.selectedPerson)
         return(
-            <div className="about">
-                <p className="close" onClick={() => this.setState({show:!this.state.show})}>{this.state.show == true ? 'X':'Click to show'}</p>
-                {this.state.show == true ? (
-                    <div>
-                        <p>Hi and welcome to POP.FLO!</p>
-                        <p>POP.FLO is a tool that gives you the possibility to
-                            visualize moving patterns between Swedish counties, "län".
-                        </p>
-                        <p>Sweden has 21 counties - which shouldn't be mixed up
-                            with the Swedish provinces, "landskap", of which there are 25. The counties have political
-                            and admininistrative powers, the provinces have not. 
-                        </p>
-                        <p>You can see all of the 21 counties in the map below! Explore away!!</p>
-                        <p>Hi! We are the developers of the visualization tool POP.FLO!</p>
-                        <p>We are <b>Hilda Robertsson</b>, <b>Albin Matson Gyllang</b>, 
-                        <b> Amalia Berglöf</b> and <b>Moa Engquist</b>.</p>
-                        <p>We got this idea while reading about Corona driving people to move
+            <div>
+                <div className="aboutcontainer">
+                    <div className="aboutblock">
+                    <h3>Hi and welcome to POP.FLO!</h3>
+                            <p>POP.FLO is a tool that gives you the possibility to
+                                visualize moving patterns between Swedish counties, "län".
+                            </p>
+                            <p>We got this idea while reading about Corona driving people to move
                             from the cities to smaller municipalities. We asked ourselves: has there
                             been any other interesting moving patterns in Sweden during the last couple of years?
-                        </p>
-                        <p>Our goal is to visualize movement in a simple, yet interesting way! It's up
-                            to you if we succeeded of course! You want to get in touch with us? Email us at
-                        </p>
-                        <p>aberglof@kth.se</p>
-                        <p>moaeng@kth.se</p>
-                        <p>hildar@kth.se</p>
-                        <p>albinsmailgoeshere</p>
+                            </p>
+                            <p>Sweden has 21 counties - which shouldn't be mixed up
+                                with the Swedish provinces, "landskap", of which there are 25. The counties have political
+                                and admininistrative powers, the provinces have not. 
+                            </p>
+                            <p>The data comes from the Swedish Central Bureau of Statistics, and the visualization
+                                is built mainly with D3.js, Javascript, CSS and React.
+                            </p>
                     </div>
-                ): ''}
+                    <div className="aboutpicture"><img className="biglogo" src={map}></img></div>
+                </div>
+                <div className="aboutcontainer">
+                    <div className="photocontainer">
+                        <div className="photorow">
+                            <img id="albin" className="profilephoto" src={albin} onMouseEnter={() => this.setState({selectedPerson: "Albin"})} onClick={() => this.setState({detailsPerson: "Albin"})} onMouseOut={() => this.setState({selectedPerson: undefined})}></img>
+                            <img id="amalia" className="profilephoto" src={amalia} onMouseEnter={() => this.setState({selectedPerson: "Amalia"})} onClick={() => this.setState({detailsPerson: "Amalia"})} onMouseOut={() => this.setState({selectedPerson: undefined})}></img>
+                        </div>
+                        <div className="photorow">
+                            <img id="hilda" className="profilephoto" src={hilda} onMouseEnter={() => this.setState({selectedPerson: "Hilda"})} onClick={() => this.setState({detailsPerson: "Hilda"})} onMouseOut={() => this.setState({selectedPerson: undefined})}></img>
+                            <img id="moa" className="profilephoto" src={moa} onMouseEnter={() => this.setState({selectedPerson: "Moa"})} onClick={() => this.setState({detailsPerson: "Moa"})} onMouseOut={() => this.setState({selectedPerson: undefined})}></img>
+                        </div>
+                    </div>
+                    <div className="aboutblock">
+                        <p>We are the developers of the visualization tool POP.FLO!</p>
+                        <p>We are 
+                            {this.state.selectedPerson== "Albin"? <b> Albin Matson Gyllang</b>:' Albin Matson Gyllang'}, 
+                            {this.state.selectedPerson== "Amalia"? <b> Amalia Berglöf</b>:' Amalia Berglöf'}, 
+                            {this.state.selectedPerson== "Hilda"? <b> Hilda Robertsson</b>:' Hilda Robertsson'} and  
+                            {this.state.selectedPerson== "Moa"? <b> Moa Engquist</b>:' Moa Engquist'}.</p>
+                        <p>Our goal is to visualize movement in a simple, yet interesting way! It's up
+                            to you if we succeeded of course! You want to get in touch with us? Click on a person to
+                            get to know them better, and get their contact details!
+                        </p>
+                        {this.state.detailsPerson == "Amalia"? <p>aberglof@kth.se</p> :<div></div>}
+                        {this.state.detailsPerson == "Moa"? <p>moaeng@kth.se</p>:<div></div>}
+                        {this.state.detailsPerson == "Hilda"? <p>hildar@kth.se</p>:<div></div>}
+                        {this.state.detailsPerson == "Albin"?<p>agyllang@kth.se</p>:<div></div>}
+                    </div>
+                </div>
             </div>
 
         )
