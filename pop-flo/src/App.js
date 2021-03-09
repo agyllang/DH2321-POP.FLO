@@ -106,15 +106,13 @@ function App() {
 
   return (
       <Router>
-      <div className="navbar">
-      <Link to ="/"><img className="logo" src={logo}></img></Link>
         <div className="navbar">
+        <Link to ="/"><img className="logo" src={logo}></img></Link>
           <div className="navbuttons">
             <button className="navbutton" onClick={() => setShow(true)}>How to use</button>
             <Link to="/about"><button className="navbutton">About us & POP.FLO</button></Link>
           </div>
           {show == true ? <Explanation show={show} setShow={showval => setShow(showval)} /> : <div></div>}
-        </div>
         </div>
         <Switch>
           <Route exact path="/" render={() =>

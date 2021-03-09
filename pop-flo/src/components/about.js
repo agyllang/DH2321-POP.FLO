@@ -42,29 +42,45 @@ class About extends React.Component {
                 <div className="aboutcontainer">
                     <div className="photocontainer">
                         <div className="photorow">
-                            <img id="albin" className="profilephoto" src={albin} onMouseEnter={() => this.setState({selectedPerson: "Albin"})} onClick={() => this.setState({detailsPerson: "Albin"})} onMouseOut={() => this.setState({selectedPerson: undefined})}></img>
-                            <img id="amalia" className="profilephoto" src={amalia} onMouseEnter={() => this.setState({selectedPerson: "Amalia"})} onClick={() => this.setState({detailsPerson: "Amalia"})} onMouseOut={() => this.setState({selectedPerson: undefined})}></img>
+                        <img id="albin" className={this.state.detailsPerson == "Albin" || this.state.detailsPerson == undefined ?"profilephoto":"photohide"} src={albin} onMouseEnter={() => this.setState({selectedPerson: "Albin"})} onClick={() => this.setState({detailsPerson: "Albin"})} onMouseOut={() => this.setState({selectedPerson: undefined})}></img>
+                            <img id="amalia" className={this.state.detailsPerson == "Amalia" || this.state.detailsPerson == undefined ?"profilephoto":"photohide"} src={amalia} onMouseEnter={() => this.setState({selectedPerson: "Amalia"})} onClick={() => this.setState({detailsPerson: "Amalia"})} onMouseOut={() => this.setState({selectedPerson: undefined})}></img>
                         </div>
                         <div className="photorow">
-                            <img id="hilda" className="profilephoto" src={hilda} onMouseEnter={() => this.setState({selectedPerson: "Hilda"})} onClick={() => this.setState({detailsPerson: "Hilda"})} onMouseOut={() => this.setState({selectedPerson: undefined})}></img>
-                            <img id="moa" className="profilephoto" src={moa} onMouseEnter={() => this.setState({selectedPerson: "Moa"})} onClick={() => this.setState({detailsPerson: "Moa"})} onMouseOut={() => this.setState({selectedPerson: undefined})}></img>
+                            <img id="hilda" className={this.state.detailsPerson == "Hilda" || this.state.detailsPerson == undefined ?"profilephoto":"photohide"} src={hilda} onMouseEnter={() => this.setState({selectedPerson: "Hilda"})} onClick={() => this.setState({detailsPerson: "Hilda"})} onMouseOut={() => this.setState({selectedPerson: undefined})}></img>
+                            <img id="moa" className={this.state.detailsPerson == "Moa" || this.state.detailsPerson == undefined ?"profilephoto":"photohide"} src={moa} onMouseEnter={() => this.setState({selectedPerson: "Moa"})} onClick={() => this.setState({detailsPerson: "Moa"})} onMouseOut={() => this.setState({selectedPerson: undefined})}></img>
                         </div>
                     </div>
                     <div className="aboutblock">
-                        <p>We are the developers of the visualization tool POP.FLO!</p>
+                    {this.state.detailsPerson == "Amalia"? 
+                    <div>
+                        <p onClick={() => this.setState({detailsPerson: undefined, selectedPerson:undefined})} className="close">X</p>
+                            <p>
+                            Hi! 
+                            I'm Amalia and I've been mainly responsible for the UX in this project.
+                            I've user tested our product, as well as had the user in mind through the process
+                            of creating this webpage!
+                            <p>Email me at aberglof@kth.se!</p>
+                            </p>
+                    </div> :
+                            (
+                                this.state.detailsPerson == "Albin" ? <p>agyllang@kth.se</p>:
+                                (
+                                this.state.detailsPerson == "Hilda" ? <p>hildar@kth.se</p>:
+                                (
+                                    this.state.detailsPerson== "Moa" ? <p>moaeng@kth.se</p>:
+                                
+                                    <div><p>We are the developers of the visualization tool POP.FLO!</p>
                         <p>We are 
-                            {this.state.selectedPerson== "Albin"? <b> Albin Matson Gyllang</b>:' Albin Matson Gyllang'}, 
+                            {this.state.selectedPerson== "Albin" ? <b> Albin Matson Gyllang</b>:' Albin Matson Gyllang'}, 
                             {this.state.selectedPerson== "Amalia"? <b> Amalia Berglöf</b>:' Amalia Berglöf'}, 
                             {this.state.selectedPerson== "Hilda"? <b> Hilda Robertsson</b>:' Hilda Robertsson'} and  
                             {this.state.selectedPerson== "Moa"? <b> Moa Engquist</b>:' Moa Engquist'}.</p>
                         <p>Our goal is to visualize movement in a simple, yet interesting way! It's up
-                            to you if we succeeded of course! You want to get in touch with us? Click on a person to
-                            get to know them better, and get their contact details!
-                        </p>
-                        {this.state.detailsPerson == "Amalia"? <p>aberglof@kth.se</p> :<div></div>}
-                        {this.state.detailsPerson == "Moa"? <p>moaeng@kth.se</p>:<div></div>}
-                        {this.state.detailsPerson == "Hilda"? <p>hildar@kth.se</p>:<div></div>}
-                        {this.state.detailsPerson == "Albin"?<p>agyllang@kth.se</p>:<div></div>}
+                            to you if we succeeded of course! You want to get in touch with us? Click on one of us to
+                            get to know them better, and get the contact details!
+                        </p></div>
+                                ))
+                            )}
                     </div>
                 </div>
             </div>
