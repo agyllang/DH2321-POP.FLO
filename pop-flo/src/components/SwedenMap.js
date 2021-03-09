@@ -8,11 +8,11 @@ import * as d3 from 'd3';
 
 
 function SwedenMap({ geographies, selected, selectCounty, counties, height, width }) {
-    console.log("height",height)
-    console.log("width",width)
+    // console.log("height",height)
+    // console.log("width",width)
 
-    console.log(" Swedenmap selected", selected)
-    console.log("GEOGRAPHIES SWEDN MAP: ", geographies)
+    // console.log(" Swedenmap selected", selected)
+    // console.log("GEOGRAPHIES SWEDN MAP: ", geographies)
     const [hoverKey, setHoverKey] = useState(0)
 
     // var width = 800;
@@ -21,7 +21,7 @@ function SwedenMap({ geographies, selected, selectCounty, counties, height, widt
     var geojson = {
         "type": "FeatureCollection", "features": geographies
     };
-    console.log("geojson",geojson)
+    // console.log("geojson",geojson)
     const projection = geoConicEquidistant().fitSize([width/2, height/2], geojson);
 
     // const projection = geoConicEquidistant().fitSize([width, height], geographies);
@@ -38,7 +38,7 @@ function SwedenMap({ geographies, selected, selectCounty, counties, height, widt
 
     }
 
-    console.log("counties in swedenmap:", counties);
+    // console.log("counties in swedenmap:", counties);
 
     const handleCountryClick = countryIndex => {
         console.log("Clicked on country: ", geographies[countryIndex])

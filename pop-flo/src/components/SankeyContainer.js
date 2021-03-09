@@ -1,62 +1,70 @@
-import React from "react";
+//import React from "react";
 import SankeyDiagram from "./Sankey";
-//import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 //import { geoConicEquidistant, geoEqualEarth, geoPath } from "d3-geo";
 //import * as d3 from 'd3';
-const scb = [
-{id: "01", name: "Stockholms län", in: 0, out: 0, netto: 0, inflytt: [300,400], utflytt: ["Jönköping"] },
-{id: "06", name: "Jönköping län", in: 0, out: 0, netto: 0, inflytt: [300,400], utflytt: ["Jönköping"] },]
-; 
 
-//console.log("counties from Sankey", counties);
+const data2 = {
 
-
-/*
-for (var i in scb.utflytt){
-    if (scb.utflytt[i] == data.nodes){
-        data.links[0].source = i;
-    }
-}*/
-
-//this is testdata, sent to the Sankey class
-const data = {
-    
-    "nodes":[
-        {"name": scb[0].name},
-        {"name": "Uppsala"},
-        {"name": "Gotland"},
-        {"name": "Jönköping"}
+    "nodes": [
+        { "name": "Stockholm" },
+        { "name": "Uppsala" },
+        { "name": "Gotland" },
+        { "name": "Jönköping" }
     ],
-    "links":[
+    "links": [
         {
             "source": 1,
-            "target": 0,
-            "value": scb[0].inflytt[0]
+            "target": 2,
+            "value": 120
         },
         {
-            "source": 2,
+            "source": 1,
             "target": 0,
             "value": 220
         },
         {
+            "source": 1,
+            "target": 3,
+            "value": 100
+        }
+    ]
+};
+const data3 = {
+
+    "nodes": [
+        { "name": "Stockholm" },
+        { "name": "Uppsala" },
+        { "name": "Gotland" },
+        { "name": "Jönköping" }
+    ],
+    "links": [
+        {
+            "source": 0,
+            "target": 1,
+            "value": 5000
+        },
+        {
             "source": 3,
-            "target": 0,
+            "target": 1,
+            "value": 220
+        },
+        {
+            "source": 2,
+            "target": 1,
             "value": 100
         }
     ]
 };
 
-
-console.log("sankey:", data.links[0]);
-
-const data2 = {
-    "nodes":[
-        {"name": "Stockholm"},
-        {"name": "Uppsala"},
-        {"name": "Gotland"},
-        {"name": "Jönköping"}
+const data1 = {
+    "nodes": [
+        { "name": "Stockholm" },
+        { "name": "Uppsala" },
+        { "name": "Gotland" },
+        { "name": "Jönköping" }
     ],
-    "links":[
+    "links": [
         {
             "source": 0,
             "target": 1,
@@ -75,48 +83,90 @@ const data2 = {
     ]
 };
 
-class SankeyContainer extends React.Component {
 
-  state = { data: {data}, width: 0, height: 0 };
-  svgRef = React.createRef();
+const SankeyContainer = ({ counties }) => {
+    const [structuredData, setData] = useState({ "nodes": [], "links": [] })
+    // const [width, setWidth] = useState(700)
+    // const [height, setHeight] = useState(700)
+    //const [dim, setDim] = useState({})
+    const svgRef = React.createRef();
+    // console.log("SankeyContainer counties in", counties)
+    console.log("SankeyContainer counties in", counties[0])
+    // console.log("structuredData",structuredData)
+    useEffect(() => {
+        formatData(counties)
+    }, [])
+// console.log("PERFECT DATA", data2)
+    // const measureSVG = () => {
+    //     const { width, height } = svgRef.current.getBoundingClientRect();
+
+    //     setWidth(width);
+    //     setHeight(height);
+    // }
+    const formatData = (counties) => {
+        
+
+        //create all the nodes and links
+        
+        var nodesToBe = []
+        var linksToBe = []
+        
+        //adding all the counties as node target 
+        //example: "nodes": [ {name: "Uppsala län"},{name: "Södermanlands län"},{name: "Östergötlands län"},]
+        for (var i in counties[0].inflyttLän) {
+            nodesToBe.push({ "name": counties[0].inflyttLän[i] })
+        }
+        // console.log("nodestobe", nodesToBe)
+
+
+        for (var j in counties[0].inflytt) {
+            // console.log("j",j);
+            linksToBe.push({ "source": parseInt(j), "target":counties[0].inflytt.length, "value": counties[0].inflytt[j] })
+            // linksToBe.push({ "source": parseInt(j), "target": counties[0].inflytt.length - 1, "value": counties[0].inflytt[j] })
+        }
+        //console.log("linksToBe", linksToBe)
+
+        //adding the "target" county to the last array. (THIS is used to target the links towards)
+        nodesToBe.push({ "name": counties[0].name })
+
+        setData({
+            "nodes":
+                nodesToBe
+            ,
+            "links":
+                linksToBe
+        })
+        //console.log("structuredData.nodes formatdata",structuredData)
+
+    }
+    // formatData(counties);
+    
+    // useEffect(() => {
+    //     console.log("counties in useffect",counties)
+    //     formatData(counties)
+
+    //     // measureSVG()
+    //     // window.addEventListener("resize", measureSVG)
+    //     // return () => {
+    //     //     console.log()
+    //     //     window.removeEventListener("resize", measureSVG)
+    //     // }
+
+    // },[])
+
   
-  componentDidMount() {
-    // d3.json("/ugr-sankey-openspending.json").then(data =>
-    //   this.setState({ data })
-    // );
-    this.measureSVG();
-    window.addEventListener("resize", this.measureSVG);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.measureSVG);
-  }
-
-  measureSVG = () => {
-    const { width, height } = this.svgRef.current.getBoundingClientRect();
-
-    this.setState({
-      width,
-      height
-    });
-  };
-
-  
-
-  render() {
-    const { data, width, height, } = this.state;
-    // console.log("props in sankey", this.props.counties);
-   // console.log("counties in sankey", counties);
 
 
     return (
-        <svg width="50%" height="300" ref={this.svgRef}>
-            {data && (
-            <SankeyDiagram data={data.data} width={width} height={height} />
-            )}
+        <svg width="50%" height="300" ref={svgRef}>
+          
+        {/* {console.log("structuredData before sankey diagram", structuredData)} */}
+        {/* {console.log("data3 before sankey diagram", data3)} */}
+            {structuredData.nodes.length>0 && <SankeyDiagram data={structuredData} width={500} height={500} />}
+
         </svg>
     );
-  }
+
 }
 
 export default SankeyContainer;

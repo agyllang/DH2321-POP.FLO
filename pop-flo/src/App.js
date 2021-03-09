@@ -6,7 +6,6 @@ import SankeyContainer from "./components/SankeyContainer"
 import "./App.css"
 import Explanation from "./components/explanation"
 import About from "./components/about";
-import GetData from "./components/GetData";
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
 import data from './scb_data.csv';
 import * as d3 from 'd3';
@@ -53,7 +52,7 @@ function App() {
 
   function GetData() {
       // d3.csv(data, function(data) { 
-//         d3.csv(data).then(function(data){
+//         d3.csv(data).then(function(data){ 
       var updatedCounties = EmptyCounties;
       d3.csv(data).then(function(data){
           
@@ -102,10 +101,10 @@ function App() {
    
 useEffect(() => {
   GetData()
-  return () => {
-    console.log("get data rerendered", counties);
+  // return () => {
+  //   console.log("get data rerendered", counties);
 
-  }
+  // }
 }, [year])
 
   return (
@@ -131,7 +130,7 @@ useEffect(() => {
                   <LinearScale />
                 </div>
                 <div className="sankey-container">
-                  <SankeyContainer counties={counties} hej={"albinssträng"} />
+                {counties.length > 0 &&<SankeyContainer counties={counties} />}
                 </div>
                 <div>
                   {/* <Slider year={year => setYear(year)}/> */}
