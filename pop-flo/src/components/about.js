@@ -63,22 +63,36 @@ class About extends React.Component {
                             </p>
                     </div> :
                             (
-                                this.state.detailsPerson == "Albin" ? <p>agyllang@kth.se</p>:
+                                this.state.detailsPerson == "Albin" ? 
+                                <div>
+                                    <p onClick={() => this.setState({detailsPerson: undefined, selectedPerson:undefined})} className="close">X</p>
+                                    <p>agyllang@kth.se</p>
+                                </div>:
                                 (
-                                this.state.detailsPerson == "Hilda" ? <p>hildar@kth.se</p>:
+                                this.state.detailsPerson == "Hilda" ? 
+                                <div>
+                                    <p onClick={() => this.setState({detailsPerson: undefined, selectedPerson:undefined})} className="close">X</p>
+                                    <p>hildar@kth.se</p>
+                                </div>:
                                 (
-                                    this.state.detailsPerson== "Moa" ? <p>moaeng@kth.se</p>:
+                                    this.state.detailsPerson== "Moa" ? 
+                                    <div>
+                                        <p onClick={() => this.setState({detailsPerson: undefined, selectedPerson:undefined})} className="close">X</p>
+                                        <p>moaeng@kth.se</p>
+                                    </div>:
                                 
-                                    <div><p>We are the developers of the visualization tool POP.FLO!</p>
-                        <p>We are 
-                            {this.state.selectedPerson== "Albin" ? <b> Albin Matson Gyllang</b>:' Albin Matson Gyllang'}, 
-                            {this.state.selectedPerson== "Amalia"? <b> Amalia Berglöf</b>:' Amalia Berglöf'}, 
-                            {this.state.selectedPerson== "Hilda"? <b> Hilda Robertsson</b>:' Hilda Robertsson'} and  
-                            {this.state.selectedPerson== "Moa"? <b> Moa Engquist</b>:' Moa Engquist'}.</p>
-                        <p>Our goal is to visualize movement in a simple, yet interesting way! It's up
-                            to you if we succeeded of course! You want to get in touch with us? Click on one of us to
-                            get to know them better, and get the contact details!
-                        </p></div>
+                                    <div>
+                                        <p>We are the developers of the visualization tool POP.FLO!</p>
+                                        <p>We are 
+                                            {this.state.selectedPerson== "Albin" ? <b> Albin Matson Gyllang</b>:' Albin Matson Gyllang'}, 
+                                            {this.state.selectedPerson== "Amalia"? <b> Amalia Berglöf</b>:' Amalia Berglöf'}, 
+                                            {this.state.selectedPerson== "Hilda"? <b> Hilda Robertsson</b>:' Hilda Robertsson'} and  
+                                            {this.state.selectedPerson== "Moa"? <b> Moa Engquist</b>:' Moa Engquist'}.</p>
+                                        <p>Our goal is to visualize movement in a simple, yet interesting way! It's up
+                                            to you if we succeeded of course! You want to get in touch with us? Click on one of us to
+                                            get to know them better, and get the contact details!
+                                        </p>
+                                </div>
                                 ))
                             )}
                     </div>
