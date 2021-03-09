@@ -10,11 +10,14 @@ import GetData from "./components/GetData";
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
 import data from './scb_data.csv';
 import * as d3 from 'd3';
+import Slider from './components/Slider';
 
 
 function App() {
   const [selectedCounty, setSelectedCounty] = useState(null);
   const [show, setShow] = useState(false);
+
+  const [year, setYear] = useState(2019);
 
   const dYear = 2019;
   // in, out, netto, för kvinnor, män, all
@@ -62,17 +65,17 @@ const [counties, setCounties] = useState([]);
                    d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
                    d.Utflyttningslän = d.Utflyttningslän.trim();
                    if (d.Inflyttningslän == updatedCounties[i].name && d.kön == dGender) {
-                       //inflytt.push(Number(d[dYear])); // plus vilket län det kommer från 
-                       updatedCounties[i].inflytt.push(Number(d[dYear])); // plus vilket län det kommer från 
-                      // counties[i].inflytt.push(d.Utflyttningslän);
-                      updatedCounties[i].inflyttLän.push(d.Utflyttningslän);
+                     updatedCounties[i].inflytt.push(Number(d[year])); 
+/*                      updatedCounties[i].inflytt.push(Number(d[dYear])); 
+ */                     updatedCounties[i].inflyttLän.push(d.Utflyttningslän);
    
                    }
                    /* d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
                    d.Utflyttningslän = d.Utflyttningslän.trim(); */
                    if (d.Utflyttningslän == updatedCounties[i].name && d.kön ==dGender) {
-                      updatedCounties[i].utflytt.push(Number(d[dYear]));
-                      updatedCounties[i].utflyttLän.push(d.Inflyttningslän);
+                      updatedCounties[i].utflytt.push(Number(d[year]));
+/*                       updatedCounties[i].utflytt.push(Number(d[dYear]));
+ */                      updatedCounties[i].utflyttLän.push(d.Inflyttningslän);
                    }
                }
            });
@@ -99,9 +102,10 @@ const [counties, setCounties] = useState([]);
 useEffect(() => {
   GetData()
   return () => {
+    console.log("get data rerendered", counties);
 
   }
-}, [])
+}, [year])
 
   return (
     <div>
@@ -123,6 +127,10 @@ useEffect(() => {
           {/* <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties}/> */}
           <LinearScale />
           <SankeyContainer counties={counties} hej={"albinssträng"}/>
+          {/* <Slider year={year => setYear(year)}/> */}
+         {/* <Slider year={year}/> */}
+          <Slider sliderYear={year} sliderSelectedYear={y => setYear(y)}/>
+      
           </div>
   
           }></Route>
