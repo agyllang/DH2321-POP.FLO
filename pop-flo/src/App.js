@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
+import * as d3 from 'd3';
 
 import MapContainer from "./components/MapContainer";
 import LinearScale from "./components/LinearScale";
@@ -8,11 +9,11 @@ import SankeyContainer from "./components/SankeyContainer"
 import SankeyContainerOut from "./components/SankeyContainerOut"
 import Explanation from "./components/explanation"
 import About from "./components/about";
-
+import RadioButtons from './components/RadioButtons';
 import Slider from './components/Slider';
+
 import logo from './components/logo3.png'
 import data from './scb_data.csv';
-import * as d3 from 'd3';
 
 import "./App.css"
 
@@ -23,6 +24,7 @@ function App() {
   const [show, setShow] = useState(false);
 
   const [year, setYear] = useState(2019);
+  const [gender, setGender] = useState("all"); //all, kvinnor, män
 
   // in, out, netto, för kvinnor, män, all
   const dGender = "kvinnor";
@@ -79,63 +81,84 @@ function App() {
     return returnArray[0]
   }
   function GetData() {
-    // d3.csv(data, function(data) { 
-    //         d3.csv(data).then(function(data){ 
-    var updatedCounties = EmptyCounties;
-    d3.csv(data).then(function (data) {
+      // d3.csv(data, function(data) { 
+//         d3.csv(data).then(function(data){
+      var updatedCounties = EmptyCounties;
+      d3.csv(data).then(function(data){
+          
+           data.forEach(d=> {
+               //if (d.Inflyttningslän == "01  Stockholms län (Inflyttningslän)" && d.kön =="kvinnor") {
+               for (var i in updatedCounties) {
+                   d.Inflyttningslän = d.Inflyttningslän.replace(/[0-9]/g, '');
+                   d.Inflyttningslän = d.Inflyttningslän.replace(' (Inflyttningslän)', '');
+                   d.Inflyttningslän = d.Inflyttningslän.trim();
+                   d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
+                   d.Utflyttningslän = d.Utflyttningslän.trim();
 
-      data.forEach(d => {
-        //if (d.Inflyttningslän == "01  Stockholms län (Inflyttningslän)" && d.kön =="kvinnor") {
-        for (var i in updatedCounties) {
-          d.Inflyttningslän = d.Inflyttningslän.replace(/[0-9]/g, '');
-          d.Inflyttningslän = d.Inflyttningslän.replace(' (Inflyttningslän)', '');
-          d.Inflyttningslän = d.Inflyttningslän.trim();
-          d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
-          d.Utflyttningslän = d.Utflyttningslän.trim();
-          if (d.Inflyttningslän == updatedCounties[i].name && d.kön == dGender) {
-            updatedCounties[i].inflytt.push(Number(d[year]));
-/*                      updatedCounties[i].inflytt.push(Number(d[dYear])); 
- */                     updatedCounties[i].inflyttLän.push(d.Utflyttningslän);
-
-          }
-          /* d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
-          d.Utflyttningslän = d.Utflyttningslän.trim(); */
-          if (d.Utflyttningslän == updatedCounties[i].name && d.kön == dGender) {
-            updatedCounties[i].utflytt.push(Number(d[year]));
-/*                       updatedCounties[i].utflytt.push(Number(d[dYear]));
- */                      updatedCounties[i].utflyttLän.push(d.Inflyttningslän);
-          }
-        }
-      });
-      //const total_in = inflytt.reduce((partial_sum, a) => partial_sum + a,0); 
-      for (var j in updatedCounties) {
-        updatedCounties[j].in = updatedCounties[j].inflytt.reduce((partial_sum, a) => partial_sum + a, 0);
-        updatedCounties[j].out = updatedCounties[j].utflytt.reduce((partial_sum, a) => partial_sum + a, 0);
-        updatedCounties[j].netto = updatedCounties[j].in - updatedCounties[j].out;
-      }
-      //console.log("typ netto", typeof(netto));
-      //console.log("alla counties", counties);
-      //console.log("counties 1", counties[1]);  
-      return updatedCounties
-    }).then(result => setCounties(result));
-    //console.log("Counties:", counties);
-    //console.log("Counties[0]:", counties[0]);
-    //console.log("Counties[0].in:", counties[0].in);
-    // setCounties(updatedCounties);
+                   if (gender == "all"){
+                  
+                       if (d.Inflyttningslän == updatedCounties[i].name && d.kön == "kvinnor" || d.Inflyttningslän == updatedCounties[i].name && d.kön== "män") {
+    /*                    if (d.Inflyttningslän == updatedCounties[i].name && d.kön == dGender) {
+    */                     updatedCounties[i].inflytt.push(Number(d[year])); 
+    /*                      updatedCounties[i].inflytt.push(Number(d[dYear])); 
+    */                     updatedCounties[i].inflyttLän.push(d.Utflyttningslän);
+      
+                      }
+                      /* d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
+                      d.Utflyttningslän = d.Utflyttningslän.trim(); */
+                      if (d.Utflyttningslän == updatedCounties[i].name && d.kön == "kvinnor" || d.Inflyttningslän == updatedCounties[i].name && d.kön== "män") {
+    /*                    if (d.Utflyttningslän == updatedCounties[i].name && d.kön ==dGender) {
+    */                      updatedCounties[i].utflytt.push(Number(d[year]));
+    /*                       updatedCounties[i].utflytt.push(Number(d[dYear]));
+    */                      updatedCounties[i].utflyttLän.push(d.Inflyttningslän);
+                      }
+                    }
+                    else {
+                      if (d.Inflyttningslän == updatedCounties[i].name && d.kön == gender) {
+                        /*                    if (d.Inflyttningslän == updatedCounties[i].name && d.kön == dGender) {
+                        */                     updatedCounties[i].inflytt.push(Number(d[year])); 
+                        /*                      updatedCounties[i].inflytt.push(Number(d[dYear])); 
+                        */                     updatedCounties[i].inflyttLän.push(d.Utflyttningslän);
+                          
+                                          }
+                                          /* d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
+                                          d.Utflyttningslän = d.Utflyttningslän.trim(); */
+                                          if (d.Utflyttningslän == updatedCounties[i].name && d.kön == gender) {
+                        /*                    if (d.Utflyttningslän == updatedCounties[i].name && d.kön ==dGender) {
+                        */                      updatedCounties[i].utflytt.push(Number(d[year]));
+                        /*                       updatedCounties[i].utflytt.push(Number(d[dYear]));
+                        */                      updatedCounties[i].utflyttLän.push(d.Inflyttningslän);
+                                          }
+                    }
+               }
+           });
+           //const total_in = inflytt.reduce((partial_sum, a) => partial_sum + a,0); 
+           for (var j in updatedCounties) {
+              updatedCounties[j].in = updatedCounties[j].inflytt.reduce((partial_sum, a) => partial_sum + a,0); 
+              updatedCounties[j].out = updatedCounties[j].utflytt.reduce((partial_sum, a) => partial_sum + a,0);
+              updatedCounties[j].netto = updatedCounties[j].in - updatedCounties[j].out;
+           }
+           //console.log("typ netto", typeof(netto));
+           //console.log("alla counties", counties);
+           //console.log("counties 1", counties[1]);  
+  
+       });
+       //console.log("Counties:", counties);
+       //console.log("Counties[0]:", counties[0]);
+       //console.log("Counties[0].in:", counties[0].in);
+       setCounties(updatedCounties);
+   
+   }
+   //console.log("Alla counties :" , counties);
+   //console.log("Inflytt av ett countie: ", counties[1].in);
+   
+useEffect(() => {
+  GetData()
+  return () => {
+    console.log("get data rerendered", counties);
 
   }
-  //console.log("Alla counties :" , counties);
-  //console.log("Inflytt av ett countie: ", counties[1].in);
-
-  useEffect(() => {
-    GetData()
-    // return () => {
-    console.log("get data rerendered", counties);
-    console.log("year", year)
-    console.log("getIndex(25)", getIndex(25))
-
-    // }
-  }, [year])
+}, [year, gender])
 
   return (
     <Router>
@@ -155,6 +178,7 @@ function App() {
               <div>selected county:{getName(selectedCounty)}</div>
               <DropDown selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} />
               <Slider sliderYear={year} sliderSelectedYear={y => setYear(y)} />
+              <RadioButtons radioGender={gender} radioSelectedGender={g => setGender(g)}/>
             </div>
             <div className="content-container">
               <div className="map-container">
