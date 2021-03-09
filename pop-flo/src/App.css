@@ -4,26 +4,36 @@ svg {
 }
 
 .navbar {
+  display: flex;
   height:100px;
   /* background-color: #5A387B; */
   /* background-color:#7a559e; */
   background-color:#72489a;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  position: sticky;
+  top: 0;
+  left: 0;
 }
 
 .navbuttons {
+  flex:1;
   position:absolute;
   right: 5px;
 }
 
 .navbutton {
   font-size: 20px;
-  border-radius: 10px;
-  padding:5px;
-  margin: 10px;
-  margin-top: 30px;
+  height: 100px;
+  padding:10px;
+  margin-left: 5px;
   border: none;
-  background-color: #FF7900;
+  color: #FF7900;
+  background-color:#72489a;
+  font-weight: bold;
+}
+.navbutton:focus {
+  outline:0;
+  background-color: #633291;
 }
 
 .modal {
@@ -49,10 +59,10 @@ svg {
 }
 
 .logo {
-  position:absolute !important;
-  left: 5px;
-  color: white;
+  position:absolute;
+  left: 10px;
   height:90px;
+  flex:1;
 }
 
 .aboutblock {
@@ -85,7 +95,15 @@ svg {
   transition: transform 0.2s;
   width: 200px;
   border-radius:50%;
-  margin: 50px;
+  margin: 10px;
+}
+
+.photohide {
+  transition: transform 0.2s;
+  width: 200px;
+  border-radius:50%;
+  margin: 10px;
+  display: none;
 }
 
 .photocontainer {
@@ -97,6 +115,7 @@ svg {
 
 .photorow {
   flex:1;
+  margin: auto;
 }
 
 .profilephoto:hover {
@@ -120,4 +139,24 @@ svg {
 
 .selection-container{
   width:100%;
+  display:flex;
+  flex-direction: row;
+}
+
+.close {
+  font-weight: bold;
+  text-align: right;
+  margin-top: 2px !important;
+}
+
+.orange {
+  color: #FF7900;
+}
+
+.blue {
+  color: rgb(0,95,255);
+}
+
+h2 {
+  margin-bottom: 5px !important;
 }

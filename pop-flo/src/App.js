@@ -6,7 +6,6 @@ import SankeyContainer from "./components/SankeyContainer"
 import "./App.css"
 import Explanation from "./components/explanation"
 import About from "./components/about";
-import GetData from "./components/GetData";
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
 import data from './scb_data.csv';
 import * as d3 from 'd3';
@@ -22,7 +21,6 @@ function App() {
   const [year, setYear] = useState(2019);
   const [gender, setGender] = useState("all"); //all, kvinnor, män
 
-  const dYear = 2019;
   // in, out, netto, för kvinnor, män, all
   const dGender = "kvinnor";
 
@@ -52,7 +50,31 @@ function App() {
   ]
 
   const [counties, setCounties] = useState([]);
+  const getIndex = (ID) => {
 
+    // counties.filter((c) => c.id == selected)
+    // var countyIndex = 1
+    var countyIndexArr = []
+    console.log("counties in get index", counties)
+
+    counties.map((c, i) => {
+      if (c.id == ID) {
+        countyIndexArr.push(i)
+      }
+    })
+    return countyIndexArr[0]
+  }
+  const getName = (ID) => {
+    // counties.filter((c) => c.id == selected)
+    var returnArray = []
+    EmptyCounties.map((c) => {
+      if (c.id == ID) {
+        console.log("c.name", c.name)
+        returnArray.push(c.name)
+      }
+    })
+    return returnArray[0]
+  }
   function GetData() {
       // d3.csv(data, function(data) { 
 //         d3.csv(data).then(function(data){
@@ -134,44 +156,40 @@ useEffect(() => {
 }, [year, gender])
 
   return (
-      <Router>
+    <Router>
       <div className="navbar">
-      <Link to ="/"><img className="logo" src={logo}></img></Link>
-        <div className="navbar">
-          <div className="navbuttons">
-            <button className="navbutton" onClick={() => setShow(true)}>How to use</button>
-            <Link to="/about"><button className="navbutton">About us & POP.FLO</button></Link>
-          </div>
-          {show == true ? <Explanation show={show} setShow={showval => setShow(showval)} /> : <div></div>}
+        <Link to="/"><img className="logo" src={logo}></img></Link>
+        <div className="navbuttons">
+          <button className="navbutton" onClick={() => setShow(true)}>How to use</button>
+          <Link to="/about"><button className="navbutton">About us & POP.FLO</button></Link>
         </div>
-        </div>
-        <Switch>
-          <Route exact path="/" render={() =>
-            <div className="App">
-              <div className="selection-container">
-                <div>selected county:{selectedCounty}</div>
-                <DropDown selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} />
-              </div>
-              <div className="content-container">
-                <div className="map-container">
-                  {counties.length > 0 && <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties}/>}
-                  <LinearScale />
-                </div>
-                <div className="sankey-container">
-                  <SankeyContainer counties={counties} hej={"albinssträng"} />
-                </div>
-                <div>
-                  {/* <Slider year={year => setYear(year)}/> */}
-                  {/* <Slider year={year}/> */}
-                  <Slider sliderYear={year} sliderSelectedYear={y => setYear(y)}/>
-                  <RadioButtons radioGender={gender} radioSelectedGender={g => setGender(g)}/>
-                </div>
-              </div>
+        {show == true ? <Explanation show={show} setShow={showval => setShow(showval)} /> : <div></div>}
+      </div>
+      <Switch>
+        <Route exact path="/" render={() =>
+          <div className="App">
+            <div className="selection-container">
+       
+              <div>selected county:{getName(selectedCounty)}</div>
+              <DropDown selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} />
+              <Slider sliderYear={year} sliderSelectedYear={y => setYear(y)} />
+              <RadioButtons radioGender={gender} radioSelectedGender={g => setGender(g)}/>
             </div>
-          }></Route>
-          <Route path="/about" render={() => <About />}></Route>
-        </Switch>
-      </Router>
+            <div className="content-container">
+              <div className="map-container">
+                {counties.length > 0 && <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties} />}
+                <LinearScale />
+              </div>
+              <div className="sankey-container">
+                {selectedCounty && counties.length > 0 && <SankeyContainer counties={counties[getIndex(selectedCounty)]} />}
+              </div>
+
+            </div>
+          </div>
+        }></Route>
+        <Route path="/about" render={() => <About />}></Route>
+      </Switch>
+    </Router>
 
 
   );
