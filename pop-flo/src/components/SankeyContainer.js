@@ -1,28 +1,13 @@
-import React from "react";
+//import React from "react";
 import SankeyDiagram from "./Sankey";
-//import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 //import { geoConicEquidistant, geoEqualEarth, geoPath } from "d3-geo";
 //import * as d3 from 'd3';
-const scb = [
-{id: "01", name: "Stockholms län", in: 0, out: 0, netto: 0, inflytt: [300,400], utflytt: ["Jönköping"] },
-{id: "06", name: "Jönköping län", in: 0, out: 0, netto: 0, inflytt: [300,400], utflytt: ["Jönköping"] },]
-; 
 
-//console.log("counties from Sankey", counties);
-
-
-/*
-for (var i in scb.utflytt){
-    if (scb.utflytt[i] == data.nodes){
-        data.links[0].source = i;
-    }
-}*/
-
-//this is testdata, sent to the Sankey class
 const data = {
     
     "nodes":[
-        {"name": scb[0].name},
+        {"name": "Stockholm"},
         {"name": "Uppsala"},
         {"name": "Gotland"},
         {"name": "Jönköping"}
@@ -30,24 +15,21 @@ const data = {
     "links":[
         {
             "source": 1,
-            "target": 0,
-            "value": scb[0].inflytt[0]
+            "target": 2,
+            "value": 120
         },
         {
-            "source": 2,
+            "source": 1,
             "target": 0,
             "value": 220
         },
         {
-            "source": 3,
-            "target": 0,
+            "source": 1,
+            "target": 3,
             "value": 100
         }
     ]
 };
-
-
-//console.log("sankey:", data.links[0]);
 
 const data2 = {
     "nodes":[
@@ -75,66 +57,81 @@ const data2 = {
     ]
 };
 
-class SankeyContainer extends React.Component {
-    //counties = this.props
-    //counties = {id:"string", name:"string", inflytt:Array(n), utflytt:Array(n), inflyttlän:Array(n), utflyttlän:Array(n), in:int, out:int, netto:int}
-  state = { data: {data}, width: 0, height: 0, structuredData: {"nodestobe":[], "linkstobe":[]} };
-  svgRef = React.createRef();
-  counties = this.props.counties[0]
+const SankeyContainer = ({counties}) => {
+    const [structuredData, setData] = useState({"nodes":[], "links":[]})
+    const [width, setWidth] = useState(0)
+    const [height, setHeight] = useState(0)
+    //const [dim, setDim] = useState({})
+    const svgRef = React.createRef();
+
+    const measureSVG = () => {
+        const { width, height } = svgRef.current.getBoundingClientRect();
+    
+        setWidth(width);
+        setHeight(height);
+    }
+
+    useEffect(()=>{
+        formatData(counties)
+        measureSVG()
+        window.addEventListener("resize", measureSVG)
+        return()=>{
+            window.removeEventListener("resize", measureSVG)
+        }
+        
+    })
+
+    const formatData = (counties) => {
+        const testcon = counties[0].inflyttLän
+        console.log("1:", counties)
+        console.log("2:", counties[0])
+        console.log("3:", typeof counties[0].inflyttLän)
+        console.log("3.2:", testcon.key(1))
+        console.log("4:", typeof counties[0].inflyttLän[1])       
+      console.log("counties in formatdata:", counties[0].inflyttLän)
   
-  componentDidMount() {
-    // d3.json("/ugr-sankey-openspending.json").then(data =>
-    //   this.setState({ data })
-    // );
-    //1. take the prop and call the function to recive the data in right format
-    this.formatData(this.counties)
-    //.then(data => this.setState({data}))
-    this.measureSVG();
-    window.addEventListener("resize", this.measureSVG);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.measureSVG);
-  }
-
-  measureSVG = () => {
-    const { width, height } = this.svgRef.current.getBoundingClientRect();
-    //const { width, height } = this.svgRef2.current.getBoundingClientRect();
-
-    this.setState({
-      width,
-      height
-    });
-  };
-
-  formatData = (counties) => {
-      //vi får in selected county med tillhörande data
-      //ta name plus alla inflyttlän och spara som nodes
-      //för varje link
-        //skapa selected county som target
-        //skapa alla inflyttvalue och inflyttlän till source och value
-      //return data i format nodes and links
-      
-      for (var i in counties.inflytt){
-          console.log(counties.inflytt[i])
+      //create all the nodes
+      var nodesToBe = []
+      var linksToBe = []
+      //här ska vi lägga in första for-loopen
+      for (var i in counties[0].inflyttLän){
+          console.log("här är iet:", i)
+          nodesToBe.push({"name": counties[0].inflyttLän[i]})
       }
-  }
+      //sen lägger vi till det sista länet:
+      nodesToBe.push({"name": counties[0].name})
+console.log("nodestobe", nodesToBe)
+      for (var j in counties[0].inflytt){
+          linksToBe.push({"source": j, "target": counties[0].inflytt.lenght-1, "value": counties.inflytt[j]})
+      }
+      console.log("linkstobo", linksToBe)
+      //här ska vi set:a all data i nodesToBe i structuredData nodes (obs! ingen array i arrayen)
+      setData(prevState => ({
+          "nodes": [
+            ...nodesToBe
+          ],
+          "links": [
+              ...linksToBe
+          ]
+             
+      }))
 
-  
+    } 
 
-  render() {
-    const { data, width, height } = this.state;
-    console.log("in the render:", this.counties);
+useEffect(() => {
+    formatData()
+},[])
 
-
-    return (
-        <svg width="50%" height="300" ref={this.svgRef}>
-            {data && (
-            <SankeyDiagram data={data.data} width={width} height={height} />
-            )}
-        </svg>
-    );
-  }
+return (
+    <svg width="50%" height="300" ref={svgRef}>
+        {/* {structuredData.nodes.length>0 && structuredData.links.length>0 && (
+        <SankeyDiagram data={structuredData} width={width} height={height} />
+        )} */}
+        {/* {structuredData.length>0 && <SankeyDiagram data={structuredData} width={width} height={height} />} */}
+        {/* {data && <SankeyDiagram data={data.data} width={width} height={height} />} */}
+    </svg>
+);
+    
 }
 
 export default SankeyContainer;

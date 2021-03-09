@@ -5,7 +5,8 @@
 }
 .county{
     /* position:relative for tooltip  */
-    position:relative;
+    /* position:relative; */
+    /* paint-order: stroke fill; */
   }
 
 /* .tooltip {

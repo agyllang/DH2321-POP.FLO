@@ -28,12 +28,14 @@ const SankeyDiagram = ({ data, width, height }) => {
     .nodeWidth(15)
     .nodePadding(10)
     .extent([[1, 1], [width - 1, height - 5]])(data);
-    //console.log(data);
+
+    //console.log(sankey()(data))
+    console.log("kommentar", data);
   //const color = chroma.scale("Set3").classes(nodes.length);
-  const colorScale = d3
-    .scaleLinear()
-    .domain([0, nodes.length])
-    .range([0, 1]);
+  // const colorScale = d3
+  //   .scaleLinear()
+  //   .domain([0, nodes.length])
+  //   .range([0, 1]);
 
   return (
     <g style={{ mixBlendMode: "multiply" }}>
@@ -47,7 +49,7 @@ const SankeyDiagram = ({ data, width, height }) => {
       {links.map((link, i) => (
         <SankeyLink
           link={link}
-          key={link.index}
+          //key={link.index}
           //color={color(colorScale(link.source.index)).hex()}
         />
       ))}
