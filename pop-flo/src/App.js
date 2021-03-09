@@ -10,12 +10,15 @@ import GetData from "./components/GetData";
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
 import data from './scb_data.csv';
 import * as d3 from 'd3';
+import Slider from './components/Slider';
 import logo from './components/logo3.png'
 
 
 function App() {
   const [selectedCounty, setSelectedCounty] = useState(null);
   const [show, setShow] = useState(false);
+
+  const [year, setYear] = useState(2019);
 
   const dYear = 2019;
   // in, out, netto, för kvinnor, män, all
@@ -49,60 +52,61 @@ function App() {
   const [counties, setCounties] = useState([]);
 
   function GetData() {
-    // d3.csv(data, function(data) { 
-    //         d3.csv(data).then(function(data){
-    var updatedCounties = EmptyCounties;
-    d3.csv(data).then(function (data) {
-
-      data.forEach(d => {
-        //if (d.Inflyttningslän == "01  Stockholms län (Inflyttningslän)" && d.kön =="kvinnor") {
-        for (var i in updatedCounties) {
-          d.Inflyttningslän = d.Inflyttningslän.replace(/[0-9]/g, '');
-          d.Inflyttningslän = d.Inflyttningslän.replace(' (Inflyttningslän)', '');
-          d.Inflyttningslän = d.Inflyttningslän.trim();
-          d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
-          d.Utflyttningslän = d.Utflyttningslän.trim();
-          if (d.Inflyttningslän == updatedCounties[i].name && d.kön == dGender) {
-            //inflytt.push(Number(d[dYear])); // plus vilket län det kommer från 
-            updatedCounties[i].inflytt.push(Number(d[dYear])); // plus vilket län det kommer från 
-            // counties[i].inflytt.push(d.Utflyttningslän);
-            updatedCounties[i].inflyttLän.push(d.Utflyttningslän);
-
-          }
-          /* d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
-          d.Utflyttningslän = d.Utflyttningslän.trim(); */
-          if (d.Utflyttningslän == updatedCounties[i].name && d.kön == dGender) {
-            updatedCounties[i].utflytt.push(Number(d[dYear]));
-            updatedCounties[i].utflyttLän.push(d.Inflyttningslän);
-          }
-        }
-      });
-      //const total_in = inflytt.reduce((partial_sum, a) => partial_sum + a,0); 
-      for (var j in updatedCounties) {
-        updatedCounties[j].in = updatedCounties[j].inflytt.reduce((partial_sum, a) => partial_sum + a, 0);
-        updatedCounties[j].out = updatedCounties[j].utflytt.reduce((partial_sum, a) => partial_sum + a, 0);
-        updatedCounties[j].netto = updatedCounties[j].in - updatedCounties[j].out;
-      }
-      //console.log("typ netto", typeof(netto));
-      //console.log("alla counties", counties);
-      //console.log("counties 1", counties[1]);  
-
-    });
-    //console.log("Counties:", counties);
-    //console.log("Counties[0]:", counties[0]);
-    //console.log("Counties[0].in:", counties[0].in);
-    setCounties(updatedCounties);
+      // d3.csv(data, function(data) { 
+//         d3.csv(data).then(function(data){
+      var updatedCounties = EmptyCounties;
+      d3.csv(data).then(function(data){
+          
+           data.forEach(d=> {
+               //if (d.Inflyttningslän == "01  Stockholms län (Inflyttningslän)" && d.kön =="kvinnor") {
+               for (var i in updatedCounties) {
+                   d.Inflyttningslän = d.Inflyttningslän.replace(/[0-9]/g, '');
+                   d.Inflyttningslän = d.Inflyttningslän.replace(' (Inflyttningslän)', '');
+                   d.Inflyttningslän = d.Inflyttningslän.trim();
+                   d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
+                   d.Utflyttningslän = d.Utflyttningslän.trim();
+                   if (d.Inflyttningslän == updatedCounties[i].name && d.kön == dGender) {
+                     updatedCounties[i].inflytt.push(Number(d[year])); 
+/*                      updatedCounties[i].inflytt.push(Number(d[dYear])); 
+ */                     updatedCounties[i].inflyttLän.push(d.Utflyttningslän);
+   
+                   }
+                   /* d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
+                   d.Utflyttningslän = d.Utflyttningslän.trim(); */
+                   if (d.Utflyttningslän == updatedCounties[i].name && d.kön ==dGender) {
+                      updatedCounties[i].utflytt.push(Number(d[year]));
+/*                       updatedCounties[i].utflytt.push(Number(d[dYear]));
+ */                      updatedCounties[i].utflyttLän.push(d.Inflyttningslän);
+                   }
+               }
+           });
+           //const total_in = inflytt.reduce((partial_sum, a) => partial_sum + a,0); 
+           for (var j in updatedCounties) {
+              updatedCounties[j].in = updatedCounties[j].inflytt.reduce((partial_sum, a) => partial_sum + a,0); 
+              updatedCounties[j].out = updatedCounties[j].utflytt.reduce((partial_sum, a) => partial_sum + a,0);
+              updatedCounties[j].netto = updatedCounties[j].in - updatedCounties[j].out;
+           }
+           //console.log("typ netto", typeof(netto));
+           //console.log("alla counties", counties);
+           //console.log("counties 1", counties[1]);  
+  
+       });
+       //console.log("Counties:", counties);
+       //console.log("Counties[0]:", counties[0]);
+       //console.log("Counties[0].in:", counties[0].in);
+       setCounties(updatedCounties);
+   
+   }
+   //console.log("Alla counties :" , counties);
+   //console.log("Inflytt av ett countie: ", counties[1].in);
+   
+useEffect(() => {
+  GetData()
+  return () => {
+    console.log("get data rerendered", counties);
 
   }
-  //console.log("Alla counties :" , counties);
-  //console.log("Inflytt av ett countie: ", counties[1].in);
-
-  useEffect(() => {
-    GetData()
-    return () => {
-
-    }
-  }, [])
+}, [year])
 
   return (
       <Router>
@@ -128,6 +132,11 @@ function App() {
                 </div>
                 <div className="sankey-container">
                   <SankeyContainer counties={counties} hej={"albinssträng"} />
+                </div>
+                <div>
+                  {/* <Slider year={year => setYear(year)}/> */}
+                  {/* <Slider year={year}/> */}
+                  <Slider sliderYear={year} sliderSelectedYear={y => setYear(y)}/>
                 </div>
               </div>
             </div>
