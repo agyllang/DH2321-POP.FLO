@@ -6,7 +6,7 @@ import url from './../01.csv';
 function Explanation({show, setShow}) {
 
         return(
-            <div className="modal">
+            <div className="modal" onClick={() => setShow(false)}>
                     <div className="modal-content">
                     <p onClick={() => setShow(false)} className="close">X</p>
                     <h2>Map</h2>
