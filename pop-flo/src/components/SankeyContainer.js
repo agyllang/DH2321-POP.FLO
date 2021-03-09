@@ -91,9 +91,10 @@ const SankeyContainer = ({ counties }) => {
     //const [dim, setDim] = useState({})
     const svgRef = React.createRef();
     // console.log("SankeyContainer counties in", counties)
-    console.log("SankeyContainer counties in", counties[0])
+    console.log("SankeyContainer counties[0]", counties[0])
     // console.log("structuredData",structuredData)
     useEffect(() => {
+        console.log("counties in useEffect",counties)
         formatData(counties)
     }, [])
 // console.log("PERFECT DATA", data2)

@@ -51,98 +51,98 @@ function App() {
   const [counties, setCounties] = useState([]);
 
   function GetData() {
-      // d3.csv(data, function(data) { 
-//         d3.csv(data).then(function(data){ 
-      var updatedCounties = EmptyCounties;
-      d3.csv(data).then(function(data){
-          
-           data.forEach(d=> {
-               //if (d.Inflyttningslän == "01  Stockholms län (Inflyttningslän)" && d.kön =="kvinnor") {
-               for (var i in updatedCounties) {
-                   d.Inflyttningslän = d.Inflyttningslän.replace(/[0-9]/g, '');
-                   d.Inflyttningslän = d.Inflyttningslän.replace(' (Inflyttningslän)', '');
-                   d.Inflyttningslän = d.Inflyttningslän.trim();
-                   d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
-                   d.Utflyttningslän = d.Utflyttningslän.trim();
-                   if (d.Inflyttningslän == updatedCounties[i].name && d.kön == dGender) {
-                     updatedCounties[i].inflytt.push(Number(d[year])); 
+    // d3.csv(data, function(data) { 
+    //         d3.csv(data).then(function(data){ 
+    var updatedCounties = EmptyCounties;
+    d3.csv(data).then(function (data) {
+
+      data.forEach(d => {
+        //if (d.Inflyttningslän == "01  Stockholms län (Inflyttningslän)" && d.kön =="kvinnor") {
+        for (var i in updatedCounties) {
+          d.Inflyttningslän = d.Inflyttningslän.replace(/[0-9]/g, '');
+          d.Inflyttningslän = d.Inflyttningslän.replace(' (Inflyttningslän)', '');
+          d.Inflyttningslän = d.Inflyttningslän.trim();
+          d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
+          d.Utflyttningslän = d.Utflyttningslän.trim();
+          if (d.Inflyttningslän == updatedCounties[i].name && d.kön == dGender) {
+            updatedCounties[i].inflytt.push(Number(d[year]));
 /*                      updatedCounties[i].inflytt.push(Number(d[dYear])); 
  */                     updatedCounties[i].inflyttLän.push(d.Utflyttningslän);
-   
-                   }
-                   /* d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
-                   d.Utflyttningslän = d.Utflyttningslän.trim(); */
-                   if (d.Utflyttningslän == updatedCounties[i].name && d.kön ==dGender) {
-                      updatedCounties[i].utflytt.push(Number(d[year]));
+
+          }
+          /* d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
+          d.Utflyttningslän = d.Utflyttningslän.trim(); */
+          if (d.Utflyttningslän == updatedCounties[i].name && d.kön == dGender) {
+            updatedCounties[i].utflytt.push(Number(d[year]));
 /*                       updatedCounties[i].utflytt.push(Number(d[dYear]));
  */                      updatedCounties[i].utflyttLän.push(d.Inflyttningslän);
-                   }
-               }
-           });
-           //const total_in = inflytt.reduce((partial_sum, a) => partial_sum + a,0); 
-           for (var j in updatedCounties) {
-              updatedCounties[j].in = updatedCounties[j].inflytt.reduce((partial_sum, a) => partial_sum + a,0); 
-              updatedCounties[j].out = updatedCounties[j].utflytt.reduce((partial_sum, a) => partial_sum + a,0);
-              updatedCounties[j].netto = updatedCounties[j].in - updatedCounties[j].out;
-           }
-           //console.log("typ netto", typeof(netto));
-           //console.log("alla counties", counties);
-           //console.log("counties 1", counties[1]);  
-  
-       });
-       //console.log("Counties:", counties);
-       //console.log("Counties[0]:", counties[0]);
-       //console.log("Counties[0].in:", counties[0].in);
-       setCounties(updatedCounties);
-   
-   }
-   //console.log("Alla counties :" , counties);
-   //console.log("Inflytt av ett countie: ", counties[1].in);
-   
-useEffect(() => {
-  GetData()
-  // return () => {
-  //   console.log("get data rerendered", counties);
+          }
+        }
+      });
+      //const total_in = inflytt.reduce((partial_sum, a) => partial_sum + a,0); 
+      for (var j in updatedCounties) {
+        updatedCounties[j].in = updatedCounties[j].inflytt.reduce((partial_sum, a) => partial_sum + a, 0);
+        updatedCounties[j].out = updatedCounties[j].utflytt.reduce((partial_sum, a) => partial_sum + a, 0);
+        updatedCounties[j].netto = updatedCounties[j].in - updatedCounties[j].out;
+      }
+      //console.log("typ netto", typeof(netto));
+      //console.log("alla counties", counties);
+      //console.log("counties 1", counties[1]);  
+      return updatedCounties
+    }).then(result => setCounties(result));
+    //console.log("Counties:", counties);
+    //console.log("Counties[0]:", counties[0]);
+    //console.log("Counties[0].in:", counties[0].in);
+    // setCounties(updatedCounties);
 
-  // }
-}, [year])
+  }
+  //console.log("Alla counties :" , counties);
+  //console.log("Inflytt av ett countie: ", counties[1].in);
+
+  useEffect(() => {
+    GetData()
+    // return () => {
+      console.log("get data rerendered", counties);
+      console.log("year",year)
+    // }
+  }, [year])
 
   return (
-      <Router>
-        <div className="navbar">
-        <Link to ="/"><img className="logo" src={logo}></img></Link>
-          <div className="navbuttons">
-            <button className="navbutton" onClick={() => setShow(true)}>How to use</button>
-            <Link to="/about"><button className="navbutton">About us & POP.FLO</button></Link>
-          </div>
-          {show == true ? <Explanation show={show} setShow={showval => setShow(showval)} /> : <div></div>}
+    <Router>
+      <div className="navbar">
+        <Link to="/"><img className="logo" src={logo}></img></Link>
+        <div className="navbuttons">
+          <button className="navbutton" onClick={() => setShow(true)}>How to use</button>
+          <Link to="/about"><button className="navbutton">About us & POP.FLO</button></Link>
         </div>
-        <Switch>
-          <Route exact path="/" render={() =>
-            <div className="App">
-              <div className="selection-container">
-                <div>selected county:{selectedCounty}</div>
-                <DropDown selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} />
+        {show == true ? <Explanation show={show} setShow={showval => setShow(showval)} /> : <div></div>}
+      </div>
+      <Switch>
+        <Route exact path="/" render={() =>
+          <div className="App">
+            <div className="selection-container">
+              <div>selected county:{selectedCounty}</div>
+              <DropDown selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} />
+            </div>
+            <div className="content-container">
+              <div className="map-container">
+                {counties.length > 0 && <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties} />}
+                <LinearScale />
               </div>
-              <div className="content-container">
-                <div className="map-container">
-                  {counties.length > 0 && <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties} />}
-                  <LinearScale />
-                </div>
-                <div className="sankey-container">
-                {counties.length > 0 &&<SankeyContainer counties={counties} />}
-                </div>
-                <div>
-                  {/* <Slider year={year => setYear(year)}/> */}
-                  {/* <Slider year={year}/> */}
-                  <Slider sliderYear={year} sliderSelectedYear={y => setYear(y)}/>
-                </div>
+              <div className="sankey-container">
+                {counties.length > 0 && <SankeyContainer counties={counties} />}
+              </div>
+              <div>
+                {/* <Slider year={year => setYear(year)}/> */}
+                {/* <Slider year={year}/> */}
+                <Slider sliderYear={year} sliderSelectedYear={y => setYear(y)} />
               </div>
             </div>
-          }></Route>
-          <Route path="/about" render={() => <About />}></Route>
-        </Switch>
-      </Router>
+          </div>
+        }></Route>
+        <Route path="/about" render={() => <About />}></Route>
+      </Switch>
+    </Router>
 
 
   );
