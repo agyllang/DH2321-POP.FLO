@@ -12,6 +12,7 @@ import data from './scb_data.csv';
 import * as d3 from 'd3';
 import Slider from './components/Slider';
 import logo from './components/logo3.png'
+import RadioButtons from './components/RadioButtons';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
   const [show, setShow] = useState(false);
 
   const [year, setYear] = useState(2019);
+  const [gender, setGender] = useState("all"); //all, kvinnor, män
 
   const dYear = 2019;
   // in, out, netto, för kvinnor, män, all
@@ -65,19 +67,42 @@ function App() {
                    d.Inflyttningslän = d.Inflyttningslän.trim();
                    d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
                    d.Utflyttningslän = d.Utflyttningslän.trim();
-                   if (d.Inflyttningslän == updatedCounties[i].name && d.kön == dGender) {
-                     updatedCounties[i].inflytt.push(Number(d[year])); 
-/*                      updatedCounties[i].inflytt.push(Number(d[dYear])); 
- */                     updatedCounties[i].inflyttLän.push(d.Utflyttningslän);
-   
-                   }
-                   /* d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
-                   d.Utflyttningslän = d.Utflyttningslän.trim(); */
-                   if (d.Utflyttningslän == updatedCounties[i].name && d.kön ==dGender) {
-                      updatedCounties[i].utflytt.push(Number(d[year]));
-/*                       updatedCounties[i].utflytt.push(Number(d[dYear]));
- */                      updatedCounties[i].utflyttLän.push(d.Inflyttningslän);
-                   }
+
+                   if (gender == "all"){
+                  
+                       if (d.Inflyttningslän == updatedCounties[i].name && d.kön == "kvinnor" || d.Inflyttningslän == updatedCounties[i].name && d.kön== "män") {
+    /*                    if (d.Inflyttningslän == updatedCounties[i].name && d.kön == dGender) {
+    */                     updatedCounties[i].inflytt.push(Number(d[year])); 
+    /*                      updatedCounties[i].inflytt.push(Number(d[dYear])); 
+    */                     updatedCounties[i].inflyttLän.push(d.Utflyttningslän);
+      
+                      }
+                      /* d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
+                      d.Utflyttningslän = d.Utflyttningslän.trim(); */
+                      if (d.Utflyttningslän == updatedCounties[i].name && d.kön == "kvinnor" || d.Inflyttningslän == updatedCounties[i].name && d.kön== "män") {
+    /*                    if (d.Utflyttningslän == updatedCounties[i].name && d.kön ==dGender) {
+    */                      updatedCounties[i].utflytt.push(Number(d[year]));
+    /*                       updatedCounties[i].utflytt.push(Number(d[dYear]));
+    */                      updatedCounties[i].utflyttLän.push(d.Inflyttningslän);
+                      }
+                    }
+                    else {
+                      if (d.Inflyttningslän == updatedCounties[i].name && d.kön == gender) {
+                        /*                    if (d.Inflyttningslän == updatedCounties[i].name && d.kön == dGender) {
+                        */                     updatedCounties[i].inflytt.push(Number(d[year])); 
+                        /*                      updatedCounties[i].inflytt.push(Number(d[dYear])); 
+                        */                     updatedCounties[i].inflyttLän.push(d.Utflyttningslän);
+                          
+                                          }
+                                          /* d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
+                                          d.Utflyttningslän = d.Utflyttningslän.trim(); */
+                                          if (d.Utflyttningslän == updatedCounties[i].name && d.kön == gender) {
+                        /*                    if (d.Utflyttningslän == updatedCounties[i].name && d.kön ==dGender) {
+                        */                      updatedCounties[i].utflytt.push(Number(d[year]));
+                        /*                       updatedCounties[i].utflytt.push(Number(d[dYear]));
+                        */                      updatedCounties[i].utflyttLän.push(d.Inflyttningslän);
+                                          }
+                    }
                }
            });
            //const total_in = inflytt.reduce((partial_sum, a) => partial_sum + a,0); 
@@ -106,7 +131,7 @@ useEffect(() => {
     console.log("get data rerendered", counties);
 
   }
-}, [year])
+}, [year, gender])
 
   return (
       <Router>
@@ -129,7 +154,7 @@ useEffect(() => {
               </div>
               <div className="content-container">
                 <div className="map-container">
-                  {counties.length > 0 && <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties} />}
+                  {counties.length > 0 && <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties}/>}
                   <LinearScale />
                 </div>
                 <div className="sankey-container">
@@ -139,6 +164,7 @@ useEffect(() => {
                   {/* <Slider year={year => setYear(year)}/> */}
                   {/* <Slider year={year}/> */}
                   <Slider sliderYear={year} sliderSelectedYear={y => setYear(y)}/>
+                  <RadioButtons radioGender={gender} radioSelectedGender={g => setGender(g)}/>
                 </div>
               </div>
             </div>
