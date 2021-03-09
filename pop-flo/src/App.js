@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react"
+import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
+
 import MapContainer from "./components/MapContainer";
 import LinearScale from "./components/LinearScale";
 import DropDown from "./components/DropDown"
 import SankeyContainer from "./components/SankeyContainer"
-import "./App.css"
+import SankeyContainerOut from "./components/SankeyContainerOut"
 import Explanation from "./components/explanation"
 import About from "./components/about";
-import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
-import data from './scb_data.csv';
-import * as d3 from 'd3';
+
 import Slider from './components/Slider';
 import logo from './components/logo3.png'
+import data from './scb_data.csv';
+import * as d3 from 'd3';
+
+import "./App.css"
+
 
 
 function App() {
@@ -156,8 +161,11 @@ function App() {
                 {counties.length > 0 && <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties} />}
                 <LinearScale />
               </div>
-              <div className="sankey-container">
+              <div className="sankeyContainer">
                 {selectedCounty && counties.length > 0 && <SankeyContainer counties={counties[getIndex(selectedCounty)]} />}
+              </div>
+              <div className="sankeyContainerOut">
+                {selectedCounty && counties.length > 0 && <SankeyContainerOut counties={counties[getIndex(selectedCounty)]} />}
               </div>
 
             </div>

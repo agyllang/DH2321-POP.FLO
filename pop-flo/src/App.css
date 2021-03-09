@@ -133,7 +133,10 @@ svg {
   
   flex:0.5;
 }
-.sankey-container{
+.sankeyContainer{
+  flex:1;
+}
+.sankeyContainerOut{
   flex:1;
 }
 
