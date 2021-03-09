@@ -19,7 +19,6 @@ function App() {
 
   const [year, setYear] = useState(2019);
 
-  const dYear = 2019;
   // in, out, netto, för kvinnor, män, all
   const dGender = "kvinnor";
 
@@ -49,7 +48,31 @@ function App() {
   ]
 
   const [counties, setCounties] = useState([]);
+  const getIndex = (ID) => {
 
+    // counties.filter((c) => c.id == selected)
+    // var countyIndex = 1
+    var countyIndexArr = []
+    console.log("counties in get index", counties)
+
+    counties.map((c, i) => {
+      if (c.id == ID) {
+        countyIndexArr.push(i)
+      }
+    })
+    return countyIndexArr[0]
+  }
+  const getName = (ID) => {
+    // counties.filter((c) => c.id == selected)
+    var returnArray = []
+    EmptyCounties.map((c) => {
+      if (c.id == ID) {
+        console.log("c.name", c.name)
+        returnArray.push(c.name)
+      }
+    })
+    return returnArray[0]
+  }
   function GetData() {
     // d3.csv(data, function(data) { 
     //         d3.csv(data).then(function(data){ 
@@ -102,8 +125,10 @@ function App() {
   useEffect(() => {
     GetData()
     // return () => {
-      console.log("get data rerendered", counties);
-      console.log("year",year)
+    console.log("get data rerendered", counties);
+    console.log("year", year)
+    console.log("getIndex(25)", getIndex(25))
+
     // }
   }, [year])
 
@@ -121,8 +146,10 @@ function App() {
         <Route exact path="/" render={() =>
           <div className="App">
             <div className="selection-container">
-              <div>selected county:{selectedCounty}</div>
+       
+              <div>selected county:{getName(selectedCounty)}</div>
               <DropDown selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} />
+              <Slider sliderYear={year} sliderSelectedYear={y => setYear(y)} />
             </div>
             <div className="content-container">
               <div className="map-container">
@@ -130,13 +157,9 @@ function App() {
                 <LinearScale />
               </div>
               <div className="sankey-container">
-                {counties.length > 0 && <SankeyContainer counties={counties} />}
+                {selectedCounty && counties.length > 0 && <SankeyContainer counties={counties[getIndex(selectedCounty)]} />}
               </div>
-              <div>
-                {/* <Slider year={year => setYear(year)}/> */}
-                {/* <Slider year={year}/> */}
-                <Slider sliderYear={year} sliderSelectedYear={y => setYear(y)} />
-              </div>
+
             </div>
           </div>
         }></Route>

@@ -91,12 +91,12 @@ const SankeyContainer = ({ counties }) => {
     //const [dim, setDim] = useState({})
     const svgRef = React.createRef();
     // console.log("SankeyContainer counties in", counties)
-    console.log("SankeyContainer counties[0]", counties[0])
+    console.log("SankeyContainer counties", counties)
     // console.log("structuredData",structuredData)
     useEffect(() => {
         console.log("counties in useEffect",counties)
         formatData(counties)
-    }, [])
+    }, [counties])
 // console.log("PERFECT DATA", data2)
     // const measureSVG = () => {
     //     const { width, height } = svgRef.current.getBoundingClientRect();
@@ -114,21 +114,21 @@ const SankeyContainer = ({ counties }) => {
         
         //adding all the counties as node target 
         //example: "nodes": [ {name: "Uppsala län"},{name: "Södermanlands län"},{name: "Östergötlands län"},]
-        for (var i in counties[0].inflyttLän) {
-            nodesToBe.push({ "name": counties[0].inflyttLän[i] })
+        for (var i in counties.inflyttLän) {
+            nodesToBe.push({ "name": counties.inflyttLän[i] })
         }
         // console.log("nodestobe", nodesToBe)
 
 
-        for (var j in counties[0].inflytt) {
+        for (var j in counties.inflytt) {
             // console.log("j",j);
-            linksToBe.push({ "source": parseInt(j), "target":counties[0].inflytt.length, "value": counties[0].inflytt[j] })
-            // linksToBe.push({ "source": parseInt(j), "target": counties[0].inflytt.length - 1, "value": counties[0].inflytt[j] })
+            linksToBe.push({ "source": parseInt(j), "target":counties.inflytt.length, "value": counties.inflytt[j] })
+            // linksToBe.push({ "source": parseInt(j), "target": counties.inflytt.length - 1, "value": counties.inflytt[j] })
         }
         //console.log("linksToBe", linksToBe)
 
         //adding the "target" county to the last array. (THIS is used to target the links towards)
-        nodesToBe.push({ "name": counties[0].name })
+        nodesToBe.push({ "name": counties.name })
 
         setData({
             "nodes":
