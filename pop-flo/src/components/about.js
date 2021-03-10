@@ -16,7 +16,6 @@ class About extends React.Component {
     }
 
     render() {
-        console.log(this.state.selectedPerson)
         return(
             <div>
                 <div className="aboutcontainer">
@@ -87,10 +86,16 @@ class About extends React.Component {
                                             {this.state.selectedPerson== "Albin" ? <b> Albin Matson Gyllang</b>:' Albin Matson Gyllang'}, 
                                             {this.state.selectedPerson== "Amalia"? <b> Amalia Berglöf</b>:' Amalia Berglöf'}, 
                                             {this.state.selectedPerson== "Hilda"? <b> Hilda Robertsson</b>:' Hilda Robertsson'} and  
-                                            {this.state.selectedPerson== "Moa"? <b> Moa Engquist</b>:' Moa Engquist'}.</p>
-                                        <p>Our goal is to visualize movement in a simple, yet interesting way! It's up
-                                            to you if we succeeded of course! You want to get in touch with us? Click on one of us to
-                                            get to know them better, and get the contact details!
+                                            {this.state.selectedPerson== "Moa"? <b> Moa Engquist</b>:' Moa Engquist'}.
+                                            We built this tool as our final project in our course in Information Visualization (DH2320)
+                                            at KTH.</p>
+                                        <p>Our goal is to visualize movement in a simple, yet interesting way! We want to
+                                            keep the simpleness and readability of a map, while adding visualizations to
+                                            help interpret the data. It's up to you if we succeeded of course. 
+                                        </p>
+                                        <p>
+                                        You want to get in touch with us? Click on one of us to
+                                        get to know them better, and get the contact details!
                                         </p>
                                 </div>
                                 ))

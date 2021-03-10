@@ -188,9 +188,9 @@ useEffect(() => {
               <div className="sankeyContainer">
                 {selectedCounty && counties.length > 0 && <SankeyContainer counties={counties[getIndex(selectedCounty)]} />}
               </div>
-              <div className="sankeyContainerOut">
+              {/* <div className="sankeyContainerOut">
                 {selectedCounty && counties.length > 0 && <SankeyContainerOut counties={counties[getIndex(selectedCounty)]} />}
-              </div>
+              </div> */}
 
             </div>
           </div>
