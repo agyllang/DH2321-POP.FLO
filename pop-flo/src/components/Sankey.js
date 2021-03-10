@@ -4,6 +4,7 @@ import { sankey, sankeyLinkHorizontal } from "d3-sankey"; //https://www.npmjs.co
 
 //creates a node for each län
 const SankeyNode = ({ name, x0, x1, y0, y1, color }) => (
+  
   <rect x={x0} y={y0} width={x1 - x0} height={Math.abs(y1-y0)}> 
     <title>{name}</title>
   </rect> //To add color add the attribute fill i nrect
@@ -24,13 +25,16 @@ const SankeyLink = ({ link, color }) => (
 
 //create and returns the diagram
 const SankeyDiagram = ({ data, width, height }) => {
+
+
+  console.log("data from Sankey",data)
+ 
   const { nodes, links } = sankey()
     .nodeWidth(15)
     .nodePadding(10)
-    .extent([[1, 1], [width - 1, height - 5]])(data);
-
-    //console.log(sankey()(data))
-    console.log("kommentar", data);
+    .extent([[1, 1], [width - 1, height - 5]])
+    (data);
+    console.log("links",links);
   //const color = chroma.scale("Set3").classes(nodes.length);
   // const colorScale = d3
   //   .scaleLinear()

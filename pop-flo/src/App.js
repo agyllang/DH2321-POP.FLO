@@ -6,51 +6,53 @@ import SankeyContainer from "./components/SankeyContainer"
 import "./App.css"
 import Explanation from "./components/explanation"
 import About from "./components/about";
-import GetData from "./components/GetData";
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
 import data from './scb_data.csv';
 import * as d3 from 'd3';
-import SankeyDiagram from "./components/Sankey";
+import Slider from './components/Slider';
+import logo from './components/logo3.png'
 
 
 function App() {
   const [selectedCounty, setSelectedCounty] = useState(null);
   const [show, setShow] = useState(false);
 
+  const [year, setYear] = useState(2019);
+
   const dYear = 2019;
   // in, out, netto, för kvinnor, män, all
   const dGender = "kvinnor";
-  
+
   const EmptyCounties = [
-  //    { name: "01  Stockholms län (Inflyttningslän)", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: [] },
-  {id: "01", name: "Stockholms län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []}, 
-  {id: "03", name: "Uppsala län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
-  {id: "04", name: "Södermanlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
-  {id: "05", name: "Östergötlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
-  {id: "06", name: "Jönköpings län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []}, 
-  {id: "07", name: "Kronobergs län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
-  {id: "08", name: "Kalmar län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
-  {id: "09", name: "Gotlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
-  {id: "10", name: "Blekinge län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []}, 
-  {id: "12", name: "Skåne län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
-  {id: "13", name: "Hallands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
-  {id: "14", name: "Västra Götalands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
-  {id: "17", name: "Värmlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []}, 
-  {id: "18", name: "Örebro län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
-  {id: "19", name: "Västmanlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
-  {id: "20", name: "Dalarnas län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
-  {id: "21", name: "Gävleborgs län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []}, 
-  {id: "22", name: "Västernorrlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
-  {id: "23", name: "Jämtlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
-  {id: "24", name: "Västerbottens län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
-  {id: "25", name: "Norrbottens län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: []},
+    //    { name: "01  Stockholms län (Inflyttningslän)", coordinates: [139.6917, 35.6895], in: 0, out: 0, netto: 0, inflytt: [], utflytt: [] },
+    { id: "01", name: "Stockholms län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+    { id: "03", name: "Uppsala län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+    { id: "04", name: "Södermanlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+    { id: "05", name: "Östergötlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+    { id: "06", name: "Jönköpings län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+    { id: "07", name: "Kronobergs län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+    { id: "08", name: "Kalmar län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+    { id: "09", name: "Gotlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+    { id: "10", name: "Blekinge län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+    { id: "12", name: "Skåne län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+    { id: "13", name: "Hallands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+    { id: "14", name: "Västra Götalands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+    { id: "17", name: "Värmlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+    { id: "18", name: "Örebro län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+    { id: "19", name: "Västmanlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+    { id: "20", name: "Dalarnas län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+    { id: "21", name: "Gävleborgs län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+    { id: "22", name: "Västernorrlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+    { id: "23", name: "Jämtlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+    { id: "24", name: "Västerbottens län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+    { id: "25", name: "Norrbottens län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
   ]
 
-const [counties, setCounties] = useState([]);
+  const [counties, setCounties] = useState([]);
 
   function GetData() {
       // d3.csv(data, function(data) { 
-//         d3.csv(data).then(function(data){
+//         d3.csv(data).then(function(data){ 
       var updatedCounties = EmptyCounties;
       d3.csv(data).then(function(data){
           
@@ -63,17 +65,17 @@ const [counties, setCounties] = useState([]);
                    d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
                    d.Utflyttningslän = d.Utflyttningslän.trim();
                    if (d.Inflyttningslän == updatedCounties[i].name && d.kön == dGender) {
-                       //inflytt.push(Number(d[dYear])); // plus vilket län det kommer från 
-                       updatedCounties[i].inflytt.push(Number(d[dYear])); // plus vilket län det kommer från 
-                      // counties[i].inflytt.push(d.Utflyttningslän);
-                      updatedCounties[i].inflyttLän.push(d.Utflyttningslän);
+                     updatedCounties[i].inflytt.push(Number(d[year])); 
+/*                      updatedCounties[i].inflytt.push(Number(d[dYear])); 
+ */                     updatedCounties[i].inflyttLän.push(d.Utflyttningslän);
    
                    }
                    /* d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
                    d.Utflyttningslän = d.Utflyttningslän.trim(); */
                    if (d.Utflyttningslän == updatedCounties[i].name && d.kön ==dGender) {
-                      updatedCounties[i].utflytt.push(Number(d[dYear]));
-                      updatedCounties[i].utflyttLän.push(d.Inflyttningslän);
+                      updatedCounties[i].utflytt.push(Number(d[year]));
+/*                       updatedCounties[i].utflytt.push(Number(d[dYear]));
+ */                      updatedCounties[i].utflyttLän.push(d.Inflyttningslän);
                    }
                }
            });
@@ -99,50 +101,50 @@ const [counties, setCounties] = useState([]);
    
 useEffect(() => {
   GetData()
-  return () => {
+  // return () => {
+  //   console.log("get data rerendered", counties);
 
-  }
-}, [])
+  // }
+}, [year])
 
   return (
-    <div>
       <Router>
-      <div className="navbar">
-        <div className="navbuttons">
-        <Link to ="/"><text className="title">POP.FLO</text></Link>
-        <button className="navbutton" onClick={() => setShow(true)}>How to use</button>
-        <Link to="/about"><button className="navbutton">About us & POP.FLO</button></Link>
-        </div>
-        {show == true? <Explanation show={show} setShow={showval => setShow(showval)}/>:<div></div>}
-      </div>
-        <Switch>
-          <Route exact path="/" render={() => 
-          <div className="App">
-          <div>selected county:{selectedCounty}]</div>
-          <DropDown selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} />
-          {counties.length>0 && <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties}/>}
-          {/* <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties}/> */}
-          <LinearScale />
-          {counties.length>0 && <SankeyContainer counties={counties}/>}
-          {/* <SankeyContainer counties={counties}/> */}
+        <div className="navbar">
+        <Link to ="/"><img className="logo" src={logo}></img></Link>
+          <div className="navbuttons">
+            <button className="navbutton" onClick={() => setShow(true)}>How to use</button>
+            <Link to="/about"><button className="navbutton">About us & POP.FLO</button></Link>
           </div>
-  
+          {show == true ? <Explanation show={show} setShow={showval => setShow(showval)} /> : <div></div>}
+        </div>
+        <Switch>
+          <Route exact path="/" render={() =>
+            <div className="App">
+              <div className="selection-container">
+                <div>selected county:{selectedCounty}</div>
+                <DropDown selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} />
+              </div>
+              <div className="content-container">
+                <div className="map-container">
+                  {counties.length > 0 && <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties} />}
+                  <LinearScale />
+                </div>
+                <div className="sankey-container">
+                {counties.length > 0 &&<SankeyContainer counties={counties} />}
+                </div>
+                <div>
+                  {/* <Slider year={year => setYear(year)}/> */}
+                  {/* <Slider year={year}/> */}
+                  <Slider sliderYear={year} sliderSelectedYear={y => setYear(y)}/>
+                </div>
+              </div>
+            </div>
           }></Route>
-          <Route path="/about" render={() => <About/>}></Route>
+          <Route path="/about" render={() => <About />}></Route>
         </Switch>
-    </Router>   
-    </div> 
+      </Router>
 
-      // <div>selected county:{selectedCounty}]</div>
-      // <DropDown selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} />
-      // <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties}/>
-      // <LinearScale />
-      // <Explanation/>
-      // <About/>
-      // <SankeyContainer counties={counties}/>
-      // </div>
-    
-    
+
   );
 }
 

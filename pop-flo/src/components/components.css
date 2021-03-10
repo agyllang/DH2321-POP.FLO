@@ -1,5 +1,5 @@
 .dropDownContainer{
-    width:50%;
+    width:20%;
     height:100%;
     background-color: rgba(155,155,155,0.8);
 }
@@ -38,4 +38,45 @@ div.tooltip {
 .tooltip-area{
     cursor:default;
     /* background-color: rgba(114, 138, 165, 0.8) */
+}
+
+
+
+/*_____________DROPDOWN_________*/
+.dropDownSelectedSpan{
+    margin-left:10px;
+}
+.dropDownUL{
+    cursor:default;
+    list-style:none;
+    /* position: relative;
+    z-index: 10; */
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    padding:10px;
+}
+
+.dropDownItem{
+    padding:2px;
+}
+.dropDownItem:hover{
+    font-weight:500;
+    background-color: rgba(100,100,100,0.5);
+}
+
+.dropDownItemSelected{
+    font-weight:bold;
+}
+
+.dropDownSelectionContainer{
+    display:flex;
+    justify-content: space-between;
+}
+.dropDownButton{
+    /* margin-right:10px; */
+    
+
 }
