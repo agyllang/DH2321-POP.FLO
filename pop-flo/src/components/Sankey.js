@@ -7,31 +7,31 @@ import { sankey, sankeyLinkHorizontal } from "d3-sankey"; //https://www.npmjs.co
 //assigning color for each län
 const indelning = {
   "Götaland": [
-    {name: "Blekinge län", color:"coral"}, 
-    {name: "Västra Götalands län", color:"blue"},
-    {name: "Gotlands län", color: "purple"},
-    {name: "Hallands län", color:"brown"},
-    {name:"Skåne län", color:"aqua"},
-    {name: "Jönköpings län", color: "blue"},
-    {name: "Kalmar län", color:"red"},
-    {name: "Kronobergs län", color: "orange"},
-    {name: "Östergötlands län", color: "pink"},
+    { name: "Blekinge län", color: "coral" },
+    { name: "Västra Götalands län", color: "blue" },
+    { name: "Gotlands län", color: "purple" },
+    { name: "Hallands län", color: "brown" },
+    { name: "Skåne län", color: "aqua" },
+    { name: "Jönköpings län", color: "blue" },
+    { name: "Kalmar län", color: "red" },
+    { name: "Kronobergs län", color: "orange" },
+    { name: "Östergötlands län", color: "pink" },
   ],
   "Svealand": [
-    {name: "Uppsala län", color:"green"},
-    {name: "Örebro län", color: "yellow"},
-    {name: "Västmanlands län", color: "olive"},
-    {name:"Södermanlands län", color: "gold"},
-    {name: "Stockholms län", color: "thistle"},
-    {name:"Värmlands län", color:"violet"}
+    { name: "Uppsala län", color: "green" },
+    { name: "Örebro län", color: "yellow" },
+    { name: "Västmanlands län", color: "olive" },
+    { name: "Södermanlands län", color: "gold" },
+    { name: "Stockholms län", color: "thistle" },
+    { name: "Värmlands län", color: "violet" }
   ],
   "Norrland": [
-    {name: "Gävleborgs län", color: "khaki"},
-    {name: "Jämtlands län", color: "magenta"},
-    {name: "Dalarnas län", color: "mediumslateblue"},
-    {name: "Västernorrlands län", color: "crimson"},
-    {name: "Västerbottens län", color: "rosybrown"},
-    {name: "Norrbottens län", color: "cadetblue"},
+    { name: "Gävleborgs län", color: "khaki" },
+    { name: "Jämtlands län", color: "magenta" },
+    { name: "Dalarnas län", color: "mediumslateblue" },
+    { name: "Västernorrlands län", color: "crimson" },
+    { name: "Västerbottens län", color: "rosybrown" },
+    { name: "Norrbottens län", color: "cadetblue" },
   ]
 }
 
@@ -63,10 +63,10 @@ const SankeyLink = ({ link, color }) => (
 
 const SankeyDiagram = ({ data, width, height, direction }) => {
 
-  useEffect(()=>{
-    console.log("UUUUUUUUUUUUUU SankeyDiagram mounted, with data:",data)
-    return () => console.log("XXXXXXXXXXXXX SankeyDiagram DISmounted, with data:",data)
-})
+  //   useEffect(()=>{
+  //     // console.log("UUUUUUUUUUUUUU SankeyDiagram mounted, with data:",data)
+  //     return () => console.log("XXXXXXXXXXXXX SankeyDiagram DISmounted, with data:",data)
+  // })
 
   // console.log("data from Sankey", data)
 
@@ -84,31 +84,31 @@ const SankeyDiagram = ({ data, width, height, direction }) => {
 
   const giveColor = (link) => {
     var color
-    if (direction=="in"){
-      console.log("--------in-------")
-      for(const prop in indelning) {
+    if (direction == "in") {
+      // console.log("--------in-------")
+      for (const prop in indelning) {
         indelning[prop].forEach((county) => {
-          if(county.name == link.source.name) {
-            console.log("i if-satsen", typeof county.color)
+          if (county.name == link.source.name) {
+            // console.log("i if-satsen", typeof county.color)
             color = county.color
           }
         })
+      }
     }
-    }
-    else if (direction=="out"){
-      console.log("------out-------")
-      for(const prop in indelning) {
+    else if (direction == "out") {
+      // console.log("------out-------")
+      for (const prop in indelning) {
         indelning[prop].forEach((county) => {
-          if(county.name == link.target.name) {
-            console.log("i if-satsen", typeof county.color)
+          if (county.name == link.target.name) {
+            // console.log("i if-satsen", typeof county.color)
             color = county.color
           }
         })
+      }
     }
-    }
-    else{
-      console.log("----nothing-----")
-      color="blue"
+    else {
+      // console.log("----nothing-----")
+      color = "blue"
     }
     return color
   }
@@ -140,7 +140,7 @@ const SankeyDiagram = ({ data, width, height, direction }) => {
         <SankeyLink
           link={link}
           key={direction === "out" ? `${link.index}-out` : `${link.index}-in`}
-          color= {giveColor(link)}
+          color={giveColor(link)}
         // color={(colorScale(link.source.index)).hex()}
         />
       ))}

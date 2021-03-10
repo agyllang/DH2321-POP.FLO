@@ -186,9 +186,11 @@ const emptyCounties = [
               <div className="sankeyContainer">
                 {selectedCounty && counties.length > 0 && <SankeyContainer selected={selectedCounty} counties={counties} />}
               </div>
-              {/* <div className="sankeyContainerOut">
-                {selectedCounty && counties.length > 0 && <SankeyContainerOut counties={counties[getIndex(selectedCounty)]} />}
-              </div> */}
+
+              
+              <div className="sankeyContainerOut">
+                {selectedCounty && counties.length > 0 && <SankeyContainerOut selected={selectedCounty} counties={counties}  />}
+              </div>
 
             </div>
           </div>

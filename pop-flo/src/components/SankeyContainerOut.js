@@ -5,7 +5,7 @@ import React, { useRef, useState, useEffect } from "react";
 //import * as d3 from 'd3';
 
 
-const SankeyContainerOut = ({ counties }) => {
+const SankeyContainerOut = ({ counties, selected }) => {
     const [nodesArray, setNodesArray] = useState([])
     const [linksArray, setLinksArray] = useState([])
     const [width, setWidth] = useState(500)
@@ -15,9 +15,19 @@ const SankeyContainerOut = ({ counties }) => {
     const svgRef = React.createRef();
     
     useEffect(() => {
-        console.log("^^^^^^^^counties in SANKEY OUT",counties)
-        formatData(counties)
-    }, [counties])
+
+        const getIndex = (ID) => {
+            var countyIndexArr = []
+            counties.map((c, i) => {
+                if (c.id == ID) {
+                    countyIndexArr.push(i)
+                }
+            })
+            return countyIndexArr[0]
+        }
+        // console.log("counties in useEffect",counties)
+        formatData(counties[getIndex(selected)])
+    }, [counties,selected])
     // const measureSVG = () => {
     //     const { width, height } = svgRef.current.getBoundingClientRect();
 
