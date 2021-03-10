@@ -53,22 +53,25 @@ const DropDown = ({ selected, selectCounty }) => {
     return (
         <div className="dropDownContainer" >
             <div className="dropDownSelectionContainer">
-            <span className="dropDownSelectedSpan">{selected != null ? getName(selected) : "Choose a county"}</span>
-            <button className="dropDownButton" onClick={() => setOpen(!open)}>
-                {!open ? <DownSvg />
-                    : <UpSvg />
-                }
-            </button>
+                <span className="dropDownSelectedSpan">{selected != null ? getName(selected) : "Choose a county"}</span>
+                <button className="dropDownButton" onClick={() => setOpen(!open)}>
+                    {!open ? <DownSvg />
+                        : <UpSvg />
+                    }
+                </button>
             </div>
             {open ?
 
                 <ul className="dropDownUL">{counties.map(c =>
-                    <li className= {c.id==selected ? "dropDownItemSelected" : "dropDownItem"}
-                        
+                    <li className={c.id == selected ? "dropDownItemSelected" : "dropDownItem"}
+
                         key={c.id}
                         // onMouseEnter={() => setHover(true)}
                         // onMouseLeave={() => { setHover(false) }}
-                        onClick={() => selectCounty(c.id)}
+                        onClick={() => {
+                            selectCounty(c.id)
+                            setOpen(false)
+                        }}
                     >
                         {c.name}</li>
                 )}

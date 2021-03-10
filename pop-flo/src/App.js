@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from "react"
+import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
+import * as d3 from 'd3';
+
 import MapContainer from "./components/MapContainer";
 import LinearScale from "./components/LinearScale";
 import DropDown from "./components/DropDown"
 import SankeyContainer from "./components/SankeyContainer"
-import "./App.css"
+import SankeyContainerOut from "./components/SankeyContainerOut"
 import Explanation from "./components/explanation"
 import About from "./components/about";
-import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
-import data from './scb_data.csv';
-import * as d3 from 'd3';
+import RadioButtons from './components/RadioButtons';
 import Slider from './components/Slider';
+
 import logo from './components/logo3.png'
+import data from './scb_data.csv';
+
+import "./App.css"
+
 
 
 function App() {
@@ -18,8 +24,8 @@ function App() {
   const [show, setShow] = useState(false);
 
   const [year, setYear] = useState(2019);
+  const [gender, setGender] = useState("all"); //all, kvinnor, män
 
-  const dYear = 2019;
   // in, out, netto, för kvinnor, män, all
   const dGender = "kvinnor";
 
@@ -49,10 +55,34 @@ function App() {
   ]
 
   const [counties, setCounties] = useState([]);
+  const getIndex = (ID) => {
 
+    // counties.filter((c) => c.id == selected)
+    // var countyIndex = 1
+    var countyIndexArr = []
+    console.log("counties in get index", counties)
+
+    counties.map((c, i) => {
+      if (c.id == ID) {
+        countyIndexArr.push(i)
+      }
+    })
+    return countyIndexArr[0]
+  }
+  const getName = (ID) => {
+    // counties.filter((c) => c.id == selected)
+    var returnArray = []
+    EmptyCounties.map((c) => {
+      if (c.id == ID) {
+        console.log("c.name", c.name)
+        returnArray.push(c.name)
+      }
+    })
+    return returnArray[0]
+  }
   function GetData() {
       // d3.csv(data, function(data) { 
-//         d3.csv(data).then(function(data){ 
+//         d3.csv(data).then(function(data){
       var updatedCounties = EmptyCounties;
       d3.csv(data).then(function(data){
           
@@ -64,19 +94,42 @@ function App() {
                    d.Inflyttningslän = d.Inflyttningslän.trim();
                    d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
                    d.Utflyttningslän = d.Utflyttningslän.trim();
-                   if (d.Inflyttningslän == updatedCounties[i].name && d.kön == dGender) {
-                     updatedCounties[i].inflytt.push(Number(d[year])); 
-/*                      updatedCounties[i].inflytt.push(Number(d[dYear])); 
- */                     updatedCounties[i].inflyttLän.push(d.Utflyttningslän);
-   
-                   }
-                   /* d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
-                   d.Utflyttningslän = d.Utflyttningslän.trim(); */
-                   if (d.Utflyttningslän == updatedCounties[i].name && d.kön ==dGender) {
-                      updatedCounties[i].utflytt.push(Number(d[year]));
-/*                       updatedCounties[i].utflytt.push(Number(d[dYear]));
- */                      updatedCounties[i].utflyttLän.push(d.Inflyttningslän);
-                   }
+
+                   if (gender == "all"){
+                  
+                       if (d.Inflyttningslän == updatedCounties[i].name && d.kön == "kvinnor" || d.Inflyttningslän == updatedCounties[i].name && d.kön== "män") {
+    /*                    if (d.Inflyttningslän == updatedCounties[i].name && d.kön == dGender) {
+    */                     updatedCounties[i].inflytt.push(Number(d[year])); 
+    /*                      updatedCounties[i].inflytt.push(Number(d[dYear])); 
+    */                     updatedCounties[i].inflyttLän.push(d.Utflyttningslän);
+      
+                      }
+                      /* d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
+                      d.Utflyttningslän = d.Utflyttningslän.trim(); */
+                      if (d.Utflyttningslän == updatedCounties[i].name && d.kön == "kvinnor" || d.Inflyttningslän == updatedCounties[i].name && d.kön== "män") {
+    /*                    if (d.Utflyttningslän == updatedCounties[i].name && d.kön ==dGender) {
+    */                      updatedCounties[i].utflytt.push(Number(d[year]));
+    /*                       updatedCounties[i].utflytt.push(Number(d[dYear]));
+    */                      updatedCounties[i].utflyttLän.push(d.Inflyttningslän);
+                      }
+                    }
+                    else {
+                      if (d.Inflyttningslän == updatedCounties[i].name && d.kön == gender) {
+                        /*                    if (d.Inflyttningslän == updatedCounties[i].name && d.kön == dGender) {
+                        */                     updatedCounties[i].inflytt.push(Number(d[year])); 
+                        /*                      updatedCounties[i].inflytt.push(Number(d[dYear])); 
+                        */                     updatedCounties[i].inflyttLän.push(d.Utflyttningslän);
+                          
+                                          }
+                                          /* d.Utflyttningslän = d.Utflyttningslän.replace(' (Utflyttningslän)', '');
+                                          d.Utflyttningslän = d.Utflyttningslän.trim(); */
+                                          if (d.Utflyttningslän == updatedCounties[i].name && d.kön == gender) {
+                        /*                    if (d.Utflyttningslän == updatedCounties[i].name && d.kön ==dGender) {
+                        */                      updatedCounties[i].utflytt.push(Number(d[year]));
+                        /*                       updatedCounties[i].utflytt.push(Number(d[dYear]));
+                        */                      updatedCounties[i].utflyttLän.push(d.Inflyttningslän);
+                                          }
+                    }
                }
            });
            //const total_in = inflytt.reduce((partial_sum, a) => partial_sum + a,0); 
@@ -101,48 +154,50 @@ function App() {
    
 useEffect(() => {
   GetData()
-  // return () => {
-  //   console.log("get data rerendered", counties);
+  return () => {
+    console.log("get data rerendered", counties);
 
-  // }
-}, [year])
+  }
+}, [year, gender])
 
   return (
-      <Router>
-        <div className="navbar">
-        <Link to ="/"><img className="logo" src={logo}></img></Link>
-          <div className="navbuttons">
-            <button className="navbutton" onClick={() => setShow(true)}>How to use</button>
-            <Link to="/about"><button className="navbutton">About us & POP.FLO</button></Link>
-          </div>
-          {show == true ? <Explanation show={show} setShow={showval => setShow(showval)} /> : <div></div>}
+    <Router>
+      <div className="navbar">
+        <Link to="/"><img className="logo" src={logo}></img></Link>
+        <div className="navbuttons">
+          <button className="navbutton" onClick={() => setShow(true)}>How to use</button>
+          <Link to="/about"><button className="navbutton">About us & POP.FLO</button></Link>
         </div>
-        <Switch>
-          <Route exact path="/" render={() =>
-            <div className="App">
-              <div className="selection-container">
-                <div>selected county:{selectedCounty}</div>
-                <DropDown selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} />
-              </div>
-              <div className="content-container">
-                <div className="map-container">
-                  {counties.length > 0 && <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties} />}
-                  <LinearScale />
-                </div>
-                <div className="sankey-container">
-                {counties.length > 0 &&<SankeyContainer counties={counties} />}
-                </div>
-                <div>
-                  {/* <Slider year={year => setYear(year)}/> */}
-                  {/* <Slider year={year}/> */}
-                  <Slider sliderYear={year} sliderSelectedYear={y => setYear(y)}/>
-                </div>
-              </div>
+        {show == true ? <Explanation show={show} setShow={showval => setShow(showval)} /> : <div></div>}
+      </div>
+      <Switch>
+        <Route exact path="/" render={() =>
+          <div className="App">
+            <div className="selection-container">
+       
+              <div>selected county:{getName(selectedCounty)}</div>
+              <DropDown selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} />
+              <Slider sliderYear={year} sliderSelectedYear={y => setYear(y)} />
+              <RadioButtons radioGender={gender} radioSelectedGender={g => setGender(g)}/>
             </div>
-          }></Route>
-          <Route path="/about" render={() => <About />}></Route>
-        </Switch>
-      </Router>
+            <div className="content-container">
+              <div className="map-container">
+                {counties.length > 0 && <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties} />}
+                <LinearScale />
+              </div>
+              <div className="sankeyContainer">
+                {selectedCounty && counties.length > 0 && <SankeyContainer counties={counties[getIndex(selectedCounty)]} />}
+              </div>
+              <div className="sankeyContainerOut">
+                {selectedCounty && counties.length > 0 && <SankeyContainerOut counties={counties[getIndex(selectedCounty)]} />}
+              </div>
+
+            </div>
+          </div>
+        }></Route>
+        <Route path="/about" render={() => <About />}></Route>
+      </Switch>
+    </Router>
 
 
   );

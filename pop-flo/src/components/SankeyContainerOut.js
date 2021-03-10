@@ -84,22 +84,18 @@ const data1 = {
 };
 
 
-const SankeyContainer = ({ counties }) => {
+const SankeyContainerOut = ({ counties }) => {
     const [structuredData, setData] = useState({ "nodes": [], "links": [] })
     const [width, setWidth] = useState(500)
     const [height, setHeight] = useState(500)
+    //const [dim, setDim] = useState({})
 
     const svgRef = React.createRef();
-    // console.log("SankeyContainer counties in", counties)
-    // console.log("SankeyContainer counties", counties)
-    // console.log("structuredData",structuredData)
+    
     useEffect(() => {
-        console.log("VVVVVVV counties in SANKEY IN",counties)
-
-        // console.log("counties in useEffect",counties)
+        console.log("^^^^^^^^counties in SANKEY OUT",counties)
         formatData(counties)
     }, [counties])
-// console.log("PERFECT DATA", data2)
     // const measureSVG = () => {
     //     const { width, height } = svgRef.current.getBoundingClientRect();
 
@@ -116,15 +112,15 @@ const SankeyContainer = ({ counties }) => {
         
         //adding all the counties as node target 
         //example: "nodes": [ {name: "Uppsala län"},{name: "Södermanlands län"},{name: "Östergötlands län"},]
-        for (var i in counties.inflyttLän) {
-            nodesToBe.push({ "name": counties.inflyttLän[i] })
+        for (var i in counties.utflyttLän) {
+            nodesToBe.push({ "name": counties.utflyttLän[i] })
         }
         // console.log("nodestobe", nodesToBe)
 
 
-        for (var j in counties.inflytt) {
+        for (var j in counties.utflytt) {
             // console.log("j",j);
-            linksToBe.push({ "source": parseInt(j), "target":counties.inflytt.length, "value": counties.inflytt[j] })
+            linksToBe.push({ "source": counties.utflytt.length, "target":parseInt(j), "value": counties.utflytt[j] })
             // linksToBe.push({ "source": parseInt(j), "target": counties.inflytt.length - 1, "value": counties.inflytt[j] })
         }
         //console.log("linksToBe", linksToBe)
@@ -162,11 +158,10 @@ const SankeyContainer = ({ counties }) => {
 
     return (
         <svg width="100%" height="500" ref={svgRef}>
-            {structuredData.nodes.length>0 && <SankeyDiagram data={structuredData} width={width} height={height} direction="in" />}
-
+            {structuredData.nodes.length>0 && <SankeyDiagram data={structuredData} width={width} height={height} direction="out"/>}
         </svg>
     );
 
 }
 
-export default SankeyContainer;
+export default SankeyContainerOut;

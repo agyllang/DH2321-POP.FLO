@@ -7,11 +7,11 @@ import * as d3 from 'd3';
 
 
 
-// function SwedenMap({ geographies, selected, selectCounty, counties, height, width }) {
-//     // console.log("height",height)
-//     // console.log("width",width)
+function SwedenMap({ geographies, selected, selectCounty, counties, height, width }) {
+    // console.log("height",height)
+    // console.log("width",width)
 
-function SwedenMap({ geographies, selected, selectCounty, counties }) {
+//function SwedenMap({ geographies, selected, selectCounty, counties }) {
     //console.log("geographies", geographies)
     const [hoverKey, setHoverKey] = useState(0)
 
