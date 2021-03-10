@@ -1,6 +1,4 @@
 import React, { useRef,useState, useEffect } from "react";
-import * as d3 from 'd3';
-import { sliderBottom } from 'd3-simple-slider';
 import {RangeStepInput} from 'react-range-step-input';
 
 /* const Slider = () => {

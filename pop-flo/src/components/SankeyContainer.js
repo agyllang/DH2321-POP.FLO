@@ -4,88 +4,7 @@ import React, { useRef, useState, useEffect } from "react";
 //import { geoConicEquidistant, geoEqualEarth, geoPath } from "d3-geo";
 //import * as d3 from 'd3';
 
-const data2 = {
-
-    "nodes": [
-        { "name": "Stockholm" },
-        { "name": "Uppsala" },
-        { "name": "Gotland" },
-        { "name": "Jönköping" }
-    ],
-    "links": [
-        {
-            "source": 1,
-            "target": 2,
-            "value": 120
-        },
-        {
-            "source": 1,
-            "target": 0,
-            "value": 220
-        },
-        {
-            "source": 1,
-            "target": 3,
-            "value": 100
-        }
-    ]
-};
-const data3 = {
-
-    "nodes": [
-        { "name": "Stockholm" },
-        { "name": "Uppsala" },
-        { "name": "Gotland" },
-        { "name": "Jönköping" }
-    ],
-    "links": [
-        {
-            "source": 0,
-            "target": 1,
-            "value": 5000
-        },
-        {
-            "source": 3,
-            "target": 1,
-            "value": 220
-        },
-        {
-            "source": 2,
-            "target": 1,
-            "value": 100
-        }
-    ]
-};
-
-const data1 = {
-    "nodes": [
-        { "name": "Stockholm" },
-        { "name": "Uppsala" },
-        { "name": "Gotland" },
-        { "name": "Jönköping" }
-    ],
-    "links": [
-        {
-            "source": 0,
-            "target": 1,
-            "value": 100
-        },
-        {
-            "source": 0,
-            "target": 2,
-            "value": 320
-        },
-        {
-            "source": 0,
-            "target": 3,
-            "value": 100
-        }
-    ]
-};
-
-
 const SankeyContainer = ({ counties, selected, }) => {
-    const [structuredData, setData] = useState({ "nodes": [], "links": [] })
     const [nodesArray, setNodesArray] = useState([])
     const [linksArray, setLinksArray] = useState([])
 
@@ -94,6 +13,9 @@ const SankeyContainer = ({ counties, selected, }) => {
     // const [width, setWidth] = useState(700)
     // const [height, setHeight] = useState(700)
     //const [dim, setDim] = useState({})
+    const [width, setWidth] = useState(500)
+    const [height, setHeight] = useState(500)
+
     const svgRef = React.createRef();
     // console.log("SankeyContainer counties in", counties)
     // console.log("SankeyContainer counties", counties)
@@ -116,7 +38,6 @@ const SankeyContainer = ({ counties, selected, }) => {
         // console.log("counties in useEffect",counties)
         formatData(counties[getIndex(selected)])
     }, [counties,selected])
-    // console.log("PERFECT DATA", data2)
     // const measureSVG = () => {
     //     const { width, height } = svgRef.current.getBoundingClientRect();
 
@@ -180,8 +101,7 @@ const SankeyContainer = ({ counties, selected, }) => {
 
     return (
         <svg width="50%" height="300" ref={svgRef}>
-            {/* {structuredData.nodes.length > 0 && <SankeyDiagram origin={"in"} data={structuredData} width={500} height={500} />} */}
-            {nodesArray.length > 0 && <SankeyDiagram origin={"in"} data={{ "nodes": nodesArray, "links": linksArray }} width={500} height={500} />}
+            {nodesArray.length > 0 && <SankeyDiagram direction="in" data={{ "nodes": nodesArray, "links": linksArray }} width={width} height={height} />}
         </svg>
     );
 

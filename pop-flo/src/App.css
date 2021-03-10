@@ -1,3 +1,8 @@
+.App{
+  padding-top: 20px;
+  background-color: #eee;
+}
+
 svg {
   background : #eee;
   overflow:visible;
@@ -9,7 +14,7 @@ svg {
   /* background-color: #5A387B; */
   /* background-color:#7a559e; */
   background-color:#72489a;
-  margin-bottom: 10px;
+  padding-bottom: 10px;
   position: sticky;
   top: 0;
   left: 0;

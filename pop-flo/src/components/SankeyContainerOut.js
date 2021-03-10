@@ -4,93 +4,16 @@ import React, { useRef, useState, useEffect } from "react";
 //import { geoConicEquidistant, geoEqualEarth, geoPath } from "d3-geo";
 //import * as d3 from 'd3';
 
-const data2 = {
-
-    "nodes": [
-        { "name": "Stockholm" },
-        { "name": "Uppsala" },
-        { "name": "Gotland" },
-        { "name": "Jönköping" }
-    ],
-    "links": [
-        {
-            "source": 1,
-            "target": 2,
-            "value": 120
-        },
-        {
-            "source": 1,
-            "target": 0,
-            "value": 220
-        },
-        {
-            "source": 1,
-            "target": 3,
-            "value": 100
-        }
-    ]
-};
-const data3 = {
-
-    "nodes": [
-        { "name": "Stockholm" },
-        { "name": "Uppsala" },
-        { "name": "Gotland" },
-        { "name": "Jönköping" }
-    ],
-    "links": [
-        {
-            "source": 0,
-            "target": 1,
-            "value": 5000
-        },
-        {
-            "source": 3,
-            "target": 1,
-            "value": 220
-        },
-        {
-            "source": 2,
-            "target": 1,
-            "value": 100
-        }
-    ]
-};
-
-const data1 = {
-    "nodes": [
-        { "name": "Stockholm" },
-        { "name": "Uppsala" },
-        { "name": "Gotland" },
-        { "name": "Jönköping" }
-    ],
-    "links": [
-        {
-            "source": 0,
-            "target": 1,
-            "value": 100
-        },
-        {
-            "source": 0,
-            "target": 2,
-            "value": 320
-        },
-        {
-            "source": 0,
-            "target": 3,
-            "value": 100
-        }
-    ]
-};
-
 
 const SankeyContainerOut = ({ counties }) => {
-    const [structuredData, setData] = useState({ "nodes": [], "links": [] })
-    // const [width, setWidth] = useState(700)
-    // const [height, setHeight] = useState(700)
+    const [nodesArray, setNodesArray] = useState([])
+    const [linksArray, setLinksArray] = useState([])
+    const [width, setWidth] = useState(500)
+    const [height, setHeight] = useState(500)
     //const [dim, setDim] = useState({})
 
     const svgRef = React.createRef();
+    
     useEffect(() => {
         console.log("^^^^^^^^counties in SANKEY OUT",counties)
         formatData(counties)
@@ -127,13 +50,9 @@ const SankeyContainerOut = ({ counties }) => {
         //adding the "target" county to the last array. (THIS is used to target the links towards)
         nodesToBe.push({ "name": counties.name })
 
-        setData({
-            "nodes":
-                nodesToBe
-            ,
-            "links":
-                linksToBe
-        })
+       
+        setNodesArray(nodesToBe)
+        setLinksArray(linksToBe)
         //console.log("structuredData.nodes formatdata",structuredData)
 
     }
@@ -156,10 +75,12 @@ const SankeyContainerOut = ({ counties }) => {
 
 
     return (
+      
         <svg width="50%" height="300" ref={svgRef}>
-            {structuredData.nodes.length>0 && <SankeyDiagram origin={"out"} data={structuredData} width={500} height={500} />}
+            {nodesArray.length > 0 && <SankeyDiagram direction="out" data={{ "nodes": nodesArray, "links": linksArray }} width={width} height={height} />}
         </svg>
     );
+
 
 }
 

@@ -19,6 +19,7 @@ const SwedenMap = ({ geographies, selected, selectCounty, counties, height, widt
     //     console.log("counties TRIGGED triggered")
     // },[counties])
 
+
     const [hoverKey, setHoverKey] = useState(0)
 
     // var width = 800;
@@ -28,7 +29,7 @@ const SwedenMap = ({ geographies, selected, selectCounty, counties, height, widt
         "type": "FeatureCollection", "features": geographies
     };
     // console.log("geojson",geojson)
-    const projection = geoConicEquidistant().fitSize([width/2, height/2], geojson);
+    const projection = geoConicEquidistant().fitSize([width / 2, height / 2], geojson);
 
     // const projection = geoConicEquidistant().fitSize([width, height], geographies);
 
@@ -46,7 +47,7 @@ const SwedenMap = ({ geographies, selected, selectCounty, counties, height, widt
     // console.log("counties in swedenmap:", counties);
 
     const handleCountryClick = countryIndex => {
-        console.log("Clicked on country: ", geographies[countryIndex])
+        //console.log("Clicked on country: ", geographies[countryIndex])
     }
 
     var tooltip = d3.select('.tooltip-area')
@@ -102,7 +103,7 @@ const SwedenMap = ({ geographies, selected, selectCounty, counties, height, widt
             // console.log("counties[i].id",counties[i].id)
             if (counties[i].id == id1) {
                 var pivotPoint = (calculateMaxMin()[0] + calculateMaxMin()[1] / 2)
-                // console.log("pivotPoint", pivotPoint)
+
                 if (counties[i].netto > pivotPoint) {
                     return colorScaleBigger(counties[i].netto)
                 } else {
@@ -127,7 +128,7 @@ const SwedenMap = ({ geographies, selected, selectCounty, counties, height, widt
             <g className="counties">
                 {
                     geojson.features.map((d, i) => (
-                    // geographies.map((d, i) => (
+                        // geographies.map((d, i) => (
                         <path
                             key={`path-${i}`}
                             d={geoPath().projection(projection)(d)}
