@@ -20,28 +20,11 @@ var height = 1000;
 
 //const projection = geoConicEquidistant().scale(1200).center([45, 60]);
 
-const MapContainer = ({selected,selectCounty, counties}) => {
-    // const [dimensions, setDimensions] = useState({ 
-    //     height: window.height,
-    //     width: window.width
-    //   })
-
-    // useEffect(() => {
-    //     function handleResize() {
-    //       setDimensions({
-    //         height: window.innerHeight,
-    //         width: window.innerWidth
-    //       })
-        
-    // }
-    
-    //     window.addEventListener('resize', handleResize)
-    //   })
+const MapContainer = ({selected, selectCounty, counties}) => {
     const [geographies, setGeographies] = useState([])
     const svgRef = createRef();
 
-
-
+    // console.log("selected in map container",selected)
     useEffect(() => {
         fetch("/sweden-counties.json")
             .then(response => {

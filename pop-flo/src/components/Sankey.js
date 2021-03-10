@@ -1,6 +1,8 @@
 import * as d3 from "d3";
+import React, { useRef, useState, useEffect } from "react";
+
 import { sankey, sankeyLinkHorizontal } from "d3-sankey"; //https://www.npmjs.com/package/d3-sankey-diagram
-//import chroma from "chroma-js";
+// import chroma from "chroma-js";
 
 //creates a node for each län
 const SankeyNode = ({ name, x0, x1, y0, y1, color }) => (
@@ -27,18 +29,24 @@ const SankeyLink = ({ link, color }) => (
 );
 
 //create and returns the diagram
-const SankeyDiagram = ({ data, width, height }) => {
+const SankeyDiagram = ({ data, width, height, origin,  }) => {
 
+  useEffect(()=>{
+    console.log("UUUUUUUUUUUUUU SankeyDiagram mounted, with data:",data)
+    return () => console.log("XXXXXXXXXXXXX SankeyDiagram DISmounted, with data:",data)
+})
 
-  console.log("data from Sankey", data)
+  // console.log("data from Sankey", data)
 
   const { nodes, links } = sankey()
     .nodeWidth(15)
     .nodePadding(10)
     .extent([[1, 1], [width - 1, height - 5]])
     (data);
-  console.log("links", links);
+  // console.log("links", links);
   // const color = chroma.scale("Set3").classes(nodes.length);
+
+
   const colorScale = d3
     .scaleLinear()
     .domain([0, nodes.length])
@@ -50,13 +58,14 @@ const SankeyDiagram = ({ data, width, height }) => {
         <SankeyNode
           {...node}
           // color={(colorScale(i)).hex()}
-          key={node.name}
+          key={origin === "out" ? `${node.name}-out` : `${node.name}-in`}
         />
       ))}
       {links.map((link, i) => (
         <SankeyLink
           link={link}
           key={link.index}
+          key={origin === "out" ? `${link.index}-out` : `${link.index}-in`}
         // color={(colorScale(link.source.index)).hex()}
         />
       ))}

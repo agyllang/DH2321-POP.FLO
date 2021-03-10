@@ -7,12 +7,18 @@ import * as d3 from 'd3';
 
 
 
-function SwedenMap({ geographies, selected, selectCounty, counties, height, width }) {
+const SwedenMap = ({ geographies, selected, selectCounty, counties, height, width }) => {
     // console.log("height",height)
     // console.log("width",width)
+    // console.log("counties in swedenmap", counties)
+    // console.log("selected in sweden map", selected)
+    // const [counties, setcounties] =useState([counties])
 
-    // console.log(" Swedenmap selected", selected)
-    // console.log("GEOGRAPHIES SWEDN MAP: ", geographies)
+    // useEffect(()=>{
+    //     // setcounties(counties)
+    //     console.log("counties TRIGGED triggered")
+    // },[counties])
+
     const [hoverKey, setHoverKey] = useState(0)
 
     // var width = 800;
@@ -33,9 +39,8 @@ function SwedenMap({ geographies, selected, selectCounty, counties, height, widt
         counties.forEach((c) => {
             calcArr.push(c.netto)
         })
-
+        // console.log([Math.min.apply(null, calcArr), Math.max.apply(null, calcArr)])
         return [Math.min.apply(null, calcArr), Math.max.apply(null, calcArr)];
-
     }
 
     // console.log("counties in swedenmap:", counties);
@@ -97,7 +102,7 @@ function SwedenMap({ geographies, selected, selectCounty, counties, height, widt
             // console.log("counties[i].id",counties[i].id)
             if (counties[i].id == id1) {
                 var pivotPoint = (calculateMaxMin()[0] + calculateMaxMin()[1] / 2)
-                console.log("pivotPoint", pivotPoint)
+                // console.log("pivotPoint", pivotPoint)
                 if (counties[i].netto > pivotPoint) {
                     return colorScaleBigger(counties[i].netto)
                 } else {

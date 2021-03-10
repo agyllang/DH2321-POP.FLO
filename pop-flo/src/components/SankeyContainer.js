@@ -84,8 +84,13 @@ const data1 = {
 };
 
 
-const SankeyContainer = ({ counties }) => {
+const SankeyContainer = ({ counties, selected, }) => {
     const [structuredData, setData] = useState({ "nodes": [], "links": [] })
+    const [nodesArray, setNodesArray] = useState([])
+    const [linksArray, setLinksArray] = useState([])
+
+
+    console.log(" SankeyContainer counties_____",counties)
     // const [width, setWidth] = useState(700)
     // const [height, setHeight] = useState(700)
     //const [dim, setDim] = useState({})
@@ -93,13 +98,25 @@ const SankeyContainer = ({ counties }) => {
     // console.log("SankeyContainer counties in", counties)
     // console.log("SankeyContainer counties", counties)
     // console.log("structuredData",structuredData)
-    useEffect(() => {
-        console.log("VVVVVVV counties in SANKEY IN",counties)
 
+    // console.log("VVVVVVV counties in SANKEY IN", counties)
+
+
+    useEffect(() => {
+
+        const getIndex = (ID) => {
+            var countyIndexArr = []
+            counties.map((c, i) => {
+                if (c.id == ID) {
+                    countyIndexArr.push(i)
+                }
+            })
+            return countyIndexArr[0]
+        }
         // console.log("counties in useEffect",counties)
-        formatData(counties)
-    }, [counties])
-// console.log("PERFECT DATA", data2)
+        formatData(counties[getIndex(selected)])
+    }, [counties,selected])
+    // console.log("PERFECT DATA", data2)
     // const measureSVG = () => {
     //     const { width, height } = svgRef.current.getBoundingClientRect();
 
@@ -107,13 +124,12 @@ const SankeyContainer = ({ counties }) => {
     //     setHeight(height);
     // }
     const formatData = (counties) => {
-        
 
         //create all the nodes and links
-        
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>nodesArray in SankeyContainer",nodesArray)
         var nodesToBe = []
         var linksToBe = []
-        
+
         //adding all the counties as node target 
         //example: "nodes": [ {name: "Uppsala län"},{name: "Södermanlands län"},{name: "Östergötlands län"},]
         for (var i in counties.inflyttLän) {
@@ -124,26 +140,28 @@ const SankeyContainer = ({ counties }) => {
 
         for (var j in counties.inflytt) {
             // console.log("j",j);
-            linksToBe.push({ "source": parseInt(j), "target":counties.inflytt.length, "value": counties.inflytt[j] })
+            linksToBe.push({ "source": parseInt(j), "target": counties.inflytt.length, "value": counties.inflytt[j] })
             // linksToBe.push({ "source": parseInt(j), "target": counties.inflytt.length - 1, "value": counties.inflytt[j] })
         }
         //console.log("linksToBe", linksToBe)
 
-        //adding the "target" county to the last array. (THIS is used to target the links towards)
+        //adding the "target" counties to the last array. (THIS is used to target the links towards)
         nodesToBe.push({ "name": counties.name })
 
-        setData({
-            "nodes":
-                nodesToBe
-            ,
-            "links":
-                linksToBe
-        })
-        //console.log("structuredData.nodes formatdata",structuredData)
-
+        setNodesArray(nodesToBe)
+        setLinksArray(linksToBe)
+        // setData({
+        //     "nodes":
+        //         nodesToBe 
+        //     ,
+        //     "links":
+        //         linksToBe ,
+        // })
     }
+
+
     // formatData(counties);
-    
+
     // useEffect(() => {
     //     console.log("counties in useffect",counties)
     //     formatData(counties)
@@ -157,13 +175,13 @@ const SankeyContainer = ({ counties }) => {
 
     // },[])
 
-  
+
 
 
     return (
         <svg width="50%" height="300" ref={svgRef}>
-            {structuredData.nodes.length>0 && <SankeyDiagram data={structuredData} width={500} height={500} />}
-
+            {/* {structuredData.nodes.length > 0 && <SankeyDiagram origin={"in"} data={structuredData} width={500} height={500} />} */}
+            {nodesArray.length > 0 && <SankeyDiagram origin={"in"} data={{ "nodes": nodesArray, "links": linksArray }} width={500} height={500} />}
         </svg>
     );
 

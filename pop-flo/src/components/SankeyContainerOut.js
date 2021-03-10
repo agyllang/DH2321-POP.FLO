@@ -157,7 +157,7 @@ const SankeyContainerOut = ({ counties }) => {
 
     return (
         <svg width="50%" height="300" ref={svgRef}>
-            {structuredData.nodes.length>0 && <SankeyDiagram data={structuredData} width={500} height={500} />}
+            {structuredData.nodes.length>0 && <SankeyDiagram origin={"out"} data={structuredData} width={500} height={500} />}
         </svg>
     );
 
