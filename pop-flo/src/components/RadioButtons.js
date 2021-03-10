@@ -22,7 +22,7 @@ const RadioButtons = ({radioGender, radioSelectedGender}) => {
             <label>All</label>
             {/* <input type="radio" name="gender" value="all" checked/>  */}
             {/* <input type="radio" name="gender" value="all" /> */} 
-            <input type="radio" name="gender" value="all" checked/> 
+            <input type="radio" name="gender" value="all" /> 
             <label>Female</label>
             <input type="radio" name="gender" value="kvinnor"/> 
             <label>Male</label>
