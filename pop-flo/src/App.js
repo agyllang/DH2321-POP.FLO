@@ -138,6 +138,8 @@ function App() {
               updatedCounties[j].out = updatedCounties[j].utflytt.reduce((partial_sum, a) => partial_sum + a,0);
               updatedCounties[j].netto = updatedCounties[j].in - updatedCounties[j].out;
            }
+
+           console.log("här",updatedCounties)
            //console.log("typ netto", typeof(netto));
            //console.log("alla counties", counties);
            //console.log("counties 1", counties[1]);  
@@ -188,9 +190,9 @@ useEffect(() => {
               <div className="sankeyContainer">
                 {selectedCounty && counties.length > 0 && <SankeyContainer counties={counties[getIndex(selectedCounty)]} />}
               </div>
-              {/* <div className="sankeyContainerOut">
+              <div className="sankeyContainerOut">
                 {selectedCounty && counties.length > 0 && <SankeyContainerOut counties={counties[getIndex(selectedCounty)]} />}
-              </div> */}
+              </div>
 
             </div>
           </div>

@@ -86,11 +86,12 @@ const data1 = {
 
 const SankeyContainerOut = ({ counties }) => {
     const [structuredData, setData] = useState({ "nodes": [], "links": [] })
-    // const [width, setWidth] = useState(700)
-    // const [height, setHeight] = useState(700)
+    const [width, setWidth] = useState(500)
+    const [height, setHeight] = useState(500)
     //const [dim, setDim] = useState({})
 
     const svgRef = React.createRef();
+    
     useEffect(() => {
         console.log("^^^^^^^^counties in SANKEY OUT",counties)
         formatData(counties)
@@ -156,8 +157,8 @@ const SankeyContainerOut = ({ counties }) => {
 
 
     return (
-        <svg width="50%" height="300" ref={svgRef}>
-            {structuredData.nodes.length>0 && <SankeyDiagram data={structuredData} width={500} height={500} />}
+        <svg width="100%" height="500" ref={svgRef}>
+            {structuredData.nodes.length>0 && <SankeyDiagram data={structuredData} width={width} height={height} direction="out"/>}
         </svg>
     );
 

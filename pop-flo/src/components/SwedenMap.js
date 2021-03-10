@@ -11,8 +11,8 @@ function SwedenMap({ geographies, selected, selectCounty, counties, height, widt
     // console.log("height",height)
     // console.log("width",width)
 
-    // console.log(" Swedenmap selected", selected)
-    // console.log("GEOGRAPHIES SWEDN MAP: ", geographies)
+//function SwedenMap({ geographies, selected, selectCounty, counties }) {
+    //console.log("geographies", geographies)
     const [hoverKey, setHoverKey] = useState(0)
 
     // var width = 800;
@@ -41,7 +41,7 @@ function SwedenMap({ geographies, selected, selectCounty, counties, height, widt
     // console.log("counties in swedenmap:", counties);
 
     const handleCountryClick = countryIndex => {
-        console.log("Clicked on country: ", geographies[countryIndex])
+        //console.log("Clicked on country: ", geographies[countryIndex])
     }
 
     var tooltip = d3.select('.tooltip-area')
@@ -97,7 +97,7 @@ function SwedenMap({ geographies, selected, selectCounty, counties, height, widt
             // console.log("counties[i].id",counties[i].id)
             if (counties[i].id == id1) {
                 var pivotPoint = (calculateMaxMin()[0] + calculateMaxMin()[1] / 2)
-                console.log("pivotPoint", pivotPoint)
+                //console.log("pivotPoint", pivotPoint)
                 if (counties[i].netto > pivotPoint) {
                     return colorScaleBigger(counties[i].netto)
                 } else {

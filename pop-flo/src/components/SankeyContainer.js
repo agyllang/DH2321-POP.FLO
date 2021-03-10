@@ -86,9 +86,9 @@ const data1 = {
 
 const SankeyContainer = ({ counties }) => {
     const [structuredData, setData] = useState({ "nodes": [], "links": [] })
-    // const [width, setWidth] = useState(700)
-    // const [height, setHeight] = useState(700)
-    //const [dim, setDim] = useState({})
+    const [width, setWidth] = useState(500)
+    const [height, setHeight] = useState(500)
+
     const svgRef = React.createRef();
     // console.log("SankeyContainer counties in", counties)
     // console.log("SankeyContainer counties", counties)
@@ -161,8 +161,8 @@ const SankeyContainer = ({ counties }) => {
 
 
     return (
-        <svg width="50%" height="300" ref={svgRef}>
-            {structuredData.nodes.length>0 && <SankeyDiagram data={structuredData} width={500} height={500} />}
+        <svg width="100%" height="500" ref={svgRef}>
+            {structuredData.nodes.length>0 && <SankeyDiagram data={structuredData} width={width} height={height} direction="in" />}
 
         </svg>
     );
