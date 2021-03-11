@@ -74,7 +74,11 @@ class About extends React.Component {
                                 this.state.detailsPerson == "Hilda" ? 
                                 <div>
                                     <p onClick={() => this.setState({detailsPerson: undefined, selectedPerson:undefined})} className="close">X</p>
-                                    <p>hildar@kth.se</p>
+                                    <p>
+                                        Hi! My name is Hilda and I have worked a lot with the data, and how we filter and map it to the different visual structures.
+                                        I really enjoyed working on this project!
+                                        <p>hildar@kth.se</p>
+                                    </p>
                                 </div>:
                                 (
                                     this.state.detailsPerson== "Moa" ? 
