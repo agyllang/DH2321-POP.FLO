@@ -8,22 +8,9 @@ import * as d3 from 'd3';
 
 
 const SwedenMap = ({ geographies, selected, selectCounty, counties, height, width }) => {
-    // console.log("height",height)
-    // console.log("width",width)
-    // console.log("counties in swedenmap", counties)
-    // console.log("selected in sweden map", selected)
-    // const [counties, setcounties] =useState([counties])
-
-    // useEffect(()=>{
-    //     // setcounties(counties)
-    //     console.log("counties TRIGGED triggered")
-    // },[counties])
-
 
     const [hoverKey, setHoverKey] = useState(0)
-
-    // var width = 800;
-    // var height = 1000;
+    console.log("hoverKey", hoverKey)
 
     var geojson = {
         "type": "FeatureCollection", "features": geographies
@@ -32,6 +19,102 @@ const SwedenMap = ({ geographies, selected, selectCounty, counties, height, widt
     const projection = geoConicEquidistant().fitSize([width / 2, height / 2], geojson);
 
     // const projection = geoConicEquidistant().fitSize([width, height], geographies);
+
+
+    var tooltip1 = d3.select('.tooltip-area1').attr('transform', `translate(10, 40)`)
+    // .style('opacity', 0);
+    var tooltip2 = d3.select('.tooltip-area2').attr('transform', `translate(10, 60)`);
+
+    // .style('opacity', 0);
+    var tooltip3 = d3.select('.tooltip-area3').attr('transform', `translate(10, 80)`);
+    // .style('opacity', 0);
+    var tooltip4 = d3.select('.tooltip-area4').attr('transform', `translate(10, 100)`);
+    // .style('opacity', 0);
+
+    // useEffect(() => {
+    //     tooltip1
+    //         .attr('transform', `translate(10, 50)`);
+    //     tooltip2
+    //         .attr('transform', `translate(10, 65)`);
+    //     tooltip3
+    //         .attr('transform', `translate(10, 90)`);
+    //     tooltip4
+    //         .attr('transform', `translate(10, 105)`);
+    // }, [])
+
+
+
+
+
+    const mouseOver = (event, object) => {
+        console.log("mouseOver")
+
+        // tooltip1.style("opacity", 1);
+        // tooltip2.style("opacity", 1);
+        // tooltip3.style("opacity", 1);
+        // tooltip4.style("opacity", 1);
+    };
+
+    const mouseLeave = (event, d) => {
+        console.log("mouseLeave")
+
+        tooltip1.style('opacity', 0);
+        tooltip2.style('opacity', 0);
+        tooltip3.style('opacity', 0);
+        tooltip4.style('opacity', 0);
+        // setHoverKey(0)
+
+    }
+
+
+    const mouseEnter = (event, object) => {
+        console.log("mouseEnter")
+
+        const text = d3.select('.tooltip-area__text');
+        const text2 = d3.select('.tooltip-area__text2');
+        const text3 = d3.select('.tooltip-area__text3');
+        const text4 = d3.select('.tooltip-area__text4');
+        for (var i in counties) {
+            if (counties[i].id == object.ID_1) {
+                //   text.text(object.VARNAME_1,);
+                text.text(counties[i].name).attr("font-size",20).attr("font-weight","bolder");
+                text2.text(`Migration/Immigration= ${counties[i].ratio.toFixed(2)}`);
+                text3.text(`Migration: ${counties[i].in}`);
+                text4.text(`Immigration: ${counties[i].out}`);
+                //text.text(counties[i].netto); 
+            }
+        }
+        tooltip1.style("opacity", 1);
+        tooltip2.style("opacity", 1);
+        tooltip3.style("opacity", 1);
+        tooltip4.style("opacity", 1);
+        setHoverKey(object.ID_1)
+
+        // tooltip1
+        //     .attr('transform', `translate(10, 50)`);
+        // tooltip2
+        //     .attr('transform', `translate(10, 65)`);
+        // tooltip3
+        //     .attr('transform', `translate(10, 90)`);
+        // tooltip4
+        //     .attr('transform', `translate(10, 105)`);
+
+
+
+        // if (object.ID_1 !== hoverKey) {
+        //     // console.log("mouseEnter set new cordinates")
+
+
+        //     // const [x, y] = d3.pointer(event);
+
+
+        //     // tooltip
+        //     //     .attr('transform', `translate(${x}, ${y})`);
+        // }
+        // else{
+        //     console.log("här kom vi inte fram")
+        // }
+    };
 
 
 
@@ -44,52 +127,6 @@ const SwedenMap = ({ geographies, selected, selectCounty, counties, height, widt
         return [0.5, 1.5];
         // return [Math.min.apply(null, calcArr), Math.max.apply(null, calcArr)];
     }
-
-    // console.log("counties in swedenmap:", counties);
-
-    const handleCountryClick = countryIndex => {
-        //console.log("Clicked on country: ", geographies[countryIndex])
-    }
-
-    var tooltip = d3.select('.tooltip-area')
-        .style('opacity', 0);
-
-    const mouseOver = (event, object) => {
-        tooltip.style("opacity", 1);
-    };
-
-    const mouseLeave = (event, d) => {
-        // console.log("mouseLeave")
-        tooltip.style('opacity', 0);
-
-    }
-
-
-    const mouseEnter = (event, object) => {
-        const text = d3.select('.tooltip-area__text');
-        for (var i in counties) {
-            if (counties[i].id == object.ID_1) {
-                //   text.text(object.VARNAME_1,);
-                text.text(counties[i].name + counties[i].ratio);
-                //text.text(counties[i].netto); 
-            }
-        }
-        setHoverKey(object.ID_1)
-        if (object.ID_1 !== hoverKey) {
-            // console.log("mouseEnter set new cordinates")
-
-
-            // const [x, y] = d3.pointer(event);
-
-            tooltip
-                .attr('transform', `translate(10, 60)`);
-            // tooltip
-            //     .attr('transform', `translate(${x}, ${y})`);
-        }
-    };
-
-    // var myColor = d3.scaleSequential().domain(calculateMaxMin())
-    //     .range(["white","green"]);
 
     var colorScaleSmaller = d3.scaleSequential().domain([0.6, 0.95])
         .range(["rgb(0,95,255)", "rgb(255,255, 255)"]);
@@ -129,18 +166,9 @@ const SwedenMap = ({ geographies, selected, selectCounty, counties, height, widt
         }
     }
 
-
-
-
     return (
         <>
-            {/* { geographies.length > 0 && projection.fitExtent(
-                        [
-                            [0, 0],
-                            [width , height ],
-                        ], geographies
-                    )
-} */}
+    
             <g className="counties">
                 {
                     geojson.features.map((d, i) => (
@@ -152,8 +180,10 @@ const SwedenMap = ({ geographies, selected, selectCounty, counties, height, widt
                             // fill={`rgba(38,50,56,${1 / geographies.length * i})`}
                             // fill={myColor(i*100)}
                             fill={mapIdToColor(geographies[i].properties.ID_1)}
-                            stroke={selected == geographies[i].properties.ID_1 ? "#212021" : "rgba(24, 14, 12, 0.2)"}
-                            strokeWidth={selected == geographies[i].properties.ID_1 ? 1 : 0.5}
+                            stroke={selected == geographies[i].properties.ID_1 ? "rgba(0, 0, 0, 1)" : "rgba(0, 0, 0, 0.5)"}
+                            // stroke={selected == geographies[i].properties.ID_1 ? "rgba(0, 0, 0, 1)" : "rgba(24, 14, 12, 0.5)"}
+                            strokeWidth={selected == geographies[i].properties.ID_1 ? 3 : 0.5}
+                            strokeOpacity={selected == geographies[i].properties.ID_1 ? 1 : 0.5}
                             // strokeWidth={ 3}
                             // onClick={() => handleCountryClick(i)}
                             onClick={() => selectCounty(geographies[i].properties.ID_1)}
@@ -167,16 +197,18 @@ const SwedenMap = ({ geographies, selected, selectCounty, counties, height, widt
                 }
 
             </g>
-            <g className="tooltip-area">
+            <g className="tooltip-area1">
                 <text className="tooltip-area__text"></text>
             </g>
-
-            {/* <MyToolTip
-                left={mouseX}
-                top={mouseY}
-                //fields={this.state.tooltipState.fields} 
-                /> */}
-
+            <g className="tooltip-area2">
+                <text className="tooltip-area__text2"></text>
+            </g>
+            <g className="tooltip-area3">
+                <text className="tooltip-area__text3"></text>
+            </g>
+            <g className="tooltip-area4">
+                <text className="tooltip-area__text4"></text>
+            </g>
 
         </>
     );
