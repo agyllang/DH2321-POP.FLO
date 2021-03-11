@@ -38,10 +38,11 @@ const SwedenMap = ({ geographies, selected, selectCounty, counties, height, widt
     const calculateMaxMin = () => {
         var calcArr = [];
         counties.forEach((c) => {
-            calcArr.push(c.netto)
+            calcArr.push(c.ratio)
         })
-        // console.log([Math.min.apply(null, calcArr), Math.max.apply(null, calcArr)])
-        return [Math.min.apply(null, calcArr), Math.max.apply(null, calcArr)];
+        console.log([Math.min.apply(null, calcArr), Math.max.apply(null, calcArr)])
+        return [0.5, 1.5];
+        // return [Math.min.apply(null, calcArr), Math.max.apply(null, calcArr)];
     }
 
     // console.log("counties in swedenmap:", counties);
@@ -69,7 +70,7 @@ const SwedenMap = ({ geographies, selected, selectCounty, counties, height, widt
         for (var i in counties) {
             if (counties[i].id == object.ID_1) {
                 //   text.text(object.VARNAME_1,);
-                text.text(counties[i].name);
+                text.text(counties[i].name + counties[i].ratio);
                 //text.text(counties[i].netto); 
             }
         }
@@ -90,11 +91,13 @@ const SwedenMap = ({ geographies, selected, selectCounty, counties, height, widt
     // var myColor = d3.scaleSequential().domain(calculateMaxMin())
     //     .range(["white","green"]);
 
-    var colorScaleSmaller = d3.scaleSequential().domain(calculateMaxMin())
+    var colorScaleSmaller = d3.scaleSequential().domain([0.6, 0.95])
         .range(["rgb(0,95,255)", "rgb(255,255, 255)"]);
 
-    var colorScaleBigger = d3.scaleSequential().domain(calculateMaxMin())
+    var colorScaleBigger = d3.scaleSequential().domain([1.05, 1.4])
         .range(["rgb(255,255, 255)", "rgb(255,121,0)"]);
+    var colorScaleNeutral = d3.scaleSequential().domain([0.96, 1.04])
+        .range(["rgb(235,242, 255)", "rgb(255,255,255)", "rgb(255,244,235)"]);
 
     const mapIdToColor = (id1) => {
         // console.log("mapIdToColor id1", id1)
@@ -102,12 +105,25 @@ const SwedenMap = ({ geographies, selected, selectCounty, counties, height, widt
 
             // console.log("counties[i].id",counties[i].id)
             if (counties[i].id == id1) {
-                var pivotPoint = (calculateMaxMin()[0] + calculateMaxMin()[1] / 2)
+                var pivotPoint = 1.000;
+                // var pivotPoint = (calculateMaxMin()[0] + calculateMaxMin()[1] / 2)
 
-                if (counties[i].netto > pivotPoint) {
-                    return colorScaleBigger(counties[i].netto)
-                } else {
-                    return colorScaleSmaller(counties[i].netto)
+
+                if (counties[i].ratio > 1.05) {
+                    // console.log("bigger", counties[i].ratio)
+
+                    return colorScaleBigger(counties[i].ratio)
+                }
+                if (counties[i].ratio < 0.94) {
+                    // console.log("smaller", counties[i].ratio)
+
+                    // console.log("colorScaleSmaller(counties[i].ratio)",colorScaleSmaller(counties[i].ratio))
+                    return colorScaleSmaller(counties[i].ratio)
+                }
+                if (1.05 > counties[i].ratio > 0.95) {
+                    // console.log("neutral", counties[i].ratio)
+
+                    return colorScaleNeutral(counties[i].ratio)
                 }
             }
         }

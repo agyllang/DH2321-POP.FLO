@@ -11,7 +11,7 @@ const LinearScale = () => {
     useEffect(()=>{
         const svg = d3.select(svgRef.current)
         var linear = d3.scaleLinear()
-        .domain([-5,0,5])
+        .domain([0.60,1.00,1.40])
         .range(["rgb(0,95,255)","rgb(255,255, 255)", "rgb(255,121,0)"]);
 
       
@@ -21,7 +21,7 @@ const LinearScale = () => {
         .attr("transform", "translate(20,20)");
       
       var legendLinear = legendColor()
-        .shapeWidth(30)
+        .shapeWidth(40)
         .cells(11)
         .orient('horizontal')
         .scale(linear);
