@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import { sankey, sankeyLinkHorizontal } from "d3-sankey"; //https://www.npmjs.com/package/d3-sankey-diagram
-//import chroma from "chroma-js";
+import "../Sankey.css"
 
 //assigning color for each län
 const indelning = {
@@ -11,7 +11,7 @@ const indelning = {
     {name: "Hallands län", color:"brown"},
     {name:"Skåne län", color:"aqua"},
     {name: "Jönköpings län", color: "blue"},
-    {name: "Kalmar län", color:"red"},
+    {name: "Kalmar län", color:"blue"},
     {name: "Kronobergs län", color: "orange"},
     {name: "Östergötlands län", color: "pink"},
   ],
@@ -20,7 +20,7 @@ const indelning = {
     {name: "Örebro län", color: "yellow"},
     {name: "Västmanlands län", color: "olive"},
     {name:"Södermanlands län", color: "gold"},
-    {name: "Stockholms län", color: "thistle"},
+    {name: "Stockholms län", color: "#000"},
     {name:"Värmlands län", color:"violet"}
   ],
   "Norrland": [
@@ -48,35 +48,36 @@ const SankeyLink = ({ link, color }) => (
     d={sankeyLinkHorizontal()(link)}
     style={{
       fill: "none",
-      strokeOpacity: ".3",
       stroke: color,
       strokeWidth: Math.max(1, link.width)
     }}
-
-
-  ><title>{link.source.name} {"→"} {link.target.name} {':'} {link.value} </title></path>
+    >
+      <title>{link.source.name} {"→"} {link.target.name} {':'} {link.value} </title>
+  </path>
 );
 
 //create and returns the diagram
 const SankeyDiagram = ({ data, width, height, direction }) => {
 
-
-  console.log("data from Sankey", data)
+//console.log("data from Sankey", data)
 
   const { nodes, links } = sankey()
     .nodeWidth(15)
     .nodePadding(10)
     .extent([[1, 1], [width - 1, height - 5]])
     (data);
-  console.log("links", links);
+  //console.log("links", links);
   // const color = chroma.scale("Set3").classes(nodes.length);
   // const colorScale = d3
   //   .scaleLinear()
   //   .domain([0, nodes.length])
   //   .range([0, 1]);
 
+  //assigns the different links a color depenting on the county
   const giveColor = (link) => {
     var color
+    
+    //for the in link
     if (direction=="in"){
       console.log("--------in-------")
       for(const prop in indelning) {
@@ -88,6 +89,7 @@ const SankeyDiagram = ({ data, width, height, direction }) => {
         })
     }
     }
+    //for the out link
     else if (direction=="out"){
       console.log("------out-------")
       for(const prop in indelning) {
@@ -106,25 +108,11 @@ const SankeyDiagram = ({ data, width, height, direction }) => {
     return color
   }
 
-  // const giveColor = (linksource) => {
-  //   var color
-  //   for(const prop in indelning) {
-  //     indelning[prop].forEach((county) => {
-  //       if(county.name == linksource.name) {
-  //         console.log("i if-satsen", typeof county.color)
-  //         color = county.color
-  //       }
-  //     })
-  // }
-  // return color
-  // }
-
   return (
     <g style={{ mixBlendMode: "multiply" }}>
       {nodes.map((node, i) => (
         <SankeyNode
           {...node}
-          //color={(colorScale(i)).hex()}
           key={node.name}
         />
       ))}
@@ -134,7 +122,6 @@ const SankeyDiagram = ({ data, width, height, direction }) => {
           link={link}
           key={link.index}
           color= {giveColor(link)}
-        // color={(colorScale(link.source.index)).hex()}
         />
       ))}
     </g>

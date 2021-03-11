@@ -1,0 +1,7 @@
+path {
+    stroke-opacity: 30%;
+}
+
+path:hover {
+    stroke-opacity: 70%;
+}
