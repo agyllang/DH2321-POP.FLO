@@ -1,8 +1,8 @@
 import * as d3 from "d3";
 import React, { useRef, useState, useEffect } from "react";
 
-import { sankey, sankeyCenter, sankeyLeft, sankeyLinkHorizontal, sankeyRight } from "d3-sankey"; //https://www.npmjs.com/package/d3-sankey-diagram
-// import chroma from "chroma-js";
+import { sankey, sankeyLinkHorizontal } from "d3-sankey"; //https://www.npmjs.com/package/d3-sankey-diagram
+import "../Sankey.css"
 
 //assigning color for each län
 const indelning = {
@@ -51,38 +51,33 @@ const SankeyLink = ({ link, color }) => (
     d={sankeyLinkHorizontal()(link)}
     style={{
       fill: "none",
-      strokeOpacity: ".3",
       stroke: color,
       strokeWidth: Math.max(1, link.width)
     }}
-
-
-  ><title>{link.source.name} {"→"} {link.target.name} {':'} {link.value} </title></path>
+    >
+      <title>{link.source.name} {"→"} {link.target.name} {':'} {link.value} </title>
+  </path>
 );
 
 //create and returns the diagram
 
 const SankeyDiagram = ({ data, width, height, direction }) => {
 
-  //   useEffect(()=>{
-  //     // console.log("UUUUUUUUUUUUUU SankeyDiagram mounted, with data:",data)
-  //     return () => console.log("XXXXXXXXXXXXX SankeyDiagram DISmounted, with data:",data)
-  // })
-
-  // console.log("data from Sankey", data)
+//console.log("data from Sankey", data)
 
   const { nodes, links } = sankey()
     .nodeWidth(15)
     .nodePadding(10)
     .extent([[1, 1], [width - 1, height - 5]])
     (data);
-  // console.log("links", links);
+  //console.log("links", links);
   // const color = chroma.scale("Set3").classes(nodes.length);
   // const colorScale = d3
   //   .scaleLinear()
   //   .domain([0, nodes.length])
   //   .range([0, 1]);
 
+  //assigns the different links a color depenting on the county
   const giveColor = (link) => {
     var color
     if (direction == "in") {
@@ -113,19 +108,6 @@ const SankeyDiagram = ({ data, width, height, direction }) => {
     }
     return color
   }
-
-  // const giveColor = (linksource) => {
-  //   var color
-  //   for(const prop in indelning) {
-  //     indelning[prop].forEach((county) => {
-  //       if(county.name == linksource.name) {
-  //         console.log("i if-satsen", typeof county.color)
-  //         color = county.color
-  //       }
-  //     })
-  // }
-  // return color
-  // }
 
   return (
     <g style={{ mixBlendMode: "multiply" }}>
