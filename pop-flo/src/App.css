@@ -10,7 +10,7 @@ svg {
 
 .navbar {
   display: flex;
-  height:90px;
+  height:80px;
   /* background-color: #5A387B; */
   /* background-color:#7a559e; */
   background-color:#48659a;
@@ -28,7 +28,7 @@ svg {
 
 .navbutton {
   font-size: 20px;
-  height: 100px;
+  height: 80px;
   padding:10px;
   margin-left: 5px;
   border: none;
@@ -68,7 +68,7 @@ svg {
 .logo {
   position:absolute;
   left: 10px;
-  height:90px;
+  height:80px;
   flex:1;
 }
 
