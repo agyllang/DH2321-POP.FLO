@@ -88,6 +88,9 @@ const SankeyContainerOut = ({ counties, selected }) => {
       
         <svg width="50%" height="300" ref={svgRef}>
             {nodesArray.length > 0 && <SankeyDiagram direction="out" data={{ "nodes": nodesArray, "links": linksArray }} width={width} height={height} />}
+            <polyline points="0,520 480,520" fill="none" stroke="black"/>
+            <path d="M480 520 L460 510 L460 530 Z" />
+            {nodesArray.length > 0 && <text x="0" y="540" fill="black">Emigration from {nodesArray[20].name}</text>}
         </svg>
     );
 
