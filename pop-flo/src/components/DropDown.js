@@ -51,6 +51,7 @@ const DropDown = ({ selected, selectCounty }) => {
     }
 
     return (
+        <div className="dropDown">
         <div className="dropDownContainer" >
             <div className="dropDownSelectionContainer">
                 <span className="dropDownSelectedSpan">{selected != null ? getName(selected) : "Choose a county"}</span>
@@ -81,6 +82,7 @@ const DropDown = ({ selected, selectCounty }) => {
 
             }
 
+        </div>
         </div>
     )
 }
