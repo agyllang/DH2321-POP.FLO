@@ -7,12 +7,19 @@ import * as d3 from 'd3';
 
 
 
-function SwedenMap({ geographies, selected, selectCounty, counties, height, width }) {
+const SwedenMap = ({ geographies, selected, selectCounty, counties, height, width }) => {
     // console.log("height",height)
     // console.log("width",width)
+    // console.log("counties in swedenmap", counties)
+    // console.log("selected in sweden map", selected)
+    // const [counties, setcounties] =useState([counties])
 
-//function SwedenMap({ geographies, selected, selectCounty, counties }) {
-    //console.log("geographies", geographies)
+    // useEffect(()=>{
+    //     // setcounties(counties)
+    //     console.log("counties TRIGGED triggered")
+    // },[counties])
+
+
     const [hoverKey, setHoverKey] = useState(0)
 
     // var width = 800;
@@ -22,7 +29,7 @@ function SwedenMap({ geographies, selected, selectCounty, counties, height, widt
         "type": "FeatureCollection", "features": geographies
     };
     // console.log("geojson",geojson)
-    const projection = geoConicEquidistant().fitSize([width/2, height/2], geojson);
+    const projection = geoConicEquidistant().fitSize([width / 2, height / 2], geojson);
 
     // const projection = geoConicEquidistant().fitSize([width, height], geographies);
 
@@ -33,9 +40,8 @@ function SwedenMap({ geographies, selected, selectCounty, counties, height, widt
         counties.forEach((c) => {
             calcArr.push(c.netto)
         })
-
+        // console.log([Math.min.apply(null, calcArr), Math.max.apply(null, calcArr)])
         return [Math.min.apply(null, calcArr), Math.max.apply(null, calcArr)];
-
     }
 
     // console.log("counties in swedenmap:", counties);
@@ -97,7 +103,7 @@ function SwedenMap({ geographies, selected, selectCounty, counties, height, widt
             // console.log("counties[i].id",counties[i].id)
             if (counties[i].id == id1) {
                 var pivotPoint = (calculateMaxMin()[0] + calculateMaxMin()[1] / 2)
-                //console.log("pivotPoint", pivotPoint)
+
                 if (counties[i].netto > pivotPoint) {
                     return colorScaleBigger(counties[i].netto)
                 } else {
@@ -122,7 +128,7 @@ function SwedenMap({ geographies, selected, selectCounty, counties, height, widt
             <g className="counties">
                 {
                     geojson.features.map((d, i) => (
-                    // geographies.map((d, i) => (
+                        // geographies.map((d, i) => (
                         <path
                             key={`path-${i}`}
                             d={geoPath().projection(projection)(d)}

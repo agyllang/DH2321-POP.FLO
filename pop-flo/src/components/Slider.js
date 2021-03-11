@@ -21,14 +21,14 @@ export default Slider  */
 
 const Slider = ({sliderYear, sliderSelectedYear}) => {
     //const [year, setYear] = useState(2019);
-
+    // console.log("sliderYear",sliderYear)
     return ( 
         <div>
            <p>{sliderYear}</p>
             <RangeStepInput
                 min={2000} max={2019}
                 value={sliderYear} step={1}
-                onChange={e => sliderSelectedYear(e.target.value)}
+                onChange={e => sliderSelectedYear(parseInt(e.target.value))}
                 />
   {/*           {console.log("SLIDER year", sliderYear)} */}
         </div>
