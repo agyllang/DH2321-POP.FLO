@@ -47,7 +47,7 @@ const SankeyContainer = ({ counties, selected, }) => {
     const formatData = (counties) => {
 
         //create all the nodes and links
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>nodesArray in SankeyContainer",nodesArray)
+        //console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>nodesArray in SankeyContainer",nodesArray)
         var nodesToBe = []
         var linksToBe = []
 
