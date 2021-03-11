@@ -84,7 +84,7 @@ class About extends React.Component {
                                     </div>:
                                 
                                     <div>
-                                        <p>We are the group behind  POP.FLO!</p>
+                                        <h3>We are the group behind POP.FLO!</h3>
                                         <p>
                                             {this.state.selectedPerson== "Albin" ? <b> Albin Matson Gyllang</b>:' Albin Matson Gyllang'}, 
                                             {this.state.selectedPerson== "Amalia"? <b> Amalia Berglöf</b>:' Amalia Berglöf'}, 
