@@ -10,7 +10,7 @@ import { ReactComponent as UpSvg } from '../icons/icon-up.svg'
 
 
 const DropDown = ({ selected, selectCounty }) => {
-    console.log("Dropdown_selected,:", selected)
+    // console.log("Dropdown_selected,:", selected)
     const [open, setOpen] = useState(false);
     const [hover, setHover] = useState(false);
 

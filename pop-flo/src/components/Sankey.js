@@ -1,6 +1,8 @@
 import * as d3 from "d3";
-import { sankey, sankeyLinkHorizontal } from "d3-sankey"; //https://www.npmjs.com/package/d3-sankey-diagram
-//import chroma from "chroma-js";
+import React, { useRef, useState, useEffect } from "react";
+
+import { sankey, sankeyCenter, sankeyLeft, sankeyLinkHorizontal, sankeyRight } from "d3-sankey"; //https://www.npmjs.com/package/d3-sankey-diagram
+// import chroma from "chroma-js";
 
 //assigning color for each län
 const indelning = {
@@ -34,8 +36,8 @@ const indelning = {
 }
 
 //creates a node for each län
-const SankeyNode = ({ name, x0, x1, y0, y1, color }) => (
-
+const SankeyNode = ({ name, index, x0, x1, y0, y1, color }) => (
+//  <rect x={x0} y={index == 20? 101: y0} width={x1 - x0} height={Math.abs(y1 - y0)}>
   <rect x={x0} y={y0} width={x1 - x0} height={Math.abs(y1 - y0)}>
     <title>{name} </title>
   </rect> //To add color add the attribute fill i nrect
@@ -45,10 +47,11 @@ const SankeyNode = ({ name, x0, x1, y0, y1, color }) => (
 const SankeyLink = ({ link, color }) => (
 
   <path
+    // d={sankeyLinkHorizontal()(link)}
     d={sankeyLinkHorizontal()(link)}
     style={{
       fill: "none",
-      strokeOpacity: ".5",
+      strokeOpacity: ".3",
       stroke: color,
       strokeWidth: Math.max(1, link.width)
     }}
@@ -58,17 +61,22 @@ const SankeyLink = ({ link, color }) => (
 );
 
 //create and returns the diagram
+
 const SankeyDiagram = ({ data, width, height, direction }) => {
 
+  //   useEffect(()=>{
+  //     // console.log("UUUUUUUUUUUUUU SankeyDiagram mounted, with data:",data)
+  //     return () => console.log("XXXXXXXXXXXXX SankeyDiagram DISmounted, with data:",data)
+  // })
 
-  console.log("data from Sankey", data)
+  // console.log("data from Sankey", data)
 
   const { nodes, links } = sankey()
     .nodeWidth(15)
     .nodePadding(10)
     .extent([[1, 1], [width - 1, height - 5]])
     (data);
-  console.log("links", links);
+  // console.log("links", links);
   // const color = chroma.scale("Set3").classes(nodes.length);
   // const colorScale = d3
   //   .scaleLinear()
@@ -77,31 +85,31 @@ const SankeyDiagram = ({ data, width, height, direction }) => {
 
   const giveColor = (link) => {
     var color
-    if (direction=="in"){
-      console.log("--------in-------")
-      for(const prop in indelning) {
+    if (direction == "in") {
+      // console.log("--------in-------")
+      for (const prop in indelning) {
         indelning[prop].forEach((county) => {
-          if(county.name == link.source.name) {
-            console.log("i if-satsen", typeof county.color)
+          if (county.name == link.source.name) {
+            // console.log("i if-satsen", typeof county.color)
             color = county.color
           }
         })
+      }
     }
-    }
-    else if (direction=="out"){
-      console.log("------out-------")
-      for(const prop in indelning) {
+    else if (direction == "out") {
+      // console.log("------out-------")
+      for (const prop in indelning) {
         indelning[prop].forEach((county) => {
-          if(county.name == link.target.name) {
-            console.log("i if-satsen", typeof county.color)
+          if (county.name == link.target.name) {
+            // console.log("i if-satsen", typeof county.color)
             color = county.color
           }
         })
+      }
     }
-    }
-    else{
-      console.log("----nothing-----")
-      color="blue"
+    else {
+      // console.log("----nothing-----")
+      color = "blue"
     }
     return color
   }
@@ -124,16 +132,17 @@ const SankeyDiagram = ({ data, width, height, direction }) => {
       {nodes.map((node, i) => (
         <SankeyNode
           {...node}
-          //color={(colorScale(i)).hex()}
-          key={node.name}
+          {...i}
+          // color={(colorScale(i)).hex()}
+          key={direction === "out" ? `${node.name}-out` : `${node.name}-in`}
         />
       ))}
       {links.map((link, i) => (
         //console.log("in return:", giveColor(link.source)),
         <SankeyLink
           link={link}
-          key={link.index}
-          color= {giveColor(link)}
+          key={direction === "out" ? `${link.index}-out` : `${link.index}-in`}
+          color={giveColor(link)}
         // color={(colorScale(link.source.index)).hex()}
         />
       ))}
