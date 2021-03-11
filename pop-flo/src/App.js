@@ -177,9 +177,9 @@ function App() {
               </table>
             </div>
             <div className="content-container">
-              <div className="map-container">
-              <LinearScale />{counties.length > 0 && <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties} />}
-                
+              <LinearScale /><div className="map-container">
+              
+              {counties.length > 0 && <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties} />}  
               </div>
 
               {!selectedCounty && <div className="placeholderContainer">
