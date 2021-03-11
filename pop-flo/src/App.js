@@ -169,10 +169,13 @@ function App() {
                 <LinearScale />
               </div>
 
+              {!selectedCounty && <div className="placeholderContainer">
+                <h2>Hi and welcome to POP.FLO!</h2>
+                <p>Choose a county to explore its emigration and immigration in detail!</p></div>}
+              
               <div className="sankeyContainer">
                 {selectedCounty && counties.length > 0 && <SankeyContainer selected={selectedCounty} counties={counties} />}
               </div>
-
 
               <div className="sankeyContainerOut">
                 {selectedCounty && counties.length > 0 && <SankeyContainerOut selected={selectedCounty} counties={counties} />}

@@ -132,6 +132,7 @@ svg {
 .content-container{
   /* width:100vw; */
   display:flex;
+  padding:20px;
   /* flex-direction: row; */
 }
 .map-container{
@@ -167,4 +168,12 @@ svg {
 
 h2 {
   margin-bottom: 5px !important;
+}
+
+.placeholderContainer {
+  position: relative;
+  top: -100px;
+  margin: auto;
+  text-align: center;
+  width: 100%;
 }
