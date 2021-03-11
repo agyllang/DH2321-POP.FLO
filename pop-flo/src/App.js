@@ -157,7 +157,7 @@ const emptyCounties = [
         <Route exact path="/" render={() =>
           <div className="App">
             <div className="selection-container">
-              <table class="table">
+              <table>
                 <thead>
                   <tr>
                     <th scope="col"></th>

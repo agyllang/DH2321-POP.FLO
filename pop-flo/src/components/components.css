@@ -45,6 +45,8 @@ div.tooltip {
 /*_____________DROPDOWN_________*/
 .dropDownSelectedSpan{
     margin-left:10px;
+    width: 150px;
+    text-align: center;
 }
 .dropDownUL{
     cursor:default;
@@ -81,5 +83,5 @@ div.tooltip {
 
 .dropDown {
     margin-right: 10px;
-    text-align: center;
+    text-align:
 }
