@@ -32,7 +32,7 @@ const LinearScale = () => {
             
           
     return (
-        <svg ref={svgRef} height={100} width={500} >
+        <svg ref={svgRef} height={300} width={100} >
            
         </svg>
     )

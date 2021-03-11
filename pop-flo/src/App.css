@@ -1,5 +1,5 @@
 .App{
-  padding-top: 20px;
+  padding-top: 5px;
   background-color: #eee;
 }
 
@@ -13,8 +13,8 @@ svg {
   height:100px;
   /* background-color: #5A387B; */
   /* background-color:#7a559e; */
-  background-color:#72489a;
-  padding-bottom: 5px;
+  background-color:#48659a;
+  padding-bottom: 10px;
   position: sticky;
   top: 0;
   left: 0;
@@ -28,17 +28,19 @@ svg {
 
 .navbutton {
   font-size: 20px;
-  height: 100px;
+  height: 110px;
   padding:10px;
   margin-left: 5px;
   border: none;
   color: #FF7900;
-  background-color:#72489a;
+  /* background-color:#72489a; */
+  background-color: #48659a;
   font-weight: bold;
 }
 .navbutton:focus {
   outline:0;
-  background-color: #633291;
+  /* background-color: #633291; */
+  background-color: #2d4168;
 }
 
 .modal {
@@ -147,9 +149,12 @@ svg {
 }
 
 .selection-container{
-  width:100%;
+  margin: 10px;
+  padding: 10px;
+  width:550px;
   display:flex;
   flex-direction: row;
+  background-color: lightgray;
 }
 
 .close {
@@ -176,4 +181,20 @@ h2 {
   margin: auto;
   text-align: center;
   width: 100%;
+}
+
+.centeredSliderValue {
+  text-align: center;
+}
+
+#genderButton {
+  margin: 10px;
+}
+
+.genderTitle {
+  text-align: center;
+}
+
+.addMargin {
+  margin-left: 10px;
 }

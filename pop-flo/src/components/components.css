@@ -1,7 +1,7 @@
 .dropDownContainer{
-    width:20%;
-    height:100%;
+    width:100%;
     background-color: rgba(155,155,155,0.8);
+    margin: 10px;
 }
 .county{
     /* position:relative for tooltip  */
@@ -9,32 +9,14 @@
     /* paint-order: stroke fill; */
   }
 
-/* .tooltip {
-    position: absolute;
-    opacity: 0.75;
-    background-color: blue;
-    font-family: sans-serif;
-    font-weight: bold;
-    color: white;
-    padding: 5px;
+  /* path.county {
+    stroke-opacity: 30%;
 }
-div.tooltip {	
-    position: absolute;			
-    text-align: center;			
-    width: 60px;					
-    height: 28px;					
-    padding: 2px;				
-    font: 12px sans-serif;		
-    background: lightsteelblue;	
-    border: 0px;		
-    border-radius: 8px;			
-    pointer-events: none;			
-}
-.tooltip p {
-    font-size: 10px;
-    padding: 1px;
-    margin: 1px; 
+
+path.county:hover {
+    stroke-opacity: 100%;
 } */
+
 .tooltip-area{
     cursor:default;
     /* background-color: rgba(114, 138, 165, 0.8) */
@@ -45,6 +27,8 @@ div.tooltip {
 /*_____________DROPDOWN_________*/
 .dropDownSelectedSpan{
     margin-left:10px;
+    width: 150px;
+    text-align: center;
 }
 .dropDownUL{
     cursor:default;
@@ -77,6 +61,9 @@ div.tooltip {
 }
 .dropDownButton{
     /* margin-right:10px; */
-    
+}
 
+.dropDown {
+    margin-right: 10px;
+    text-align: center;
 }
