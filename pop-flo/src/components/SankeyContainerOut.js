@@ -8,8 +8,8 @@ import React, { useRef, useState, useEffect } from "react";
 const SankeyContainerOut = ({ counties, selected }) => {
     const [nodesArray, setNodesArray] = useState([])
     const [linksArray, setLinksArray] = useState([])
-    const [width, setWidth] = useState(500)
-    const [height, setHeight] = useState(500)
+    const [width, setWidth] = useState(400)
+    const [height, setHeight] = useState(400)
     //const [dim, setDim] = useState({})
 
     const svgRef = React.createRef();
@@ -86,11 +86,11 @@ const SankeyContainerOut = ({ counties, selected }) => {
 
     return (
       
-        <svg width="50%" height="300" ref={svgRef}>
+        <svg width="50%" height="500" ref={svgRef}>
             {nodesArray.length > 0 && <SankeyDiagram direction="out" data={{ "nodes": nodesArray, "links": linksArray }} width={width} height={height} />}
-            <polyline points="0,520 480,520" fill="none" stroke="black"/>
-            <path d="M480 520 L460 510 L460 530 Z" />
-            {nodesArray.length > 0 && <text x="0" y="540" fill="black">Emigration from {nodesArray[20].name}</text>}
+            <polyline points="0,420 380,420" fill="none" stroke="black"/>
+            <path d="M380 420 L360 410 L360 430 Z" />
+            {nodesArray.length > 0 && <text x="0" y="440" fill="black">Emigration from {nodesArray[20].name}</text>}
         </svg>
     );
 

@@ -13,8 +13,8 @@ const SankeyContainer = ({ counties, selected, }) => {
     // const [width, setWidth] = useState(700)
     // const [height, setHeight] = useState(700)
     //const [dim, setDim] = useState({})
-    const [width, setWidth] = useState(500)
-    const [height, setHeight] = useState(500)
+    const [width, setWidth] = useState(400)
+    const [height, setHeight] = useState(400)
 
     const svgRef = React.createRef();
     // console.log("SankeyContainer counties in", counties)
@@ -100,11 +100,11 @@ const SankeyContainer = ({ counties, selected, }) => {
 
 
     return (
-        <svg width="50%" height="300" ref={svgRef}>
+        <svg width="50%" height="500" ref={svgRef}>
             {nodesArray.length > 0 && <SankeyDiagram direction="in" data={{ "nodes": nodesArray, "links": linksArray }} width={width} height={height} />}
-            <polyline points="0,520 480,520" fill="none" stroke="black"/>
-            <path d="M480 520 L460 510 L460 530 Z" />
-            {nodesArray.length > 0 && <text x="0" y="540" fill="black">Immigration to {nodesArray[20].name}</text>}
+            <polyline points="0,420 380,420" fill="none" stroke="black"/>
+            <path d="M380 420 L360 410 L360 430 Z" />
+            {nodesArray.length > 0 && <text x="0" y="440" fill="black">Immigration to {nodesArray[20].name}</text>}
         </svg>
     );
 

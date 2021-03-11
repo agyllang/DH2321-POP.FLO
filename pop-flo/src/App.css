@@ -14,7 +14,7 @@ svg {
   /* background-color: #5A387B; */
   /* background-color:#7a559e; */
   background-color:#72489a;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
   position: sticky;
   top: 0;
   left: 0;
@@ -140,10 +140,10 @@ svg {
   flex:0.5;
 }
 .sankeyContainer{
-  flex:1;
+  flex:0.5;
 }
 .sankeyContainerOut{
-  flex:1;
+  flex:0.5;
 }
 
 .selection-container{
