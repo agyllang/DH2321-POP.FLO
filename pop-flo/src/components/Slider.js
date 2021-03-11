@@ -1,5 +1,6 @@
 import React, { useRef,useState, useEffect } from "react";
 import {RangeStepInput} from 'react-range-step-input';
+import "../App.css";
 
 /* const Slider = () => {
     const [year, setYear] = useState(2019);
@@ -23,14 +24,16 @@ const Slider = ({sliderYear, sliderSelectedYear}) => {
     //const [year, setYear] = useState(2019);
     // console.log("sliderYear",sliderYear)
     return ( 
-        <div>
-           <p>{sliderYear}</p>
+        <div className="addMargin">
+           <div className="centeredSliderValue">{sliderYear}</div>
+           2000
             <RangeStepInput
                 min={2000} max={2019}
                 value={sliderYear} step={1}
                 onChange={e => sliderSelectedYear(parseInt(e.target.value))}
                 />
   {/*           {console.log("SLIDER year", sliderYear)} */}
+            2019
         </div>
     );
 }; 

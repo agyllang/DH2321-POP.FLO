@@ -47,7 +47,7 @@ function App() {
   // console.log("SELECTED COUNTY IN APP.JS: ", selectedCounty)
   const [show, setShow] = useState(false);
 
-  const [year, setYear] = useState(2018);
+  const [year, setYear] = useState(2019);
   console.log("YEAR", year)
 
   const [gender, setGender] = useState("all"); //all, kvinnor, män
@@ -157,11 +157,24 @@ function App() {
         <Route exact path="/" render={() =>
           <div className="App">
             <div className="selection-container">
-
-              <div>selected county:{getName(selectedCounty)}</div>
-              <DropDown selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} />
-              <Slider sliderYear={year} sliderSelectedYear={y => setYear(y)} />
-              <RadioButtons radioGender={gender} radioSelectedGender={g => setGender(g)} />
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">County</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Year</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row"></th>
+                    <td><DropDown selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} /></td>
+                    <td><RadioButtons radioGender={gender} radioSelectedGender={g => setGender(g)} /></td>
+                    <td><Slider sliderYear={year} sliderSelectedYear={y => setYear(y)} /></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
             <div className="content-container">
               <div className="map-container">

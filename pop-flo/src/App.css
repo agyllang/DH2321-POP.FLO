@@ -147,6 +147,7 @@ svg {
 }
 
 .selection-container{
+  margin: 10px;
   width:100%;
   display:flex;
   flex-direction: row;
@@ -176,4 +177,20 @@ h2 {
   margin: auto;
   text-align: center;
   width: 100%;
+}
+
+.centeredSliderValue {
+  text-align: center;
+}
+
+#genderButton {
+  margin: 10px;
+}
+
+.genderTitle {
+  text-align: center;
+}
+
+.addMargin {
+  margin-left: 10px;
 }
