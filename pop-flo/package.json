@@ -1,4 +1,5 @@
-{ "homepage": "http://agyllang.github.io/",
+{ 
+  "homepage": "http://agyllang.github.io/",
   "name": "pop-flo",
   "version": "0.1.0",
   "private": true,
