@@ -19,7 +19,7 @@ const SelectedCountyInfoBox = ({counties, selectedCounty}) => {
     }
 
     return (
-    <div>{ratio >= 100? <div><b>Migration ratio:</b> {ratio}% (more people are moving in than out).</div>:<div><b>Migration ratio:</b> {ratio}% (more people are moving out then in).</div>}
+    <div>{ratio >= 100? <div><b>Migration ratio:</b> {ratio}% (more people are moving in than out).</div>:<div><b>Migration ratio:</b> {ratio}% (more people are moving out than in).</div>}
     <div><b>Immigration:</b> {immigration}, <b>Emigration:</b> {emigration}, <b>Net:</b> {netto}</div></div>
   )
 }

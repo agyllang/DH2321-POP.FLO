@@ -80,7 +80,11 @@ class About extends React.Component {
                                     this.state.detailsPerson== "Moa" ? 
                                     <div>
                                         <p onClick={() => this.setState({detailsPerson: undefined, selectedPerson:undefined})} className="close">X</p>
-                                        <p>moaeng@kth.se</p>
+                                        <p>Hej! 
+                                            <br></br>This is me! Moa! :D
+                                            <br></br>In this project I've manily been working with the front end
+                                            <br></br>
+                                        <p>moaeng@kth.se</p></p>
                                     </div>:
                                 
                                     <div>
