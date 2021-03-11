@@ -178,8 +178,8 @@ function App() {
             </div>
             <div className="content-container">
               <div className="map-container">
-                {counties.length > 0 && <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties} />}
-                <LinearScale />
+              <LinearScale />{counties.length > 0 && <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties} />}
+                
               </div>
 
               {!selectedCounty && <div className="placeholderContainer">
@@ -189,7 +189,6 @@ function App() {
               <div className="sankeyContainer">
                 {selectedCounty && counties.length > 0 && <SankeyContainer selected={selectedCounty} counties={counties} />}
               </div>
-
               <div className="sankeyContainerOut">
                 {selectedCounty && counties.length > 0 && <SankeyContainerOut selected={selectedCounty} counties={counties} />}
               </div>
