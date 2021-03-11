@@ -147,15 +147,15 @@ function App() {
   return (
     <Router>
       <div className="navbar">
-        <Link to="/"><img className="logo" src={logo}></img></Link>
+        <Link to="/DH2321-POP.FLO"><img className="logo" src={logo}></img></Link>
         <div className="navbuttons">
           <button className="navbutton" onClick={() => setShow(true)}>How to use</button>
-          <Link to="/about"><button className="navbutton">About us & POP.FLO</button></Link>
+          <Link to="/DH2321-POP.FLO/about"><button className="navbutton">About us & POP.FLO</button></Link>
         </div>
         {show == true ? <Explanation show={show} setShow={showval => setShow(showval)} /> : <div></div>}
       </div>
       <Switch>
-        <Route exact path="/" render={() =>
+        <Route exact path="/DH2321-POP.FLO" render={() =>
           <div className="App">
             <div className="topContainer">
               <div className="selection-container">
@@ -192,7 +192,7 @@ function App() {
               {counties.length > 0 && <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties} />}  
               </div>
 
-              {!selectedCounty && <div className="placeholderContainer">
+              {!selectedCounty && !show && <div className="placeholderContainer">
                 <h2>Hi and welcome to POP.FLO!</h2>
                 <p>Choose a county to explore its emigration and immigration in detail!</p></div>}
               
@@ -206,7 +206,7 @@ function App() {
             </div>
           </div>
         }></Route>
-        <Route path="/about" render={() => <About />}></Route>
+        <Route path="/DH2321-POP.FLO/about" render={() => <About />}></Route>
       </Switch>
     </Router>
 
