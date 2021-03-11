@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/DH2321-POP.FLO/static/css/main.cde4cf80.chunk.css",
-    "main.js": "/DH2321-POP.FLO/static/js/main.a5ef83ec.chunk.js",
-    "main.js.map": "/DH2321-POP.FLO/static/js/main.a5ef83ec.chunk.js.map",
-    "runtime-main.js": "/DH2321-POP.FLO/static/js/runtime-main.625b9000.js",
-    "runtime-main.js.map": "/DH2321-POP.FLO/static/js/runtime-main.625b9000.js.map",
-    "static/js/2.9831e708.chunk.js": "/DH2321-POP.FLO/static/js/2.9831e708.chunk.js",
-    "static/js/2.9831e708.chunk.js.map": "/DH2321-POP.FLO/static/js/2.9831e708.chunk.js.map",
-    "static/js/3.e1a76a16.chunk.js": "/DH2321-POP.FLO/static/js/3.e1a76a16.chunk.js",
-    "static/js/3.e1a76a16.chunk.js.map": "/DH2321-POP.FLO/static/js/3.e1a76a16.chunk.js.map",
+    "main.css": "/DH2321-POP.FLO/static/css/main.52761867.chunk.css",
+    "main.js": "/DH2321-POP.FLO/static/js/main.f7ae5ad0.chunk.js",
+    "main.js.map": "/DH2321-POP.FLO/static/js/main.f7ae5ad0.chunk.js.map",
+    "runtime-main.js": "/DH2321-POP.FLO/static/js/runtime-main.41b08f45.js",
+    "runtime-main.js.map": "/DH2321-POP.FLO/static/js/runtime-main.41b08f45.js.map",
+    "static/js/2.647b786e.chunk.js": "/DH2321-POP.FLO/static/js/2.647b786e.chunk.js",
+    "static/js/2.647b786e.chunk.js.map": "/DH2321-POP.FLO/static/js/2.647b786e.chunk.js.map",
+    "static/js/3.8621c02c.chunk.js": "/DH2321-POP.FLO/static/js/3.8621c02c.chunk.js",
+    "static/js/3.8621c02c.chunk.js.map": "/DH2321-POP.FLO/static/js/3.8621c02c.chunk.js.map",
     "index.html": "/DH2321-POP.FLO/index.html",
-    "static/css/main.cde4cf80.chunk.css.map": "/DH2321-POP.FLO/static/css/main.cde4cf80.chunk.css.map",
-    "static/js/2.9831e708.chunk.js.LICENSE.txt": "/DH2321-POP.FLO/static/js/2.9831e708.chunk.js.LICENSE.txt",
+    "static/css/main.52761867.chunk.css.map": "/DH2321-POP.FLO/static/css/main.52761867.chunk.css.map",
+    "static/js/2.647b786e.chunk.js.LICENSE.txt": "/DH2321-POP.FLO/static/js/2.647b786e.chunk.js.LICENSE.txt",
     "static/media/01.cb65d9f0.csv": "/DH2321-POP.FLO/static/media/01.cb65d9f0.csv",
     "static/media/albin.c0779bdc.png": "/DH2321-POP.FLO/static/media/albin.c0779bdc.png",
     "static/media/amalia.b22d8f37.png": "/DH2321-POP.FLO/static/media/amalia.b22d8f37.png",
@@ -24,9 +24,9 @@
     "static/media/scb_data.1ca51717.csv": "/DH2321-POP.FLO/static/media/scb_data.1ca51717.csv"
   },
   "entrypoints": [
-    "static/js/runtime-main.625b9000.js",
-    "static/js/2.9831e708.chunk.js",
-    "static/css/main.cde4cf80.chunk.css",
-    "static/js/main.a5ef83ec.chunk.js"
+    "static/js/runtime-main.41b08f45.js",
+    "static/js/2.647b786e.chunk.js",
+    "static/css/main.52761867.chunk.css",
+    "static/js/main.f7ae5ad0.chunk.js"
   ]
 }
