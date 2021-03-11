@@ -57,10 +57,9 @@ const MapContainer = ({ selected, selectCounty, counties }) => {
     // }, []);
 
     return (
-        <svg ref={svgRef} width={"100%"} height={530} >
-            {/* <svg ref={svgRef} > */}
-            {geographies.length > 0 &&
-                <SwedenMap geographies={geographies} selectCounty={selectCounty} selected={selected} counties={counties} width={width} height={height} />
+        <svg ref={svgRef} width={"90%"} height={530} >
+            {geographies.length>0  &&  
+            <SwedenMap geographies={geographies} selectCounty={selectCounty} selected={selected} counties={counties} width={width} height={height}/> 
             }
 
         </svg>
