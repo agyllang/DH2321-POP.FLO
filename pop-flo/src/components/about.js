@@ -88,14 +88,13 @@ class About extends React.Component {
                                     </div>:
                                 
                                     <div>
-                                        <p>We are the group behind  POP.FLO!</p>
+                                        <h3>We are the group behind POP.FLO!</h3>
                                         <p>
                                             {this.state.selectedPerson== "Albin" ? <b> Albin Matson Gyllang</b>:' Albin Matson Gyllang'}, 
                                             {this.state.selectedPerson== "Amalia"? <b> Amalia Berglöf</b>:' Amalia Berglöf'}, 
                                             {this.state.selectedPerson== "Hilda"? <b> Hilda Robertsson</b>:' Hilda Robertsson'} and  
                                             {this.state.selectedPerson== "Moa"? <b> Moa Engquist</b>:' Moa Engquist'}.
-                                            We built this tool as our final project in our course in Information Visualization <a href="https://www.kth.se/student/kurser/kurs/DH2321">(DH2321)</a>
-                                             at KTH.</p>
+                                            We built this tool as our final project in our course in Information Visualization <a href="https://www.kth.se/student/kurser/kurs/DH2321">DH2321</a> at KTH.</p>
                                         <p>Our goal is to visualize movement in a simple, yet interesting way! We want to
                                             keep the simpleness and readability of a map, while adding visualizations to
                                             help interpret the data. It's up to you if we succeeded of course. 

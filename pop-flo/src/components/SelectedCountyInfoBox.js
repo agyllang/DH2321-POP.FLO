@@ -13,7 +13,9 @@ const SelectedCountyInfoBox = ({counties, selectedCounty}) => {
             console.log("----------------", immigration)
             emigration = counties[i].out
             netto = counties[i].netto
-            ratio = (counties[i].ratio.toFixed(2)) * 100
+            console.log("ratio",(counties[i].ratio.toFixed(2)))
+            ratio = Math.round((counties[i].ratio.toFixed(2)) * 100)
+        
 
         }
     }
