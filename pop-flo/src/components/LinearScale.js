@@ -11,8 +11,8 @@ const LinearScale = () => {
     useEffect(()=>{
         const svg = d3.select(svgRef.current)
         var linear = d3.scaleLinear()
-        .domain([0.60,1.00,1.40])
-        .range(["rgb(0,95,255)","rgb(255,255, 255)", "rgb(255,121,0)"]);
+        .domain([1.40,1.00,0.60])
+        .range(["rgb(255,121,0)", "rgb(255,255, 255)", "rgb(0,95,255)"]);
 
       svg.append("g")
         .attr("class", "legendLinear")
