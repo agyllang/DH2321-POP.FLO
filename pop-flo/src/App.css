@@ -168,3 +168,11 @@ svg {
 h2 {
   margin-bottom: 5px !important;
 }
+
+.placeholderContainer {
+  position: relative;
+  top: -100px;
+  margin: auto;
+  text-align: center;
+  width: 100%;
+}

@@ -7,37 +7,37 @@ import "../Sankey.css"
 //assigning color for each län
 const indelning = {
   "Götaland": [
-    { name: "Blekinge län", color: "coral" },
-    { name: "Västra Götalands län", color: "blue" },
-    { name: "Gotlands län", color: "purple" },
-    { name: "Hallands län", color: "brown" },
-    { name: "Skåne län", color: "aqua" },
-    { name: "Jönköpings län", color: "blue" },
-    { name: "Kalmar län", color: "red" },
-    { name: "Kronobergs län", color: "orange" },
-    { name: "Östergötlands län", color: "pink" },
+    {name: "Blekinge län", color:"#08007A"}, 
+    {name: "Västra Götalands län", color:"#0B00A3"},
+    {name: "Gotlands län", color: "#0E00CC"},
+    {name: "Hallands län", color:"#1100FF"},
+    {name:"Skåne län", color:"#2E1FFF"},
+    {name: "Jönköpings län", color: "#5447FF"},
+    {name: "Kalmar län", color:"#7A70FF"},
+    {name: "Kronobergs län", color: "#A099FF"},
+    {name: "Östergötlands län", color: "#C6C2FF"},
   ],
   "Svealand": [
-    { name: "Uppsala län", color: "green" },
-    { name: "Örebro län", color: "yellow" },
-    { name: "Västmanlands län", color: "olive" },
-    { name: "Södermanlands län", color: "gold" },
-    { name: "Stockholms län", color: "thistle" },
-    { name: "Värmlands län", color: "violet" }
+    {name: "Uppsala län", color:"#CC0000"},
+    {name: "Örebro län", color: "#FF0A0A"},
+    {name: "Västmanlands län", color: "#FF4747"},
+    {name:"Södermanlands län", color: "#FF8585"},
+    {name: "Stockholms län", color: "#FF8585"},
+    {name:"Värmlands län", color:"#FFC2C2"}
   ],
   "Norrland": [
-    { name: "Gävleborgs län", color: "khaki" },
-    { name: "Jämtlands län", color: "magenta" },
-    { name: "Dalarnas län", color: "mediumslateblue" },
-    { name: "Västernorrlands län", color: "crimson" },
-    { name: "Västerbottens län", color: "rosybrown" },
-    { name: "Norrbottens län", color: "cadetblue" },
+    {name: "Gävleborgs län", color: "#005200"},
+    {name: "Jämtlands län", color: "#007A00"},
+    {name: "Dalarnas län", color: "#00A300"},
+    {name: "Västernorrlands län", color: "#00CC00"},
+    {name: "Västerbottens län", color: "#00F500"},
+    {name: "Norrbottens län", color: "#1FFF1F"},
   ]
 }
 
 //creates a node for each län
-const SankeyNode = ({ name, x0, x1, y0, y1, color }) => (
-
+const SankeyNode = ({ name, index, x0, x1, y0, y1, color }) => (
+//  <rect x={x0} y={index == 20? 101: y0} width={x1 - x0} height={Math.abs(y1 - y0)}>
   <rect x={x0} y={y0} width={x1 - x0} height={Math.abs(y1 - y0)}>
     <title>{name} </title>
   </rect> //To add color add the attribute fill i nrect
@@ -47,6 +47,7 @@ const SankeyNode = ({ name, x0, x1, y0, y1, color }) => (
 const SankeyLink = ({ link, color }) => (
 
   <path
+    // d={sankeyLinkHorizontal()(link)}
     d={sankeyLinkHorizontal()(link)}
     style={{
       fill: "none",
@@ -113,6 +114,7 @@ const SankeyDiagram = ({ data, width, height, direction }) => {
       {nodes.map((node, i) => (
         <SankeyNode
           {...node}
+          {...i}
           // color={(colorScale(i)).hex()}
           key={direction === "out" ? `${node.name}-out` : `${node.name}-in`}
         />
