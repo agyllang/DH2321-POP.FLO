@@ -9,32 +9,14 @@
     /* paint-order: stroke fill; */
   }
 
-/* .tooltip {
-    position: absolute;
-    opacity: 0.75;
-    background-color: blue;
-    font-family: sans-serif;
-    font-weight: bold;
-    color: white;
-    padding: 5px;
+  /* path.county {
+    stroke-opacity: 30%;
 }
-div.tooltip {	
-    position: absolute;			
-    text-align: center;			
-    width: 60px;					
-    height: 28px;					
-    padding: 2px;				
-    font: 12px sans-serif;		
-    background: lightsteelblue;	
-    border: 0px;		
-    border-radius: 8px;			
-    pointer-events: none;			
-}
-.tooltip p {
-    font-size: 10px;
-    padding: 1px;
-    margin: 1px; 
+
+path.county:hover {
+    stroke-opacity: 100%;
 } */
+
 .tooltip-area{
     cursor:default;
     /* background-color: rgba(114, 138, 165, 0.8) */
@@ -83,5 +65,5 @@ div.tooltip {
 
 .dropDown {
     margin-right: 10px;
-    text-align:
+    text-align: center;
 }
