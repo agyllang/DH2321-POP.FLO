@@ -132,6 +132,7 @@ svg {
 .content-container{
   /* width:100vw; */
   display:flex;
+  padding:20px;
   /* flex-direction: row; */
 }
 .map-container{
