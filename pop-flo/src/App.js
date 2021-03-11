@@ -21,27 +21,27 @@ import "./App.css"
 function App() {
   
 const emptyCounties = [
-  { id: "01", name: "Stockholms län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
-  { id: "03", name: "Uppsala län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
-  { id: "04", name: "Södermanlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
-  { id: "05", name: "Östergötlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
-  { id: "06", name: "Jönköpings län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
-  { id: "07", name: "Kronobergs län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
-  { id: "08", name: "Kalmar län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
-  { id: "09", name: "Gotlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
-  { id: "10", name: "Blekinge län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
-  { id: "12", name: "Skåne län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
-  { id: "13", name: "Hallands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
-  { id: "14", name: "Västra Götalands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
-  { id: "17", name: "Värmlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
-  { id: "18", name: "Örebro län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
-  { id: "19", name: "Västmanlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
-  { id: "20", name: "Dalarnas län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
-  { id: "21", name: "Gävleborgs län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
-  { id: "22", name: "Västernorrlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
-  { id: "23", name: "Jämtlands län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
-  { id: "24", name: "Västerbottens län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
-  { id: "25", name: "Norrbottens län", in: 0, out: 0, netto: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+  { id: "01", name: "Stockholms län", in: 0, out: 0, netto: 0, ratio: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+  { id: "03", name: "Uppsala län", in: 0, out: 0, netto: 0, ratio: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+  { id: "04", name: "Södermanlands län", in: 0, out: 0, netto: 0, ratio: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+  { id: "05", name: "Östergötlands län", in: 0, out: 0, netto: 0, ratio: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+  { id: "06", name: "Jönköpings län", in: 0, out: 0, netto: 0, ratio: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+  { id: "07", name: "Kronobergs län", in: 0, out: 0, netto: 0, ratio: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+  { id: "08", name: "Kalmar län", in: 0, out: 0, netto: 0, ratio: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+  { id: "09", name: "Gotlands län", in: 0, out: 0, netto: 0, ratio: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+  { id: "10", name: "Blekinge län", in: 0, out: 0, netto: 0, ratio: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+  { id: "12", name: "Skåne län", in: 0, out: 0, netto: 0, ratio: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+  { id: "13", name: "Hallands län", in: 0, out: 0, netto: 0, ratio: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+  { id: "14", name: "Västra Götalands län", in: 0, out: 0, netto: 0, ratio: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+  { id: "17", name: "Värmlands län", in: 0, out: 0, netto: 0, ratio: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+  { id: "18", name: "Örebro län", in: 0, out: 0, netto: 0, ratio: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+  { id: "19", name: "Västmanlands län", in: 0, out: 0, netto: 0, ratio: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+  { id: "20", name: "Dalarnas län", in: 0, out: 0, netto: 0, ratio: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+  { id: "21", name: "Gävleborgs län", in: 0, out: 0, netto: 0, ratio: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+  { id: "22", name: "Västernorrlands län", in: 0, out: 0, netto: 0, ratio: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+  { id: "23", name: "Jämtlands län", in: 0, out: 0, netto: 0, ratio: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+  { id: "24", name: "Västerbottens län", in: 0, out: 0, netto: 0, ratio: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
+  { id: "25", name: "Norrbottens län", in: 0, out: 0, netto: 0, ratio: 0, inflytt: [], utflytt: [], inflyttLän: [], utflyttLän: [] },
 ]
   const [selectedCounty, setSelectedCounty] = useState(null);
   // console.log("SELECTED COUNTY IN APP.JS: ", selectedCounty)
@@ -130,6 +130,7 @@ const emptyCounties = [
           updatedCounties[j].in = updatedCounties[j].inflytt.reduce((partial_sum, a) => partial_sum + a, 0);
           updatedCounties[j].out = updatedCounties[j].utflytt.reduce((partial_sum, a) => partial_sum + a, 0);
           updatedCounties[j].netto = updatedCounties[j].in - updatedCounties[j].out;
+          updatedCounties[j].ratio = updatedCounties[j].in / updatedCounties[j].out;
         }
 
         return updatedCounties
