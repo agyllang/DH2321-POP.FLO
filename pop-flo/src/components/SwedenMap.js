@@ -47,7 +47,7 @@ const SwedenMap = ({ geographies, selected, selectCounty, counties, height, widt
 
 
     const mouseOver = (event, object) => {
-        console.log("mouseOver")
+        //console.log("mouseOver")
 
         // tooltip1.style("opacity", 1);
         // tooltip2.style("opacity", 1);
@@ -56,7 +56,7 @@ const SwedenMap = ({ geographies, selected, selectCounty, counties, height, widt
     };
 
     const mouseLeave = (event, d) => {
-        console.log("mouseLeave")
+        //console.log("mouseLeave")
 
         tooltip1.style('opacity', 0);
         tooltip2.style('opacity', 0);
@@ -68,7 +68,7 @@ const SwedenMap = ({ geographies, selected, selectCounty, counties, height, widt
 
 
     const mouseEnter = (event, object) => {
-        console.log("mouseEnter")
+        //console.log("mouseEnter")
 
         const text = d3.select('.tooltip-area__text');
         const text2 = d3.select('.tooltip-area__text2');

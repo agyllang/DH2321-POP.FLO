@@ -160,20 +160,25 @@ svg {
   margin: 10px;
   padding: 5px;
   width:550px;
-  /* display:flex; */
   background-color: lightgray;
 }
 
 .selected-county-container{
   margin: 10px;
-  margin-left: 100px;
-  padding: 0px;
-  background-color: lightgray;
+  margin-left: 200px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 430px;
+  border-style: solid;
+  border-width: medium;
+  border-radius: 20px;
+  border-color: #FF7900;
+  
 }
 
-.selected-county-container h1{
-  padding-right: 30px;
-  padding-left: 30px;
+.selected-county-container h3{
+  text-align: center;
+  margin-bottom: 3px;
 }
 
 .close {

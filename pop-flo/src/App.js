@@ -11,6 +11,7 @@ import Explanation from "./components/explanation"
 import About from "./components/about";
 import RadioButtons from './components/RadioButtons';
 import Slider from './components/Slider';
+import SelectedCountyInfoBox from './components/SelectedCountyInfoBox'
 
 import logo from './components/logo3.png'
 import data from './scb_data.csv';
@@ -177,10 +178,10 @@ function App() {
                   </tbody>
                 </table>
               </div>
-              <div className="selected-county-container">
-                {selectedCounty && counties.length > 0 && <div><h1>{getName(selectedCounty)}</h1>
-                </div>}
-              </div>
+              {selectedCounty && counties.length > 0 && <div className="selected-county-container">
+                <h3>{getName(selectedCounty)}</h3>
+                <SelectedCountyInfoBox counties={counties} selectedCounty={selectedCounty} /></div>}
+              
             </div>
 
             <div className="infotext"><span>Map displaying ratio between county immigration and emigration</span></div>
