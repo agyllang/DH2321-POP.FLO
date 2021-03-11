@@ -156,27 +156,36 @@ function App() {
       <Switch>
         <Route exact path="/" render={() =>
           <div className="App">
-            <div className="selection-container">
-              <table>
-                <thead>
-                  <tr>
-                    <th scope="col"></th>
-                    <th scope="col">County</th>
-                    <th scope="col">Gender</th>
-                    <th scope="col">Year</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row"></th>
-                    <td><DropDown selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} /></td>
-                    <td><RadioButtons radioGender={gender} radioSelectedGender={g => setGender(g)} /></td>
-                    <td><Slider sliderYear={year} sliderSelectedYear={y => setYear(y)} /></td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="topContainer">
+              <div className="selection-container">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col"></th>
+                      <th scope="col">County</th>
+                      <th scope="col">Gender</th>
+                      <th scope="col">Year</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row"></th>
+                      <td><DropDown selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} /></td>
+                      <td><RadioButtons radioGender={gender} radioSelectedGender={g => setGender(g)} /></td>
+                      <td><Slider sliderYear={year} sliderSelectedYear={y => setYear(y)} /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="selected-county-container">
+                {selectedCounty && counties.length > 0 && <div><h1>{getName(selectedCounty)}</h1>
+                </div>}
+              </div>
             </div>
+
+            <div className="infotext"><span>Map displaying ratio between county immigration and emigration</span></div>
             <div className="content-container">
+              
               <LinearScale /><div className="map-container">
               
               {counties.length > 0 && <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties} />}  

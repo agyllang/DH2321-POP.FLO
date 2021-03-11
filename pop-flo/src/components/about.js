@@ -65,7 +65,9 @@ class About extends React.Component {
                                 this.state.detailsPerson == "Albin" ? 
                                 <div>
                                     <p onClick={() => this.setState({detailsPerson: undefined, selectedPerson:undefined})} className="close">X</p>
-                                    <p>agyllang@kth.se</p>
+                                    <p>Hey! My name is Albin, I have mostly been working with Front End. In this project I have explored the D3.js library. 
+                                 
+                                        <p>agyllang@kth.se </p></p>
                                 </div>:
                                 (
                                 this.state.detailsPerson == "Hilda" ? 
