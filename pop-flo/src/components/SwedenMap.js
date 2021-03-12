@@ -47,7 +47,7 @@ const SwedenMap = ({ geographies, selected, selectCounty, counties, height, widt
 
 
     const mouseOver = (event, object) => {
-        console.log("mouseOver")
+        //console.log("mouseOver")
 
         // tooltip1.style("opacity", 1);
         // tooltip2.style("opacity", 1);
@@ -56,7 +56,7 @@ const SwedenMap = ({ geographies, selected, selectCounty, counties, height, widt
     };
 
     const mouseLeave = (event, d) => {
-        console.log("mouseLeave")
+        //console.log("mouseLeave")
 
         tooltip1.style('opacity', 0);
         tooltip2.style('opacity', 0);
@@ -68,7 +68,7 @@ const SwedenMap = ({ geographies, selected, selectCounty, counties, height, widt
 
 
     const mouseEnter = (event, object) => {
-        console.log("mouseEnter")
+        //console.log("mouseEnter")
 
         const text = d3.select('.tooltip-area__text');
         const text2 = d3.select('.tooltip-area__text2');
@@ -77,10 +77,11 @@ const SwedenMap = ({ geographies, selected, selectCounty, counties, height, widt
         for (var i in counties) {
             if (counties[i].id == object.ID_1) {
                 //   text.text(object.VARNAME_1,);
-                text.text(counties[i].name).attr("font-size",20).attr("font-weight","bolder");
-                text2.text(`Migration/Immigration= ${counties[i].ratio.toFixed(2)}`);
-                text3.text(`Migration: ${counties[i].in}`);
-                text4.text(`Immigration: ${counties[i].out}`);
+                text.text(counties[i].name).attr("font-size",16).attr("font-weight","bolder");
+                text2.text(`Emigration: ${counties[i].in}`);
+                text3.text(`Immigration: ${counties[i].out}`);
+                text4.text(`Ratio: ${counties[i].ratio.toFixed(2)}`);
+
                 //text.text(counties[i].netto); 
             }
         }

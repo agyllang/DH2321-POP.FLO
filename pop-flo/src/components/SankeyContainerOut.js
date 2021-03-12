@@ -90,7 +90,7 @@ const SankeyContainerOut = ({ counties, selected }) => {
             {nodesArray.length > 0 && <SankeyDiagram direction="out" data={{ "nodes": nodesArray, "links": linksArray }} width={width} height={height} />}
             <polyline points="0,-20 380,-20" fill="none" stroke="black"/>
             <path d="M380 -20 L360 -30 L360 -10 Z" />
-            {nodesArray.length > 0 && <text x="0" y="-30" fill="black">Emigration to {nodesArray[20].name}</text>}
+            {nodesArray.length > 0 && <text x="0" y="-30" fill="black">Emigration from {nodesArray[20].name}</text>}
         </svg>
     );
 
