@@ -80,7 +80,7 @@ svg {
   margin: 10px;
   border-radius: 10px;
   display: block;
-  font-size: 18px;
+  font-size: 16px;
   /* height:fit-content; */
 }
 
@@ -106,6 +106,8 @@ svg {
   width: 200px;
   border-radius:50%;
   margin: 10px;
+  margin-left: 25px;
+  margin-right: 25px;
 }
 
 .photohide {

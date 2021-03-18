@@ -83,9 +83,10 @@ class About extends React.Component {
                                 <div>
                                     <p onClick={() => this.setState({detailsPerson: undefined, selectedPerson:undefined})} className="close">X</p>
                                     <p>
-                                        Hi! My name is Hilda and I have worked a lot with the data, and how we filter and map it to the different visual structures.
-                                        I really enjoyed working on this project!
-                                        <p>hildar@kth.se</p>
+                                        Hi! My name is Hilda and I have worked a lot with the data, and how we map it to the different visual 
+                                        structures. I have also worked with how the data is filtered by gender (radiobuttons) and year (slider) for each county. I 
+                                        really enjoyed working on this project!
+                                        <p>Contact me! hildar@kth.se, <a href="https://www.linkedin.com/in/hilda-robertsson-7a3b1816b">LinkedIn</a></p>
                                     </p>
                                 </div>:
                                 (
