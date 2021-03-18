@@ -173,7 +173,7 @@ function App() {
                       <th scope="row"></th>
                       <td><DropDown selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} /></td>
                       <td><RadioButtons radioGender={gender} radioSelectedGender={g => setGender(g)} /></td>
-                      <td><Slider sliderYear={year} sliderSelectedYear={y => setYear(y)} /></td>
+                      <td>{!show && <Slider sliderYear={year} sliderSelectedYear={y => setYear(y)} />}</td>
                     </tr>
                   </tbody>
                 </table>

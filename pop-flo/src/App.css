@@ -248,4 +248,5 @@ h2 {
   flex:1;
   margin-left: 10px;
   margin-right: 15px;
+  z-index: 0.1;
 }
