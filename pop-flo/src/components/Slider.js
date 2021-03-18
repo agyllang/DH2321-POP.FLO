@@ -1,38 +1,30 @@
 import React, { useRef,useState, useEffect } from "react";
-import {RangeStepInput} from 'react-range-step-input';
+//import {RangeStepInput} from 'react-range-step-input';
 import "../App.css";
-
-/* const Slider = () => {
-    const [year, setYear] = useState(2019);
-
-
-    return (
-        <div id="range">
-            <div id="current-year"> 
-         <h1>{year}</h1>
-            </div>
-            <svg id="svg"></svg>
-            <input type="range" min="2000" max="2019" step="1" defaultValue="2019" id="range-input"></input>
-      </div>
-      
-    );
-}
-
-export default Slider  */
+import StepRangeSlider from 'react-step-range-slider'
 
 const Slider = ({sliderYear, sliderSelectedYear}) => {
-    //const [year, setYear] = useState(2019);
-    // console.log("sliderYear",sliderYear)
+
+    const range = [
+        { value: 2000, step: 1 }, //min
+        { value: 2019 } //max
+      ]
+
     return ( 
         <div className="addMargin">
-           <div className="centeredSliderValue">{sliderYear}</div>
-           2000
-            <RangeStepInput
+           {/* <div className="centeredSliderValue">{sliderYear}</div> */}
+            2000
+            {/* <RangeStepInput 
                 min={2000} max={2019}
                 value={sliderYear} step={1}
-                onChange={e => sliderSelectedYear(parseInt(e.target.value))}
+                onChange={e => sliderSelectedYear(parseInt(e.target.value))} */}
+             <div className="StepSlider">   
+            <StepRangeSlider 
+                value={sliderYear}
+                range={range}
+                onChange={value => sliderSelectedYear(parseInt(value))}
                 />
-  {/*           {console.log("SLIDER year", sliderYear)} */}
+                </div>
             2019
         </div>
     );

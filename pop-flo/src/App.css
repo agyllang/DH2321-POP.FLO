@@ -28,7 +28,7 @@ svg {
 
 .navbutton {
   font-size: 20px;
-  height: 80px;
+  height: 90px;
   padding:10px;
   margin-left: 5px;
   border: none;
@@ -240,4 +240,12 @@ h2 {
 
 .addMargin {
   margin-left: 10px;
+  display: flex;
+  width: 200px;
+}
+
+.StepSlider{
+  flex:1;
+  margin-left: 10px;
+  margin-right: 15px;
 }
