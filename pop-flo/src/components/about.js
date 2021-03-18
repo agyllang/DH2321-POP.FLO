@@ -94,10 +94,12 @@ class About extends React.Component {
                                     <div>
                                         <p onClick={() => this.setState({detailsPerson: undefined, selectedPerson:undefined})} className="close">X</p>
                                         <p>Hej! 
-                                            <br></br>This is me! Moa! :D
-                                            <br></br>In this project I've manily been working with the front end
-                                            <br></br>
-                                        <p>moaeng@kth.se</p></p>
+                                            <br></br>My name is Moa and in this project I've manily been working with front-end related work.
+                                            <br></br>I've worked with D3.js to do the implementation of the sankey diagram, as well as making sure the data can be configured with the sankey. 
+                                            Smaller visualisation components like labels and the selected county info box has been part of my work too.
+                                            <br></br>In addition to the coding, we have worked very tight in the group. We have learned from each other, 
+                                            discussed visualization questions and solved problems together - which I have found very inspiring and rewarding! 
+                                        <p>Want to get in touch? Send an email to moaeng@kth.se or my <a href="https://www.linkedin.com/in/moa-engquist-242135163/">Linkedin profile</a></p></p>
                                     </div>:
                                 
                                     <div>
