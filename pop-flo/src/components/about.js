@@ -74,13 +74,21 @@ class About extends React.Component {
                                 this.state.detailsPerson == "Hilda" ? 
                                 <div>
                                     <p onClick={() => this.setState({detailsPerson: undefined, selectedPerson:undefined})} className="close">X</p>
-                                    <p>hildar@kth.se</p>
+                                    <p>
+                                        Hi! My name is Hilda and I have worked a lot with the data, and how we filter and map it to the different visual structures.
+                                        I really enjoyed working on this project!
+                                        <p>hildar@kth.se</p>
+                                    </p>
                                 </div>:
                                 (
                                     this.state.detailsPerson== "Moa" ? 
                                     <div>
                                         <p onClick={() => this.setState({detailsPerson: undefined, selectedPerson:undefined})} className="close">X</p>
-                                        <p>moaeng@kth.se</p>
+                                        <p>Hej! 
+                                            <br></br>This is me! Moa! :D
+                                            <br></br>In this project I've manily been working with the front end
+                                            <br></br>
+                                        <p>moaeng@kth.se</p></p>
                                     </div>:
                                 
                                     <div>
@@ -90,8 +98,7 @@ class About extends React.Component {
                                             {this.state.selectedPerson== "Amalia"? <b> Amalia Berglöf</b>:' Amalia Berglöf'}, 
                                             {this.state.selectedPerson== "Hilda"? <b> Hilda Robertsson</b>:' Hilda Robertsson'} and  
                                             {this.state.selectedPerson== "Moa"? <b> Moa Engquist</b>:' Moa Engquist'}.
-                                            We built this tool as our final project in our course in Information Visualization <a href="https://www.kth.se/student/kurser/kurs/DH2321">(DH2321)</a>
-                                             at KTH.</p>
+                                            We built this tool as our final project in our course in Information Visualization <a href="https://www.kth.se/student/kurser/kurs/DH2321">DH2321</a> at KTH.</p>
                                         <p>Our goal is to visualize movement in a simple, yet interesting way! We want to
                                             keep the simpleness and readability of a map, while adding visualizations to
                                             help interpret the data. It's up to you if we succeeded of course. 

@@ -192,7 +192,7 @@ function App() {
               {counties.length > 0 && <MapContainer selected={selectedCounty} selectCounty={county => setSelectedCounty(county)} counties={counties} />}  
               </div>
 
-              {(!selectedCounty && !show) && <div className="placeholderContainer">
+              {!selectedCounty && !show && <div className="placeholderContainer">
                 <h2>Hi and welcome to POP.FLO!</h2>
                 <p>Choose a county to explore its emigration and immigration in detail!</p></div>}
               
