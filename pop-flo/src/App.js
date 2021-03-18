@@ -194,7 +194,8 @@ function App() {
 
               {!selectedCounty && !show && <div className="placeholderContainer">
                 <h2>Hi and welcome to POP.FLO!</h2>
-                <p>Choose a county to explore its emigration and immigration in detail!</p></div>}
+                <p>Choose a county to explore its emigration and immigration in detail!</p>
+                </div>}
               
               <div className="sankeyContainer">
                 {selectedCounty && counties.length > 0 && <SankeyContainer selected={selectedCounty} counties={counties} year={year} />}
@@ -202,6 +203,13 @@ function App() {
               <div className="sankeyContainerOut">
                 {selectedCounty && counties.length > 0 && <SankeyContainerOut selected={selectedCounty} counties={counties} year={year} />}
               </div>
+              {/* {selectedCounty && counties.length > 0 &&
+              <div className="countyinfo"> The <b>Sankey diagrams</b> displays the full details of the immigration and emigration
+              to and from a county. The width
+              <p>The different counties in the Sankey are colored dependent on which part of Sweden
+                  they belong to; <br></br><text className="green">green</text> = <text className="green">Norrland</text>, <br></br><text className="purple">purple</text> = <text className="purple">Götaland</text>
+              <br></br> <text className="red">red</text> = <text className="red">Svealand</text>
+              </p> </div> } */}
 
             </div>
           </div>

@@ -80,13 +80,24 @@ const SankeyContainer = ({ counties, selected, year }) => {
         // })
     }
 
-    console.log("nodesArray[20]",nodesArray[20])
     return (
+        <div>
         <svg width="50%" height="500" ref={svgRef}>
             {nodesArray.length > 0 && <SankeyDiagram direction="in" data={{ "nodes": nodesArray, "links": linksArray }} width={width} height={height} />}
     
             {nodesArray.length > 0 && <text x="0" y="-30" fill="black">Immigration to {nodesArray[20].name} {year}</text>}
         </svg>
+        <div className="countyinfo"> 
+
+            The Sankey diagrams displays the full details of immigration and emigration respectively.
+
+            The width of each link in the Sankey Diagrams represent the share of the total immigration/emigration to/from the selected county.
+
+            <p>The different counties in the Sankeys are colored dependent on which part of Sweden they belong to; <br></br><text className="green">green</text> = <text className="green">Norrland </text>(the northern most part of Sweden) <br></br><text className="purple">purple</text> = <text className="purple">Götaland </text>(the middle part of Sweden)
+            <br></br> <text className="red">red</text> = <text className="red">Svealand </text>(the most southern part of Sweden)
+            </p> 
+        </div>
+        </div>
     );
 
 }
