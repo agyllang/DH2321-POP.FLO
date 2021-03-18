@@ -5,6 +5,7 @@ import albin from './images/albin.png'
 import amalia from './images/amalia.png'
 import hilda from './images/hilda.png'
 import map from './images/map.png'
+import video from './images/popflo1.mp4'
 
 class About extends React.Component {
     constructor(props) {
@@ -40,7 +41,7 @@ class About extends React.Component {
                             </p>
 
                     </div>
-                    <div className="aboutpicture"><img className="biglogo" src={map}></img></div>
+                    <div className="videocontainer"><video width="640" height="360" controls src={video}>Your browser does not support the video tag.</video></div>
                 </div>
                 <div className="aboutcontainer">
                     <div className="photocontainer">
