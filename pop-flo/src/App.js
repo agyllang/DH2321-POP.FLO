@@ -197,10 +197,10 @@ function App() {
                 <p>Choose a county to explore its emigration and immigration in detail!</p></div>}
               
               <div className="sankeyContainer">
-                {selectedCounty && counties.length > 0 && <SankeyContainer selected={selectedCounty} counties={counties} />}
+                {selectedCounty && counties.length > 0 && <SankeyContainer selected={selectedCounty} counties={counties} year={year} />}
               </div>
               <div className="sankeyContainerOut">
-                {selectedCounty && counties.length > 0 && <SankeyContainerOut selected={selectedCounty} counties={counties} />}
+                {selectedCounty && counties.length > 0 && <SankeyContainerOut selected={selectedCounty} counties={counties} year={year} />}
               </div>
 
             </div>

@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from "react";
 //import { geoConicEquidistant, geoEqualEarth, geoPath } from "d3-geo";
 //import * as d3 from 'd3';
 
-const SankeyContainer = ({ counties, selected, }) => {
+const SankeyContainer = ({ counties, selected, year }) => {
     const [nodesArray, setNodesArray] = useState([])
     const [linksArray, setLinksArray] = useState([])
 
@@ -37,7 +37,7 @@ const SankeyContainer = ({ counties, selected, }) => {
         }
         // console.log("counties in useEffect",counties)
         formatData(counties[getIndex(selected)])
-    }, [counties,selected])
+    }, [counties, selected])
     // const measureSVG = () => {
     //     const { width, height } = svgRef.current.getBoundingClientRect();
 
@@ -80,31 +80,12 @@ const SankeyContainer = ({ counties, selected, }) => {
         // })
     }
 
-
-    // formatData(counties);
-
-    // useEffect(() => {
-    //     console.log("counties in useffect",counties)
-    //     formatData(counties)
-
-    //     // measureSVG()
-    //     // window.addEventListener("resize", measureSVG)
-    //     // return () => {
-    //     //     console.log()
-    //     //     window.removeEventListener("resize", measureSVG)
-    //     // }
-
-    // },[])
-
-
-
-
+    console.log("nodesArray[20]",nodesArray[20])
     return (
         <svg width="50%" height="500" ref={svgRef}>
             {nodesArray.length > 0 && <SankeyDiagram direction="in" data={{ "nodes": nodesArray, "links": linksArray }} width={width} height={height} />}
-            <polyline points="0,-20 380,-20" fill="none" stroke="black"/>
-            <path d="M380 -20 L360 -30 L360 -10 Z" />
-            {nodesArray.length > 0 && <text x="0" y="-30" fill="black">Immigration to {nodesArray[20].name}</text>}
+    
+            {nodesArray.length > 0 && <text x="0" y="-30" fill="black">Immigration to {nodesArray[20].name} {year}</text>}
         </svg>
     );
 
