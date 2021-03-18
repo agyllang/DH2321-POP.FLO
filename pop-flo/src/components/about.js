@@ -22,7 +22,7 @@ class About extends React.Component {
                     <div className="aboutblock">
                     <h3>Hi and welcome to POP.FLO!</h3>
                             <p>POP.FLO is a tool that gives you the possibility to
-                                visualize moving patterns between Swedish counties, "län".
+                                visualize migration patterns between Swedish counties, "län".
                             </p>
                             <p>We got this idea while reading about Corona driving people to move
                             from the cities to smaller municipalities. We asked ourselves: has there

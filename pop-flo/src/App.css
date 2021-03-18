@@ -214,9 +214,12 @@ h2 {
 
 .infotext {
   max-width: 300px;
-  padding-left: 20px;
+  padding-left: 100px;
   /* font-weight: bold; */
   font-style: italic;
+}
+.countyinfo{
+  /* display:flex; */
 }
 
 .placeholderContainer {

@@ -20,6 +20,8 @@ const LinearScale = () => {
       
       var legendLinear = legendColor()
         .labelFormat(d3.format(".2f"))
+        .title("Ratio color")
+        .titleWidth(120)
         .shapeWidth(30)
         .cells(11)
         .orient('vertical')

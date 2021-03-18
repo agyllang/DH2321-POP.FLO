@@ -29,7 +29,7 @@ function Explanation({ show, setShow }) {
                         they belong to; <br></br><text className="green">green</text> = <text className="green">Norrland</text>, <br></br><text className="purple">purple</text> = <text className="purple">Götaland</text>
                     <br></br> <text className="red">red</text> = <text className="red">Svealand</text>
                     </p>
-                <p><b>Hover</b> over a county to get the full details of emigration or immigration.</p>
+                <p><b>Hover</b> over a county in the Sankey to get the full details of emigration or immigration.</p>
                 <p>
                     <h3>Calculation of ratio</h3> 
                 <b>Ratio</b>=<b>Immigration</b>/<b>Emigration</b> - a measure of people moving in and out </p> 
