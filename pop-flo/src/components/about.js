@@ -65,10 +65,11 @@ class About extends React.Component {
                                 this.state.detailsPerson == "Albin" ? 
                                 <div>
                                     <p onClick={() => this.setState({detailsPerson: undefined, selectedPerson:undefined})} className="close">X</p>
-                                    <p>Hello! My name is Albin, I have mostly been working with Front End related stuff. In this project I have explored the D3.js library, also I have learned alot about Swedish geography. 
-                                        I really like our group dynamic! 
+                                    <p>Hello! My name is Albin. I have been working alot with the map visualization, our vision about the map demanded deeper knowledge about the D3.js library and especially the sub-library D3-geo which I have delved into.
+                                      I have also spent alot of time figuring out state-handling React related issues. Apart from code-related learnings, I have updated my Swedish geography skills, something 10 year old Albin would be very proud of.
+                                     I really like our group dynamic! Working with these guys has been very rewarding.
                                  
-                                        <p>agyllang@kth.se </p></p>
+                                        <p><a href="https://www.linkedin.com/in/albin-matson-gyllang-535486104/">LinkedIn</a></p></p>
                                 </div>:
                                 (
                                 this.state.detailsPerson == "Hilda" ? 
