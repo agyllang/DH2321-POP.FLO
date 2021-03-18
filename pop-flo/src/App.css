@@ -93,8 +93,9 @@ svg {
 
 .videocontainer {
   flex:1;
-  margin: 30px;
-  align-items: center;
+  margin: auto;
+  margin-left: 20px;
+
 }
 
 .aboutcontainer {
