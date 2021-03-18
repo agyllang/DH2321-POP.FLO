@@ -240,4 +240,12 @@ h2 {
 
 .addMargin {
   margin-left: 10px;
+  display: flex;
+  width: 200px;
+}
+
+.StepSlider{
+  flex:1;
+  margin-left: 10px;
+  margin-right: 15px;
 }
